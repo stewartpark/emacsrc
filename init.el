@@ -63,10 +63,13 @@
     (set-frame-parameter nil 'fullscreen 'fullboth)
 ))
 (add-hook 'org-present-mode-quit-hook (lambda ()
+    (neotree-show)
+    (other-window 1)
     (org-present-small)
     (linum-mode 1)
     (git-gutter-mode 1)
     (org-remove-inline-images)
+    (set-frame-parameter nil 'fullscreen nil)
 ))
 
 (set-face-attribute
