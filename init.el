@@ -47,6 +47,7 @@
     ; Set up keys
     (global-set-key (kbd "C-x f") 'fiplr-find-file)
     (global-set-key (kbd "C-x C-f") 'ack)
+    (global-set-key (kbd "C-x e") 'neotree-toggle)
 ))
 
 ; Hooks
@@ -66,7 +67,6 @@
     (linum-mode 1)
     (git-gutter-mode 1)
     (org-remove-inline-images)
-    (set-frame-parameter nil 'fullscreen nil)
 ))
 
 (set-face-attribute
@@ -74,3 +74,9 @@
     :family "Roboto Mono"
     :height 150
     :weight 'normal)
+
+(custom-set-variables
+ '(org-babel-load-languages (quote (
+    (emacs-lisp . t) (python . t) (dot . t) (ruby . t)
+  )))
+ '(org-confirm-babel-evaluate nil))
