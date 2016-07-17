@@ -59,7 +59,7 @@
 (global-set-key (kbd "<f8>") 'neotree-toggle)
 (global-set-key (kbd "C-c t i") 'org-trello-install-board-metadata)
 (global-set-key (kbd "C-c t c") 'org-trello-create-board-and-install-metadata)
-(global-set-key (kbd "C-c t S-s") 'org-trello-sync-buffer)
+(global-set-key (kbd "C-c t S") 'org-trello-sync-buffer)
 (global-set-key (kbd "C-c t s") 'org-trello-sync-card)
 (global-set-key (kbd "C-c t a") 'org-trello-add-card-comment)
 
