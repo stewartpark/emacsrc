@@ -48,12 +48,6 @@
     (global-set-key (kbd "C-x f") 'fiplr-find-file)
     (global-set-key (kbd "C-x C-f") 'ack)
     (global-set-key (kbd "C-x e") 'neotree-toggle)
-    (global-set-key (kbd "C-t") (lambda ()
-      (interactive)
-      (setq current-prefix-arg '(4)) ; C-u
-      (call-interactively 'find-tag)
-    ))
-
 ))
 
 ; Hooks
