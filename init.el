@@ -18,6 +18,12 @@
     neotree
     monokai-theme
 ))
+
+;; Install and refresh the packages
+(unless package-archive-contents (package-refresh-contents))
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
 (package-initialize)
 
 ;; Configuration
@@ -50,18 +56,17 @@
 (global-set-key (kbd "C-x f") 'fiplr-find-file)
 (global-set-key (kbd "C-x C-f") 'ack)
 (global-set-key (kbd "<f8>") 'neotree-toggle)
+(global-set-key (kbd "C-c t i") 'org-trello-install-board-metadata)
+(global-set-key (kbd "C-c t c") 'org-trello-create-board-and-install-metadata)
+(global-set-key (kbd "C-c t S-s") 'org-trello-sync-buffer)
+(global-set-key (kbd "C-c t s") 'org-trello-sync-card)
+(global-set-key (kbd "C-c t a") 'org-trello-add-card-comment)
 
 ;; Environment variable setup
 (if (not (getenv "TERM_PROGRAM"))
   (let ((path (shell-command-to-string
           "$SHELL -cl \"printf %s \\\"\\\$PATH\\\"\"")))
     (setenv "PATH" path)))
-
-;; Install and refresh the packages
-(unless package-archive-contents (package-refresh-contents))
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
 
 ;; Autorun
 (add-hook 'after-init-hook (lambda ()
