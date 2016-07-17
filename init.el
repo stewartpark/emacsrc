@@ -36,6 +36,7 @@
 
 (tool-bar-mode 0)
 (menu-bar-mode 0)
+(scroll-bar-mode 0)
 (global-git-gutter-mode 1)
 (global-linum-mode 1)
 
