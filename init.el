@@ -9,7 +9,7 @@
 ))
 (setq package-list '(
     python-mode ruby-mode markdown-mode yaml-mode haskell-mode antlr-mode
-    dockerfile-mode
+    dockerfile-mode nasm-mode
     git-gutter magit
     org org-present org-trello
     ack fiplr
@@ -72,14 +72,19 @@
     (set-frame-parameter nil 'fullscreen nil)
 ))
 
+; Font setup
 (set-face-attribute
     'default nil
     :family "Roboto Mono"
     :height 150
     :weight 'normal)
 
+; Org-mode babel config
 (custom-set-variables
  '(org-babel-load-languages (quote (
     (emacs-lisp . t) (python . t) (dot . t) (ruby . t)
   )))
  '(org-confirm-babel-evaluate nil))
+
+; Mode setup for file extensions
+(add-to-list 'auto-mode-alist '("\\.asm\\'" . nasm-mode))
