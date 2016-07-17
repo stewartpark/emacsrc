@@ -1,9 +1,8 @@
-; Stewart Park's emacs init.el
-(setq inhibit-splash-screen t)
-(setq inhibit-startup-message t)
-(setq initial-scratch-message ";; Happy Hacking")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Stewart Park's emacs init.el ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Package setup
+;; Package setup
 (setq package-archives '(
     ("gnu" . "https://elpa.gnu.org/packages/")
     ("marmalade" . "https://marmalade-repo.org/packages/")
@@ -21,39 +20,55 @@
 ))
 (package-initialize)
 
-; Misc. setup
+;; Configuration
+(setq inhibit-splash-screen t)
+(setq inhibit-startup-message t)
+(setq initial-scratch-message ";; Happy Hacking")
+
+(setq make-backup-files nil)
+
+(tool-bar-mode 0)
+(menu-bar-mode 0)
+(global-git-gutter-mode 1)
+(global-linum-mode 1)
+
+;; Theme
+(load-theme 'monokai t)
+
+;; Font setup
+(set-face-attribute
+    'default nil
+    :family "Roboto Mono"
+    :height 130
+    :weight 'normal)
+
+;; Neotree
+(setq neo-smart-open t)
+(neotree)
+
+;; Set up shortcut keys
+(global-set-key (kbd "C-x f") 'fiplr-find-file)
+(global-set-key (kbd "C-x C-f") 'ack)
+(global-set-key (kbd "<f8>") 'neotree-toggle)
+
+;; Environment variable setup
 (if (not (getenv "TERM_PROGRAM"))
   (let ((path (shell-command-to-string
           "$SHELL -cl \"printf %s \\\"\\\$PATH\\\"\"")))
     (setenv "PATH" path)))
-(setq make-backup-files nil)
 
-; Install and refresh the packages
+;; Install and refresh the packages
 (unless package-archive-contents (package-refresh-contents))
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
 
-; Autorun
+;; Autorun
 (add-hook 'after-init-hook (lambda ()
-    (tool-bar-mode 0)
-    (menu-bar-mode 0)
-    (global-git-gutter-mode 1)
-    (global-linum-mode 1)
 
-    ; Theme
-    (load-theme 'monokai t)
-
-    ; Launch neotree
-    (neotree)
-
-    ; Set up keys
-    (global-set-key (kbd "C-x f") 'fiplr-find-file)
-    (global-set-key (kbd "C-x C-f") 'ack)
-    (global-set-key (kbd "<f8>") 'neotree-toggle)
 ))
 
-; Hooks
+;; Hooks
 (add-hook 'before-save-hook (lambda ()
     (delete-trailing-whitespace)
 ))
@@ -75,19 +90,12 @@
     (set-frame-parameter nil 'fullscreen nil)
 ))
 
-; Font setup
-(set-face-attribute
-    'default nil
-    :family "Roboto Mono"
-    :height 130
-    :weight 'normal)
-
-; Org-mode babel config
+;; Org-mode babel config
 (custom-set-variables
  '(org-babel-load-languages (quote (
     (emacs-lisp . t) (python . t) (dot . t) (ruby . t)
   )))
  '(org-confirm-babel-evaluate nil))
 
-; Mode setup for file extensions
+;; Mode setup for file extensions
 (add-to-list 'auto-mode-alist '("\\.asm\\'" . nasm-mode))
