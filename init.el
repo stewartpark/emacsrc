@@ -14,22 +14,23 @@
     dockerfile-mode nasm-mode
     git-gutter magit
     org org-present org-trello
+    hackernews
     ack fiplr
     neotree
     monokai-theme
 ))
 
 ;; Install and refresh the packages
+(package-initialize)
 (unless package-archive-contents (package-refresh-contents))
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
-(package-initialize)
 
 ;; Configuration
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
-(setq initial-scratch-message ";; Happy Hacking")
+(setq initial-scratch-message ";; Happy Hacking!")
 
 (setq make-backup-files nil)
 
