@@ -1,4 +1,7 @@
 ; Stewart Park's emacs init.el
+(setq inhibit-splash-screen t)
+(setq inhibit-startup-message t)
+(setq initial-scratch-message ";; Happy Hacking")
 
 ; Package setup
 (setq package-archives '(
@@ -47,7 +50,7 @@
     ; Set up keys
     (global-set-key (kbd "C-x f") 'fiplr-find-file)
     (global-set-key (kbd "C-x C-f") 'ack)
-    (global-set-key (kbd "C-x e") 'neotree-toggle)
+    (global-set-key (kbd "<f8>") 'neotree-toggle)
 ))
 
 ; Hooks
@@ -76,7 +79,7 @@
 (set-face-attribute
     'default nil
     :family "Roboto Mono"
-    :height 150
+    :height 130
     :weight 'normal)
 
 ; Org-mode babel config
