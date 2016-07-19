@@ -72,7 +72,8 @@
 
 ;; Autorun
 (add-hook 'after-init-hook (lambda ()
-
+  (define-key neotree-mode-map (kbd "i") #'neotree-enter-horizontal-split)
+  (define-key neotree-mode-map (kbd "I") #'neotree-enter-vertical-split)
 ))
 
 ;; Hooks
