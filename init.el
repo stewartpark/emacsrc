@@ -15,7 +15,7 @@
     git-gutter magit
     org org-present org-trello
     hackernews
-    ack fiplr
+    ack fiplr ace-window
     neotree
     monokai-theme
 ))
@@ -63,6 +63,7 @@
 (global-set-key (kbd "C-c t S") 'org-trello-sync-buffer)
 (global-set-key (kbd "C-c t s") 'org-trello-sync-card)
 (global-set-key (kbd "C-c t a") 'org-trello-add-card-comment)
+(global-set-key (kbd "M-p") 'ace-window)
 
 ;; Environment variable setup
 (if (not (getenv "TERM_PROGRAM"))
