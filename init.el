@@ -41,6 +41,7 @@
 (scroll-bar-mode 0)
 (global-git-gutter-mode 1)
 (global-linum-mode 1)
+(global-auto-revert-mode t)
 
 ;; Theme
 (load-theme 'monokai t)
