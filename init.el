@@ -102,20 +102,29 @@
     (org-remove-inline-images)
     (set-frame-parameter nil 'fullscreen nil)
 ))
+(add-hook 'web-mode-hook (lambda ()
+    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-css-indent-offset 2)
+    (setq web-mode-code-indent-offset 2)
+))
+
+(custom-set-variables
+  ;; js3-mode config
+  '(js3-lazy-commas t)
+  '(js3-lazy-operators t)
+  '(js3-expr-indent-offset 2)
+  '(js3-paren-indent-offset 2)
+  '(js3-square-indent-offset 2)
+  '(js3-curly-indent-offset 2)
 
 ;; Org-mode babel config
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-babel-load-languages
-   (quote
-    ((emacs-lisp . t)
-     (python . t)
-     (dot . t)
-     (ruby . t))))
- '(org-confirm-babel-evaluate nil)
+  '(org-babel-load-languages
+    (quote
+      ((emacs-lisp . t)
+        (python . t)
+        (dot . t)
+        (ruby . t))))
+  '(org-confirm-babel-evaluate nil)
 )
 
 ;; Mode setup for file extensions
