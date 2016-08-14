@@ -41,7 +41,7 @@
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
 (global-git-gutter-mode 1)
-(global-linum-mode 1)
+(global-linum-mode 0)
 (global-auto-revert-mode t)
 
 ;; Theme
@@ -88,7 +88,6 @@
 (add-hook 'org-present-mode-hook (lambda ()
     (neotree-hide)
     (org-present-big)
-    (linum-mode 0)
     (git-gutter-mode 0)
     (org-display-inline-images)
     (set-frame-parameter nil 'fullscreen 'fullboth)
@@ -97,7 +96,6 @@
     (neotree-show)
     (other-window 1)
     (org-present-small)
-    (linum-mode 1)
     (git-gutter-mode 1)
     (org-remove-inline-images)
     (set-frame-parameter nil 'fullscreen nil)
