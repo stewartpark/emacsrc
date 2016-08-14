@@ -110,14 +110,18 @@
 
 (custom-set-variables
   ;; js3-mode config
-  '(js3-lazy-commas t)
-  '(js3-lazy-operators t)
+  '(js3-auto-indent-p t)
+  '(js3-curly-indent-offset 0)
+  '(js3-enter-indents-newline t)
   '(js3-expr-indent-offset 2)
+  '(js3-indent-on-enter-key t)
+  '(js3-lazy-commas t)
+  '(js3-lazy-dots t)
+  '(js3-lazy-operators t)
   '(js3-paren-indent-offset 2)
   '(js3-square-indent-offset 2)
-  '(js3-curly-indent-offset 2)
 
-;; Org-mode babel config
+  ;; Org-mode babel config
   '(org-babel-load-languages
     (quote
       ((emacs-lisp . t)
@@ -137,3 +141,4 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js3-mode))
