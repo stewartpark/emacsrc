@@ -10,15 +10,17 @@
     ("org" . "http://orgmode.org/elpa/")
 ))
 (setq package-list '(
-    python-mode ruby-mode markdown-mode yaml-mode haskell-mode antlr-mode
+    better-defaults
+    python-mode elpy py-isort
+    ruby-mode markdown-mode yaml-mode haskell-mode antlr-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js3-mode json-mode
     scss-mode web-mode
     git-gutter magit
     org org-present org-trello
     hackernews
     ack fiplr ace-window
-    neotree
-    monokai-theme
+    neotree flycheck
+    material-theme
 ))
 
 ;; Install and refresh the packages
@@ -27,6 +29,13 @@
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
+
+;; Before anything starts, get the right envs
+(if (not (getenv "TERM_PROGRAM"))
+   (setenv "PATH"
+           (shell-command-to-string "source $HOME/.bashrc && printf $PATH")
+    )
+)
 
 ;; Configuration
 (setq inhibit-splash-screen t)
@@ -39,13 +48,16 @@
 
 (tool-bar-mode 0)
 (menu-bar-mode 0)
-(scroll-bar-mode 0)
+(when (display-graphic-p)
+    (scroll-bar-mode 0)
+)
 (global-git-gutter-mode 1)
 (global-linum-mode 0)
 (global-auto-revert-mode t)
+(global-flycheck-mode)
 
 ;; Theme
-(load-theme 'monokai t)
+(load-theme 'material t)
 
 ;; Font setup
 (set-face-attribute
@@ -57,6 +69,10 @@
 ;; Neotree
 (setq neo-smart-open t)
 (neotree)
+
+
+;; Elpy
+(elpy-enable)
 
 ;; Set up shortcut keys
 (global-set-key (kbd "C-x f") 'fiplr-find-file)
@@ -84,6 +100,10 @@
 ;; Hooks
 (add-hook 'before-save-hook (lambda ()
     (delete-trailing-whitespace)
+    (if (bound-and-true-p python-mode)
+        (message "Python: isorting")
+        (py-isort-buffer)
+    )
 ))
 (add-hook 'org-present-mode-hook (lambda ()
     (neotree-hide)
@@ -130,6 +150,7 @@
 )
 
 ;; Mode setup for file extensions
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js3-mode))
 (add-to-list 'auto-mode-alist '("\\.asm\\'" . nasm-mode))
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
