@@ -11,8 +11,9 @@
 ))
 (setq package-list '(
     better-defaults
-    python-mode elpy py-isort py-autopep8
-    ruby-mode markdown-mode yaml-mode haskell-mode antlr-mode
+    python-mode elpy py-isort py-autopep8 pyenv-mode-auto
+    ruby-mode rbenv rubocop
+    markdown-mode yaml-mode haskell-mode antlr-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js3-mode json-mode
     scss-mode web-mode
     git-gutter magit
@@ -54,6 +55,8 @@
 (global-linum-mode 0)
 (global-auto-revert-mode t)
 (global-flycheck-mode)
+(setq rbenv-show-active-ruby-in-modeline nil)
+(global-rbenv-mode)
 
 ;; Theme
 (load-theme 'material t)
@@ -125,6 +128,7 @@
     (setq web-mode-code-indent-offset 2)
 ))
 (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+(add-hook 'ruby-mode-hook #'rubocop-mode)
 
 (custom-set-variables
   ;; js3-mode config
