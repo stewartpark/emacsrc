@@ -11,7 +11,7 @@
 ))
 (setq package-list '(
     better-defaults
-    python-mode elpy py-isort
+    python-mode elpy py-isort py-autopep8
     ruby-mode markdown-mode yaml-mode haskell-mode antlr-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js3-mode json-mode
     scss-mode web-mode
@@ -23,19 +23,17 @@
     material-theme
 ))
 
+;; Before anything starts, get the right envs
+(when (not (getenv "TERM_PROGRAM"))
+  (setenv "PATH" (shell-command-to-string "source $HOME/.profile && printf $PATH"))
+)
+
 ;; Install and refresh the packages
 (package-initialize)
 (unless package-archive-contents (package-refresh-contents))
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
-
-;; Before anything starts, get the right envs
-(if (not (getenv "TERM_PROGRAM"))
-   (setenv "PATH"
-           (shell-command-to-string "source $HOME/.bashrc && printf $PATH")
-    )
-)
 
 ;; Configuration
 (setq inhibit-splash-screen t)
@@ -125,6 +123,7 @@
     (setq web-mode-css-indent-offset 2)
     (setq web-mode-code-indent-offset 2)
 ))
+(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
 
 (custom-set-variables
   ;; js3-mode config
