@@ -26,6 +26,7 @@
 ;; Before anything starts, get the right envs
 (when (not (getenv "TERM_PROGRAM"))
   (setenv "PATH" (shell-command-to-string "source $HOME/.profile && printf $PATH"))
+  (setq exec-path (split-string (getenv "PATH") ":"))
 )
 
 ;; Install and refresh the packages
