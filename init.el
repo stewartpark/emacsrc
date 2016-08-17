@@ -46,6 +46,10 @@
 
 (setq make-backup-files nil)
 
+(xterm-mouse-mode t)
+(global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+(global-set-key (kbd "<mouse-5>") 'scroll-up-line)
+
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (when (display-graphic-p)
