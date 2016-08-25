@@ -118,7 +118,7 @@
 ;; Hooks
 (add-hook 'before-save-hook (lambda ()
     (delete-trailing-whitespace)
-    (if (bound-and-true-p python-mode)
+    (when (bound-and-true-p python-mode)
         (message "Python: isorting")
         (py-isort-buffer)
     )
