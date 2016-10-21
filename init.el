@@ -16,7 +16,7 @@
     markdown-mode yaml-mode haskell-mode antlr-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js3-mode json-mode
     scss-mode web-mode
-    git-gutter magit
+    git-gutter magit keychain-environment
     org org-present org-trello
     hackernews
     ack fiplr ace-window
@@ -26,7 +26,8 @@
 
 ;; Before anything starts, get the right envs
 (when (not (getenv "TERM_PROGRAM"))
-  (setenv "PATH" (shell-command-to-string "source $HOME/.profile && printf $PATH"))
+  (setenv "PATH"
+    (shell-command-to-string "cat /etc/paths | tr '\n' ':'"))
   (setq exec-path (split-string (getenv "PATH") ":"))
 )
 
@@ -74,6 +75,9 @@
 (setq rbenv-show-active-ruby-in-modeline nil)
 (global-rbenv-mode)
 
+;; Load keychain env
+(keychain-refresh-environment)
+
 ;; Theme
 (load-theme 'flatland t)
 
@@ -88,7 +92,6 @@
 ;; Neotree
 (setq neo-smart-open t)
 (neotree)
-
 
 ;; Elpy
 (elpy-enable)
@@ -182,3 +185,4 @@
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js3-mode))
+(add-to-list 'auto-mode-alist '("\\.g4\\'" . antlr-mode))
