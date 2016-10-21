@@ -16,7 +16,7 @@
     racket-mode
     markdown-mode yaml-mode haskell-mode antlr-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js3-mode json-mode
-    scss-mode web-mode
+    scss-mode web-mode rainbow-mode
     git-gutter magit keychain-environment
     org org-present org-trello
     hackernews
@@ -133,7 +133,7 @@
 (add-hook 'after-init-hook (lambda ()
   (define-key neotree-mode-map (kbd "i") #'neotree-enter-horizontal-split)
   (define-key neotree-mode-map (kbd "I") #'neotree-enter-vertical-split)
-  (set-face-attribute 'linum nil :height 100)
+  (set-face-attribute 'linum nil :height 120)
   (set-face-foreground 'neo-dir-link-face "#C0C0C0")
 ))
 
@@ -169,6 +169,10 @@
 ))
 (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
 (add-hook 'ruby-mode-hook #'rubocop-mode)
+(add-hook 'after-change-major-mode-hook (lambda ()
+    ;; Additional minor modes to every major mode
+    (rainbow-mode)
+))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
