@@ -182,9 +182,7 @@
      (dot . t)
      (ruby . t))))
  '(org-confirm-babel-evaluate nil)
- '(package-selected-packages
-   (quote
-    (all-the-icons keychain-environment racket-mode yaml-mode web-mode scss-mode rubocop rspec-mode rbenv python-mode pyenv-mode-auto py-isort py-autopep8 org-trello org-present neotree nasm-mode monokai-theme material-theme markdown-mode magit json-mode js3-mode haskell-mode hackernews go-mode gnugo git-gutter foreman-mode flycheck fiplr faceup elpy dockerfile-mode better-defaults ack ace-window 2048-game))))
+)
 
 ;; Mode setup for file extensions
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js3-mode))
@@ -199,9 +197,4 @@
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js3-mode))
 (add-to-list 'auto-mode-alist '("\\.g4\\'" . antlr-mode))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(add-to-list 'auto-mode-alist '("Procfile\\'" . foreman))
