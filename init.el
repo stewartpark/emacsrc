@@ -10,7 +10,7 @@
     ("org" . "http://orgmode.org/elpa/")
 ))
 (setq package-list '(
-    better-defaults
+    better-defaults multiple-cursors
     python-mode elpy py-isort py-autopep8 pyenv-mode-auto
     ruby-mode rspec-mode rbenv rubocop
     racket-mode
@@ -102,6 +102,9 @@
 (setq fiplr-ignored-globs '(
     (directories (".git" ".svn" ".hg" ".bzr" ".bundle" "__pycache__"))
     (files (".DS_Store" "*.pyc" ".#*" "*~" "*.so" "*.jpg" "*.png" "*.gif" "*.pdf" "*.gz" "*.zip"))))
+
+;; Multiple cursors
+(global-set-key (kbd "C-d") 'mc/mark-next-like-this)
 
 ;; Elpy
 (elpy-enable)
