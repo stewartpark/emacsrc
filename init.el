@@ -218,3 +218,4 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js3-mode))
 (add-to-list 'auto-mode-alist '("\\.g4\\'" . antlr-mode))
 (add-to-list 'auto-mode-alist '("Procfile\\'" . foreman))
+(add-to-list 'auto-mode-alist '("\\.conf\\'" . conf-mode))
