@@ -17,7 +17,7 @@
     markdown-mode yaml-mode haskell-mode antlr-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js3-mode json-mode
     scss-mode web-mode rainbow-mode
-    smartparens
+    smartparens dumb-jump
     git-gutter magit keychain-environment
     org org-present org-trello
     hackernews
@@ -122,7 +122,9 @@
 (global-set-key (kbd "C-c t S") 'org-trello-sync-buffer)
 (global-set-key (kbd "C-c t s") 'org-trello-sync-card)
 (global-set-key (kbd "C-c t a") 'org-trello-add-card-comment)
-(global-set-key (kbd "M-p") 'ace-window)
+(global-set-key (kbd "C-x o") 'ace-window)
+(global-set-key (kbd "C-x C-d") 'dumb-jump-go)
+(global-set-key (kbd "C-x d") 'dumb-jump-back)
 
 ;; Environment variable setup
 (if (not (getenv "TERM_PROGRAM"))
@@ -174,6 +176,7 @@
     ;; Additional minor modes to every major mode
     (rainbow-mode)
     (smartparens-mode)
+    (dumb-jump-mode)
 ))
 
 (custom-set-variables
@@ -199,7 +202,9 @@
      (dot . t)
      (ruby . t))))
  '(org-confirm-babel-evaluate nil)
-)
+ '(package-selected-packages
+   (quote
+    (dumb-jump yaml-mode web-mode smartparens scss-mode rubocop rspec-mode rbenv rainbow-mode racket-mode python-mode pyenv-mode-auto py-isort py-autopep8 org-trello org-present neotree nasm-mode multiple-cursors monokai-theme material-theme markdown-mode magit keychain-environment json-mode js3-mode haskell-mode hackernews go-mode gnugo git-gutter foreman-mode flycheck fiplr elpy dockerfile-mode better-defaults all-the-icons ack ace-window 2048-game))))
 
 ;; Mode setup for file extensions
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js3-mode))
@@ -215,3 +220,9 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js3-mode))
 (add-to-list 'auto-mode-alist '("\\.g4\\'" . antlr-mode))
 (add-to-list 'auto-mode-alist '("Procfile\\'" . foreman))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
