@@ -21,8 +21,9 @@
     org org-present org-trello
     hackernews
     ack fiplr ace-window
-    neotree flycheck
-    dark-mint-theme
+    all-the-icons flycheck
+    neotree
+    monokai-theme
 ))
 
 ;; Before anything starts, get the right envs
@@ -82,18 +83,19 @@
 (keychain-refresh-environment)
 
 ;; Theme
-(load-theme 'dark-mint t)
+(load-theme 'monokai t)
 
 ;; Font setup
 (setq mac-allow-anti-aliasing t)
 (set-face-attribute
     'default nil
     :family "Roboto Mono"
-    :height 120
+    :height 100
     :weight 'light)
 
 ;; Neotree
 (setq neo-smart-open t)
+(setq neo-theme (if window-system 'icons 'arrow))
 (neotree)
 
 ;; Elpy
@@ -175,9 +177,7 @@
      (dot . t)
      (ruby . t))))
  '(org-confirm-babel-evaluate nil)
- '(package-selected-packages
-   (quote
-    (dark-mint-theme yaml-mode web-mode scss-mode rubocop rspec-mode rbenv racket-mode python-mode pyenv-mode-auto py-isort py-autopep8 org-trello org-present neotree nasm-mode monochrome-theme material-theme markdown-mode magit keychain-environment json-mode js3-mode haskell-mode hackernews go-mode git-gutter foreman-mode flycheck flatland-theme fiplr elpy dockerfile-mode better-defaults ack ace-window))))
+)
 
 ;; Mode setup for file extensions
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js3-mode))
@@ -192,9 +192,3 @@
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js3-mode))
 (add-to-list 'auto-mode-alist '("\\.g4\\'" . antlr-mode))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
