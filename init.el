@@ -21,7 +21,7 @@
     hackernews
     ack fiplr ace-window
     neotree flycheck
-    material-theme
+    flatland-theme
 ))
 
 ;; Before anything starts, get the right envs
@@ -75,14 +75,15 @@
 (global-rbenv-mode)
 
 ;; Theme
-(load-theme 'material t)
+(load-theme 'flatland t)
 
 ;; Font setup
+(setq mac-allow-anti-aliasing t)
 (set-face-attribute
     'default nil
     :family "Roboto Mono"
-    :height 130
-    :weight 'normal)
+    :height 120
+    :weight 'light)
 
 ;; Neotree
 (setq neo-smart-open t)
