@@ -44,8 +44,6 @@
 (setq inhibit-startup-message t)
 (setq initial-scratch-message ";; Happy Hacking!")
 
-(setq ruby-insert-encoding-magic-comment nil)
-
 (setq make-backup-files nil)
 
 (xterm-mouse-mode t)
@@ -75,6 +73,10 @@
 (global-flycheck-mode)
 (setq rbenv-show-active-ruby-in-modeline nil)
 (global-rbenv-mode)
+
+;; Ruby-related config
+(setq ruby-insert-encoding-magic-comment nil)
+(setq ruby-indent-level 2)
 
 ;; Load keychain env
 (keychain-refresh-environment)
