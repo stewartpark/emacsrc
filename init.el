@@ -69,7 +69,7 @@
 )
 
 (global-git-gutter-mode 1)
-(global-linum-mode 0)
+(global-linum-mode 1)
 (global-auto-revert-mode t)
 (global-flycheck-mode)
 (setq rbenv-show-active-ruby-in-modeline nil)
@@ -90,7 +90,7 @@
 (set-face-attribute
     'default nil
     :family "Roboto Mono"
-    :height 100
+    :height 130
     :weight 'light)
 
 ;; Neotree
@@ -122,6 +122,7 @@
 (add-hook 'after-init-hook (lambda ()
   (define-key neotree-mode-map (kbd "i") #'neotree-enter-horizontal-split)
   (define-key neotree-mode-map (kbd "I") #'neotree-enter-vertical-split)
+  (set-face-attribute 'linum nil :height 100)
 ))
 
 ;; Hooks
@@ -136,6 +137,7 @@
     (neotree-hide)
     (org-present-big)
     (git-gutter-mode 0)
+    (linum-mode 0)
     (org-display-inline-images)
     (set-frame-parameter nil 'fullscreen 'fullboth)
 ))
@@ -144,6 +146,7 @@
     (other-window 1)
     (org-present-small)
     (git-gutter-mode 1)
+    (linum-mode 1)
     (org-remove-inline-images)
     (set-frame-parameter nil 'fullscreen nil)
 ))
@@ -160,6 +163,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(linum-format (quote "%5d"))
  '(js3-auto-indent-p t)
  '(js3-curly-indent-offset 0)
  '(js3-enter-indents-newline t)
