@@ -44,6 +44,7 @@
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
 (setq initial-scratch-message ";; Happy Hacking!")
+(setq-default cursor-type 'bar)
 
 (setq make-backup-files nil)
 
@@ -96,6 +97,8 @@
 ;; Neotree
 (setq neo-smart-open t)
 (setq neo-theme (if window-system 'icons 'arrow))
+(setq neo-window-width 30)
+(add-hook 'neotree-mode-hook (lambda () (setq cursor-type nil) (hl-line-mode 1)))
 (neotree)
 
 ;; fiplr
