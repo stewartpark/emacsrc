@@ -12,7 +12,8 @@
 (setq package-list '(
     better-defaults
     python-mode elpy py-isort py-autopep8 pyenv-mode-auto
-    ruby-mode rbenv rubocop
+    ruby-mode rspec-mode rbenv rubocop
+    racket-mode
     markdown-mode yaml-mode haskell-mode antlr-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js3-mode json-mode
     scss-mode web-mode
