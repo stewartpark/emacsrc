@@ -123,6 +123,7 @@
   (define-key neotree-mode-map (kbd "i") #'neotree-enter-horizontal-split)
   (define-key neotree-mode-map (kbd "I") #'neotree-enter-vertical-split)
   (set-face-attribute 'linum nil :height 100)
+  (set-face-foreground 'neo-dir-link-face "#C0C0C0")
 ))
 
 ;; Hooks
@@ -163,7 +164,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(linum-format (quote "%5d"))
  '(js3-auto-indent-p t)
  '(js3-curly-indent-offset 0)
  '(js3-enter-indents-newline t)
@@ -174,6 +174,7 @@
  '(js3-lazy-operators t)
  '(js3-paren-indent-offset 2)
  '(js3-square-indent-offset 2)
+ '(linum-format (quote "%5d"))
  '(org-babel-load-languages
    (quote
     ((emacs-lisp . t)
@@ -181,7 +182,9 @@
      (dot . t)
      (ruby . t))))
  '(org-confirm-babel-evaluate nil)
-)
+ '(package-selected-packages
+   (quote
+    (all-the-icons keychain-environment racket-mode yaml-mode web-mode scss-mode rubocop rspec-mode rbenv python-mode pyenv-mode-auto py-isort py-autopep8 org-trello org-present neotree nasm-mode monokai-theme material-theme markdown-mode magit json-mode js3-mode haskell-mode hackernews go-mode gnugo git-gutter foreman-mode flycheck fiplr faceup elpy dockerfile-mode better-defaults ack ace-window 2048-game))))
 
 ;; Mode setup for file extensions
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js3-mode))
@@ -196,3 +199,9 @@
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js3-mode))
 (add-to-list 'auto-mode-alist '("\\.g4\\'" . antlr-mode))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
