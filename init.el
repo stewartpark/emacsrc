@@ -17,6 +17,7 @@
     markdown-mode yaml-mode haskell-mode antlr-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js3-mode json-mode
     scss-mode web-mode rainbow-mode
+    smartparens
     git-gutter magit keychain-environment
     org org-present org-trello
     hackernews
@@ -172,6 +173,7 @@
 (add-hook 'after-change-major-mode-hook (lambda ()
     ;; Additional minor modes to every major mode
     (rainbow-mode)
+    (smartparens-mode)
 ))
 
 (custom-set-variables
