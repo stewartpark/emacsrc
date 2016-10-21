@@ -98,6 +98,11 @@
 (setq neo-theme (if window-system 'icons 'arrow))
 (neotree)
 
+;; fiplr
+(setq fiplr-ignored-globs '(
+    (directories (".git" ".svn" ".hg" ".bzr" ".bundle" "__pycache__"))
+    (files (".DS_Store" "*.pyc" ".#*" "*~" "*.so" "*.jpg" "*.png" "*.gif" "*.pdf" "*.gz" "*.zip"))))
+
 ;; Elpy
 (elpy-enable)
 
