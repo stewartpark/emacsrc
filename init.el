@@ -50,7 +50,8 @@
 ;; Configuration
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
-(setq initial-scratch-message (concat ";; Happy Hacking!\n;;\n" (get-all-documentations-as-comments)))
+(setq initial-scratch-message
+      (concat ";; Happy Hacking!\n;;\n" (get-all-documentations-as-comments)))
 (setq-default cursor-type 'bar)
 
 (setq make-backup-files nil)
@@ -110,6 +111,8 @@
 (global-set-key (kbd "C-x o") 'ace-window)
 (global-set-key (kbd "C-x C-d") 'dumb-jump-go)
 (global-set-key (kbd "C-x d") 'dumb-jump-back)
+(global-set-key (kbd "C-x C-g") 'magit-blame)
+(global-set-key (kbd "C-x g") 'magit-blame-quit)
 
 ;; Environment variable setup
 (if (not (getenv "TERM_PROGRAM"))
