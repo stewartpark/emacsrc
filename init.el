@@ -1,6 +1,9 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Stewart Park's emacs init.el ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; init.el --- Emacs boot up code
+;;;
+;;; Commentary:
+;;; Stewart Park's Emacs configuration.
+;;;
+;;; Code:
 
 ;; Package setup
 (setq package-archives '(
@@ -27,6 +30,11 @@
     molokai-theme
 ))
 
+; For my own code
+(load "~/.emacs.d/lisp/utils.el")
+(global-set-key (kbd "M-=") 'font+)
+(global-set-key (kbd "M--") 'font-)
+
 ;; Before anything starts, get the right envs
 (when (not (getenv "TERM_PROGRAM"))
   (setenv "PATH" (shell-command-to-string "cat /etc/paths | tr '\n' ':'"))
@@ -42,7 +50,7 @@
 ;; Configuration
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
-(setq initial-scratch-message ";; Happy Hacking!\n;; Stewart Park's Emacs")
+(setq initial-scratch-message (concat ";; Happy Hacking!\n;;\n" (get-all-documentations-as-comments)))
 (setq-default cursor-type 'bar)
 
 (setq make-backup-files nil)
@@ -65,6 +73,7 @@
       (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
         (process-send-string proc text)
         (process-send-eof proc))))
+  (setq mac-allow-anti-aliasing t)
   (setq interprogram-cut-function 'paste-to-osx)
   (setq interprogram-paste-function 'copy-from-osx))
 
@@ -74,14 +83,6 @@
 ;; Theme
 (load-theme 'molokai t)
 
-;; Font setup
-(setq mac-allow-anti-aliasing t)
-(set-face-attribute
- 'default nil
- :family "Roboto Mono"
- :height 130
- :weight 'light)
-
 ;; Neotree
 (setq neo-smart-open t)
 (setq neo-theme (if window-system 'icons 'arrow))
@@ -90,9 +91,9 @@
 (neotree)
 
 ;; fiplr
-(setq fiplr-ignored-globs '(
-                            (directories (".git" ".svn" ".hg" ".bzr" ".bundle" "__pycache__"))
-                            (files (".DS_Store" "*.pyc" ".#*" "*~" "*.so" "*.jpg" "*.png" "*.gif" "*.pdf" "*.gz" "*.zip"))))
+(setq fiplr-ignored-globs
+      '((directories (".git" ".svn" ".hg" ".bzr" ".bundle" "__pycache__"))
+        (files (".DS_Store" "*.pyc" ".#*" "*~" "*.so" "*.jpg" "*.png" "*.gif" "*.pdf" "*.gz" "*.zip"))))
 
 ;; Multiple cursors
 (global-set-key (kbd "C-d") 'mc/mark-next-like-this)
