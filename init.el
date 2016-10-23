@@ -29,10 +29,8 @@
 
 ;; Before anything starts, get the right envs
 (when (not (getenv "TERM_PROGRAM"))
-  (setenv "PATH"
-    (shell-command-to-string "cat /etc/paths | tr '\n' ':'"))
-  (setq exec-path (split-string (getenv "PATH") ":"))
-)
+  (setenv "PATH" (shell-command-to-string "cat /etc/paths | tr '\n' ':'"))
+  (setq exec-path (split-string (getenv "PATH") ":")))
 
 ;; Install and refresh the packages
 (package-initialize)
@@ -56,30 +54,19 @@
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (when (display-graphic-p)
-    (scroll-bar-mode 0)
-)
+    (scroll-bar-mode 0))
+
+;; Mac-specific config
 (when (eq system-type 'darwin)
-    (defun copy-from-osx ()
-        (shell-command-to-string "pbpaste"))
-    (defun paste-to-osx (text &optional push)
-        (let ((process-connection-type nil))
-            (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
-                (process-send-string proc text)
-                (process-send-eof proc))))
-    (setq interprogram-cut-function 'paste-to-osx)
-    (setq interprogram-paste-function 'copy-from-osx)
-)
-
-(global-git-gutter-mode 1)
-(global-linum-mode 1)
-(global-auto-revert-mode t)
-(global-flycheck-mode)
-(setq rbenv-show-active-ruby-in-modeline nil)
-(global-rbenv-mode)
-
-;; Ruby-related config
-(setq ruby-insert-encoding-magic-comment nil)
-(setq ruby-indent-level 2)
+  (defun copy-from-osx ()
+    (shell-command-to-string "pbpaste"))
+  (defun paste-to-osx (text &optional push)
+    (let ((process-connection-type nil))
+      (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+        (process-send-string proc text)
+        (process-send-eof proc))))
+  (setq interprogram-cut-function 'paste-to-osx)
+  (setq interprogram-paste-function 'copy-from-osx))
 
 ;; Load keychain env
 (keychain-refresh-environment)
@@ -90,10 +77,10 @@
 ;; Font setup
 (setq mac-allow-anti-aliasing t)
 (set-face-attribute
-    'default nil
-    :family "Roboto Mono"
-    :height 130
-    :weight 'light)
+ 'default nil
+ :family "Roboto Mono"
+ :height 130
+ :weight 'light)
 
 ;; Neotree
 (setq neo-smart-open t)
@@ -104,14 +91,11 @@
 
 ;; fiplr
 (setq fiplr-ignored-globs '(
-    (directories (".git" ".svn" ".hg" ".bzr" ".bundle" "__pycache__"))
-    (files (".DS_Store" "*.pyc" ".#*" "*~" "*.so" "*.jpg" "*.png" "*.gif" "*.pdf" "*.gz" "*.zip"))))
+                            (directories (".git" ".svn" ".hg" ".bzr" ".bundle" "__pycache__"))
+                            (files (".DS_Store" "*.pyc" ".#*" "*~" "*.so" "*.jpg" "*.png" "*.gif" "*.pdf" "*.gz" "*.zip"))))
 
 ;; Multiple cursors
 (global-set-key (kbd "C-d") 'mc/mark-next-like-this)
-
-;; Elpy
-(elpy-enable)
 
 ;; Set up shortcut keys
 (global-set-key (kbd "C-x f") 'fiplr-find-file)
@@ -128,72 +112,88 @@
 
 ;; Environment variable setup
 (if (not (getenv "TERM_PROGRAM"))
-  (let ((path (shell-command-to-string
-          "$SHELL -cl \"printf %s \\\"\\\$PATH\\\"\"")))
-    (setenv "PATH" path)))
+    (let ((path (shell-command-to-string
+                 "$SHELL -cl \"printf %s \\\"\\\$PATH\\\"\"")))
+      (setenv "PATH" path)))
 
 ;; Autorun
-(add-hook 'after-init-hook (lambda ()
-  (define-key neotree-mode-map (kbd "i") #'neotree-enter-horizontal-split)
-  (define-key neotree-mode-map (kbd "I") #'neotree-enter-vertical-split)
-  (set-face-attribute 'linum nil :height 120)
-  (set-face-foreground 'neo-dir-link-face "#C0C0C0")
-))
+;; NOTE: Please avoid adding anything here.
+(add-hook 'after-init-hook (lambda ()))
 
 ;; Hooks
 (add-hook 'before-save-hook (lambda ()
-    (delete-trailing-whitespace)
-    (when (bound-and-true-p python-mode)
-        (message "Python: isorting")
-        (py-isort-buffer)
-    )
-))
+                              (delete-trailing-whitespace)
+                              (when (bound-and-true-p python-mode)
+                                (message "Python: isorting")
+                                (py-isort-buffer)
+                                )))
 (add-hook 'org-present-mode-hook (lambda ()
-    (neotree-hide)
-    (org-present-big)
-    (git-gutter-mode 0)
-    (linum-mode 0)
-    (org-display-inline-images)
-    (set-frame-parameter nil 'fullscreen 'fullboth)
-))
+                                   (neotree-hide)
+                                   (org-present-big)
+                                   (git-gutter-mode 0)
+                                   (linum-mode 0)
+                                   (org-display-inline-images)
+                                   (set-frame-parameter nil 'fullscreen 'fullboth)))
 (add-hook 'org-present-mode-quit-hook (lambda ()
-    (neotree-show)
-    (other-window 1)
-    (org-present-small)
-    (git-gutter-mode 1)
-    (linum-mode 1)
-    (org-remove-inline-images)
-    (set-frame-parameter nil 'fullscreen nil)
-))
-(add-hook 'web-mode-hook (lambda ()
-    (setq web-mode-markup-indent-offset 2)
-    (setq web-mode-css-indent-offset 2)
-    (setq web-mode-code-indent-offset 2)
-))
-(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-(add-hook 'ruby-mode-hook #'rubocop-mode)
-(add-hook 'after-change-major-mode-hook (lambda ()
-    ;; Additional minor modes to every major mode
-    (rainbow-mode)
-    (smartparens-mode)
-    (dumb-jump-mode)
-    (rainbow-delimiters-mode)
-    (set-face-foreground 'rainbow-delimiters-depth-1-face "grey")
-    (set-face-foreground 'rainbow-delimiters-depth-2-face "orange")
-    (set-face-foreground 'rainbow-delimiters-depth-3-face "yellow")
-    (set-face-foreground 'rainbow-delimiters-depth-4-face "green")
-    (set-face-foreground 'rainbow-delimiters-depth-5-face "blue")
-    (set-face-foreground 'rainbow-delimiters-depth-6-face "violet")
-    (set-face-foreground 'rainbow-delimiters-depth-7-face "purple")
-    (set-face-foreground 'rainbow-delimiters-depth-8-face "red")
-    (set-face-foreground 'rainbow-delimiters-depth-9-face "white")
-))
+                                        (neotree-show)
+                                        (other-window 1)
+                                        (org-present-small)
+                                        (git-gutter-mode 1)
+                                        (linum-mode 1)
+                                        (org-remove-inline-images)
+                                        (set-frame-parameter nil 'fullscreen nil)))
+
+(add-hook 'python-mode-hook (lambda()
+                              (py-autopep8-enable-on-save)
+                              (pyenv-mode)
+                              (elpy-mode)))
+
+(add-hook 'ruby-mode-hook (lambda ()
+                            (rubocop-mode)))
+
+(add-hook 'prog-mode-hook (lambda ()
+                            (git-gutter-mode 1)
+                            (linum-mode 1)
+                            (auto-revert-mode t)
+                            (flycheck-mode 1)
+                            (rainbow-mode)
+                            (smartparens-mode)
+                            (rainbow-delimiters-mode)
+                            (dumb-jump-mode)))
+
+(custom-set-faces
+ ;; Default font
+ '(default nil ((t (:family "Roboto Mono" :height 130 :weight 'light))))
+
+ ;; Line number
+ '(linum ((t (:height 120 :foreground "#C0C0C0"))))
+
+ ;; NeoTree
+ '(neo-dir-link-face ((t (:foreground "#C0C0C0"))))
+
+ ;; Rainbow-delimiters
+ '(rainbow-delimiters-depth-1-face ((t (:foreground "grey"))))
+ '(rainbow-delimiters-depth-2-face ((t (:foreground "orange"))))
+ '(rainbow-delimiters-depth-3-face ((t (:foreground "yellow"))))
+ '(rainbow-delimiters-depth-4-face ((t (:foreground "green"))))
+ '(rainbow-delimiters-depth-5-face ((t (:foreground "blue"))))
+ '(rainbow-delimiters-depth-6-face ((t (:foreground "violet"))))
+ '(rainbow-delimiters-depth-7-face ((t (:foreground "purple"))))
+ '(rainbow-delimiters-depth-8-face ((t (:foreground "red"))))
+ '(rainbow-delimiters-depth-9-face ((t (:foreground "white")))))
 
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
+ ;; Web mode related config
+ '(web-mode-markup-indent-offset 2)
+ '(web-mode-css-indent-offset 2)
+ '(web-mode-code-indent-offset 2)
+
+ ;; Ruby related config
+ '(rbenv-show-active-ruby-in-modeline nil)
+ '(ruby-insert-encoding-magic-comment nil)
+ '(ruby-indent-level 2)
+
+ ;; js3-mode related config
  '(js3-auto-indent-p t)
  '(js3-curly-indent-offset 0)
  '(js3-enter-indents-newline t)
@@ -204,15 +204,18 @@
  '(js3-lazy-operators t)
  '(js3-paren-indent-offset 2)
  '(js3-square-indent-offset 2)
+
+ ;; Line number format
  '(linum-format (quote "%5d"))
+
+ ;; Org-babel
  '(org-babel-load-languages
    (quote
     ((emacs-lisp . t)
      (python . t)
      (dot . t)
      (ruby . t))))
- '(org-confirm-babel-evaluate nil)
- )
+ '(org-confirm-babel-evaluate nil))
 
 ;; Mode setup for file extensions
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js3-mode))
