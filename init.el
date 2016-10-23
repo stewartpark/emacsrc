@@ -28,6 +28,7 @@
     all-the-icons flycheck
     neotree
     molokai-theme
+    json json-rpc
 ))
 
 ; For my own code
