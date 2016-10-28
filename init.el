@@ -27,7 +27,7 @@
     ack fiplr ace-window
     all-the-icons flycheck
     neotree
-    molokai-theme
+    gruvbox-theme
     json json-rpc
 ))
 
@@ -83,7 +83,7 @@
 (keychain-refresh-environment)
 
 ;; Theme
-(load-theme 'molokai t)
+(load-theme 'gruvbox t)
 
 ;; Neotree
 (setq neo-smart-open t)
@@ -167,16 +167,12 @@
                             (dumb-jump-mode)))
 
 (custom-set-faces
- ;; Default font
- '(default nil ((t (:family "Roboto Mono" :height 130 :weight 'light))))
-
- ;; Line number
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(linum ((t (:height 120 :foreground "#C0C0C0"))))
-
- ;; NeoTree
  '(neo-dir-link-face ((t (:foreground "#C0C0C0"))))
-
- ;; Rainbow-delimiters
  '(rainbow-delimiters-depth-1-face ((t (:foreground "grey"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "orange"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "yellow"))))
@@ -188,17 +184,10 @@
  '(rainbow-delimiters-depth-9-face ((t (:foreground "white")))))
 
 (custom-set-variables
- ;; Web mode related config
- '(web-mode-markup-indent-offset 2)
- '(web-mode-css-indent-offset 2)
- '(web-mode-code-indent-offset 2)
-
- ;; Ruby related config
- '(rbenv-show-active-ruby-in-modeline nil)
- '(ruby-insert-encoding-magic-comment nil)
- '(ruby-indent-level 2)
-
- ;; js3-mode related config
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(js3-auto-indent-p t)
  '(js3-curly-indent-offset 0)
  '(js3-enter-indents-newline t)
@@ -209,18 +198,20 @@
  '(js3-lazy-operators t)
  '(js3-paren-indent-offset 2)
  '(js3-square-indent-offset 2)
-
- ;; Line number format
  '(linum-format (quote "%5d"))
-
- ;; Org-babel
  '(org-babel-load-languages
    (quote
     ((emacs-lisp . t)
      (python . t)
      (dot . t)
      (ruby . t))))
- '(org-confirm-babel-evaluate nil))
+ '(org-confirm-babel-evaluate nil)
+ '(rbenv-show-active-ruby-in-modeline nil)
+ '(ruby-indent-level 2)
+ '(ruby-insert-encoding-magic-comment nil)
+ '(web-mode-code-indent-offset 2)
+ '(web-mode-css-indent-offset 2)
+ '(web-mode-markup-indent-offset 2))
 
 ;; Mode setup for file extensions
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js3-mode))
