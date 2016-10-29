@@ -16,7 +16,7 @@
     better-defaults multiple-cursors
     python-mode elpy py-isort py-autopep8 pyenv-mode-auto
     ruby-mode rspec-mode rbenv rubocop
-    racket-mode
+    racket-mode elm-mode rust-mode
     markdown-mode yaml-mode haskell-mode antlr-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js3-mode json-mode
     scss-mode web-mode rainbow-mode rainbow-delimiters
@@ -171,7 +171,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default nil ((t (:family "Droid Sans Mono" :height 130 :weight 'light))))
  '(linum ((t (:height 120 :foreground "#C0C0C0"))))
  '(neo-dir-link-face ((t (:foreground "#C0C0C0"))))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "grey"))))
