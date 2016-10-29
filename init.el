@@ -171,6 +171,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default nil ((t (:family "Droid Sans Mono" :height 130 :weight 'light))))
  '(linum ((t (:height 120 :foreground "#C0C0C0"))))
  '(neo-dir-link-face ((t (:foreground "#C0C0C0"))))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "grey"))))
