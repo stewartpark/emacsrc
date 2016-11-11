@@ -209,6 +209,8 @@
  '(rbenv-show-active-ruby-in-modeline nil)
  '(ruby-indent-level 2)
  '(ruby-insert-encoding-magic-comment nil)
+ '(ruby-deep-indent-paren nil)
+ '(ruby-align-to-stmt-keywords '(if begin case))
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
  '(web-mode-markup-indent-offset 2))
