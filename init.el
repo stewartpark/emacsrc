@@ -17,7 +17,7 @@
     python-mode elpy py-isort py-autopep8 pyenv-mode-auto
     ruby-mode rspec-mode rbenv rubocop
     racket-mode elm-mode rust-mode vue-mode feature-mode
-    markdown-mode yaml-mode haskell-mode antlr-mode
+    markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js3-mode json-mode
     scss-mode web-mode rainbow-mode rainbow-delimiters
     smartparens dumb-jump
@@ -207,10 +207,10 @@
      (ruby . t))))
  '(org-confirm-babel-evaluate nil)
  '(rbenv-show-active-ruby-in-modeline nil)
+ '(ruby-align-to-stmt-keywords (quote (if begin case)))
+ '(ruby-deep-indent-paren nil)
  '(ruby-indent-level 2)
  '(ruby-insert-encoding-magic-comment nil)
- '(ruby-deep-indent-paren nil)
- '(ruby-align-to-stmt-keywords '(if begin case))
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
  '(web-mode-markup-indent-offset 2))
@@ -230,3 +230,4 @@
 (add-to-list 'auto-mode-alist '("\\.g4\\'" . antlr-mode))
 (add-to-list 'auto-mode-alist '("Procfile\\'" . foreman))
 (add-to-list 'auto-mode-alist '("\\.conf\\'" . conf-mode))
+(add-to-list 'auto-mode-alist '("Jenkinsfile" . groovy-mode))
