@@ -16,7 +16,7 @@
     better-defaults multiple-cursors
     python-mode elpy py-isort py-autopep8 pyenv-mode-auto
     ruby-mode rspec-mode rbenv rubocop
-    racket-mode elm-mode rust-mode vue-mode
+    racket-mode elm-mode rust-mode vue-mode feature-mode
     markdown-mode yaml-mode haskell-mode antlr-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js3-mode json-mode
     scss-mode web-mode rainbow-mode rainbow-delimiters
