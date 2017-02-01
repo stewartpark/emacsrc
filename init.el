@@ -21,7 +21,7 @@
     dockerfile-mode nasm-mode go-mode foreman-mode js3-mode json-mode
     scss-mode web-mode rainbow-mode rainbow-delimiters
     smartparens dumb-jump
-    git-gutter-fringe+ magit keychain-environment
+    git-gutter+ git-gutter-fringe+ magit keychain-environment
     org org-present org-trello
     hackernews
     ack fiplr ace-window
@@ -65,7 +65,6 @@
 (menu-bar-mode 0)
 (when (display-graphic-p)
     (scroll-bar-mode 0))
-(git-gutter:linum-setup)
 
 
 ;; Mac-specific config
@@ -137,7 +136,7 @@
 (add-hook 'org-present-mode-hook (lambda ()
                                    (neotree-hide)
                                    (org-present-big)
-                                   (git-gutter-mode 0)
+                                   (git-gutter+-mode 0)
                                    (linum-mode 0)
                                    (org-display-inline-images)
                                    (set-frame-parameter nil 'fullscreen 'fullboth)))
@@ -145,7 +144,7 @@
                                         (neotree-show)
                                         (other-window 1)
                                         (org-present-small)
-                                        (git-gutter-mode 1)
+                                        (git-gutter+-mode 1)
                                         (linum-mode 1)
                                         (org-remove-inline-images)
                                         (set-frame-parameter nil 'fullscreen nil)))
@@ -159,7 +158,7 @@
                             (rubocop-mode)))
 
 (add-hook 'prog-mode-hook (lambda ()
-                            (git-gutter-mode 1)
+                            (git-gutter+-mode 1)
                             (linum-mode 1)
                             (auto-revert-mode t)
                             (flycheck-mode 1)
