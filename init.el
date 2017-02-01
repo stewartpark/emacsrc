@@ -16,12 +16,12 @@
     better-defaults multiple-cursors
     python-mode elpy py-isort py-autopep8 pyenv-mode-auto
     ruby-mode rspec-mode rbenv rubocop
-    racket-mode elm-mode rust-mode vue-mode feature-mode
+    racket-mode elm-mode rust-mode vue-mode
     markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js3-mode json-mode
     scss-mode web-mode rainbow-mode rainbow-delimiters
     smartparens dumb-jump
-    git-gutter magit keychain-environment
+    git-gutter-fringe+ magit keychain-environment
     org org-present org-trello
     hackernews
     ack fiplr ace-window
@@ -65,6 +65,8 @@
 (menu-bar-mode 0)
 (when (display-graphic-p)
     (scroll-bar-mode 0))
+(git-gutter:linum-setup)
+
 
 ;; Mac-specific config
 (when (eq system-type 'darwin)
