@@ -21,7 +21,7 @@
     dockerfile-mode nasm-mode go-mode foreman-mode js3-mode json-mode
     scss-mode web-mode rainbow-mode rainbow-delimiters
     smartparens dumb-jump
-    git-gutter+ git-gutter-fringe+ magit keychain-environment
+    fringe-helper git-gutter-fringe+ magit keychain-environment
     org org-present org-trello
     hackernews
     ack fiplr ace-window
@@ -85,6 +85,9 @@
 
 ;; Theme
 (load-theme 'gruvbox t)
+
+;; Git-gutter-fringe
+(require 'git-gutter-fringe+)
 
 ;; Neotree
 (setq neo-smart-open t)
@@ -199,7 +202,7 @@
  '(js3-lazy-operators t)
  '(js3-paren-indent-offset 2)
  '(js3-square-indent-offset 2)
- '(linum-format (quote "%5d"))
+ '(linum-format (quote "%3d"))
  '(org-babel-load-languages
    (quote
     ((emacs-lisp . t)
