@@ -123,7 +123,8 @@
 (if (not (getenv "TERM_PROGRAM"))
     (let ((path (shell-command-to-string
                  "$SHELL -cl \"printf %s \\\"\\\$PATH\\\"\"")))
-      (setenv "PATH" path)))
+      (setenv "PATH" path)
+      (setq exec-path (split-string path ":"))))
 
 ;; Autorun
 ;; NOTE: Please avoid adding anything here.
