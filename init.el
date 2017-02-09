@@ -20,7 +20,7 @@
     markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js3-mode json-mode
     scss-mode web-mode rainbow-mode rainbow-delimiters
-    smartparens dumb-jump persp-mode zoom-window
+    smartparens dumb-jump zoom-window
     fringe-helper git-gutter-fringe+ magit keychain-environment
     org org-present
     hackernews
@@ -117,15 +117,8 @@
 (global-set-key (kbd "C-x d") 'dumb-jump-back)
 (global-set-key (kbd "C-x C-g") 'magit-blame)
 (global-set-key (kbd "C-x g") 'magit-blame-quit)
-
 (global-set-key (kbd "C-x SPC") 'toggle-window-split)
-
-(with-eval-after-load "persp-mode"
-  (global-set-key (kbd "C-x b") #'persp-switch-to-buffer)
-  (global-set-key (kbd "C-x k") #'persp-kill-buffer)
-  (global-set-key (kbd "C-x C-z") 'zoom-window-zoom)
-  (setq wg-morph-on nil)
-  (setq persp-autokill-buffer-on-remove 'kill-weak))
+(global-set-key (kbd "C-x C-z") 'zoom-window-zoom)
 
 ;; Environment variable setup
 (if (not (getenv "TERM_PROGRAM"))
@@ -136,8 +129,7 @@
 
 ;; Autorun
 ;; NOTE: Please avoid adding anything here.
-(add-hook 'after-init-hook (lambda ()
-                             (persp-mode 1)))
+(add-hook 'after-init-hook (lambda ()))
 
 ;; Hooks
 (add-hook 'before-save-hook (lambda ()
@@ -228,11 +220,7 @@
  '(ruby-insert-encoding-magic-comment nil)
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
- '(web-mode-markup-indent-offset 2)
- '(zoom-window-use-persp t))
-
-;; Set zoom window
-(zoom-window-setup)
+ '(web-mode-markup-indent-offset 2))
 
 ;; Mode setup for file extensions
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js3-mode))
