@@ -24,7 +24,7 @@
     fringe-helper git-gutter-fringe+ magit keychain-environment
     org org-present
     hackernews
-    ack fiplr ace-window
+    ag fiplr ace-window
     all-the-icons flycheck
     neotree
     gruvbox-theme
@@ -110,7 +110,7 @@
 
 ;; Set up shortcut keys
 (global-set-key (kbd "C-x f") 'fiplr-find-file)
-(global-set-key (kbd "C-x C-f") 'ack)
+(global-set-key (kbd "C-x C-f") 'ag-project)
 (global-set-key (kbd "<f8>") 'neotree-toggle)
 (global-set-key (kbd "C-x o") 'ace-window)
 (global-set-key (kbd "C-x C-d") 'dumb-jump-go)
