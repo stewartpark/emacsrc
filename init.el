@@ -54,6 +54,7 @@
 (setq initial-scratch-message
       (concat ";; Happy Hacking!\n;;\n" (get-all-documentations-as-comments)))
 (setq-default cursor-type 'bar)
+(setq vc-follow-symlinks t)
 (setq python-shell-prompt-detect-failure-warning nil)
 (setq python-shell-completion-native-disabled-interpreters (list "python" "pypy"))
 (add-hook 'comint-exec-hook (lambda ()

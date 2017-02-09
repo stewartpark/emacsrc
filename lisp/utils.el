@@ -50,7 +50,7 @@
     (apply 'concat l)))
 
 (defun toggle-window-split ()
-  "Cmd: (toggle-window-split ) toggles window split."
+  "Cmd: (toggle-window-split) toggles window split."
   (interactive)
   (if (= (count-windows) 2)
       (let* ((this-win-buffer (window-buffer))
