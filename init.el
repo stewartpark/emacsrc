@@ -22,7 +22,7 @@
     scss-mode web-mode rainbow-mode rainbow-delimiters
     smartparens dumb-jump persp-mode zoom-window
     fringe-helper git-gutter-fringe+ magit keychain-environment
-    org org-present org-trello
+    org org-present
     hackernews
     ack fiplr ace-window
     all-the-icons flycheck
@@ -54,6 +54,10 @@
 (setq initial-scratch-message
       (concat ";; Happy Hacking!\n;;\n" (get-all-documentations-as-comments)))
 (setq-default cursor-type 'bar)
+(setq python-shell-prompt-detect-failure-warning nil)
+(setq python-shell-completion-native-disabled-interpreters (list "python" "pypy"))
+(add-hook 'comint-exec-hook (lambda ()
+                              (set-process-query-on-exit-flag (get-buffer-process (current-buffer)) nil)))
 
 (setq make-backup-files nil)
 
@@ -108,21 +112,20 @@
 (global-set-key (kbd "C-x f") 'fiplr-find-file)
 (global-set-key (kbd "C-x C-f") 'ack)
 (global-set-key (kbd "<f8>") 'neotree-toggle)
-(global-set-key (kbd "C-c t i") 'org-trello-install-board-metadata)
-(global-set-key (kbd "C-c t c") 'org-trello-create-board-and-install-metadata)
-(global-set-key (kbd "C-c t S") 'org-trello-sync-buffer)
-(global-set-key (kbd "C-c t s") 'org-trello-sync-card)
-(global-set-key (kbd "C-c t a") 'org-trello-add-card-comment)
 (global-set-key (kbd "C-x o") 'ace-window)
 (global-set-key (kbd "C-x C-d") 'dumb-jump-go)
 (global-set-key (kbd "C-x d") 'dumb-jump-back)
 (global-set-key (kbd "C-x C-g") 'magit-blame)
 (global-set-key (kbd "C-x g") 'magit-blame-quit)
 
+(global-set-key (kbd "C-x SPC") 'toggle-window-split)
+
 (with-eval-after-load "persp-mode"
   (global-set-key (kbd "C-x b") #'persp-switch-to-buffer)
   (global-set-key (kbd "C-x k") #'persp-kill-buffer)
-  (global-set-key (kbd "C-x C-z") 'zoom-window-zoom))
+  (global-set-key (kbd "C-x C-z") 'zoom-window-zoom)
+  (setq wg-morph-on nil)
+  (setq persp-autokill-buffer-on-remove 'kill-weak))
 
 ;; Environment variable setup
 (if (not (getenv "TERM_PROGRAM"))
@@ -160,6 +163,7 @@
                                         (set-frame-parameter nil 'fullscreen nil)))
 
 (add-hook 'python-mode-hook (lambda()
+                              (run-python (python-shell-parse-command))
                               (py-autopep8-enable-on-save)
                               (pyenv-mode)
                               (elpy-mode)))
