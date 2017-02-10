@@ -23,7 +23,7 @@
     smartparens dumb-jump zoom-window inf-ruby
     fringe-helper git-gutter-fringe+ magit keychain-environment
     org org-present
-    hackernews transpose-window
+    hackernews transpose-frame
     ag fiplr ace-window
     all-the-icons flycheck
     neotree
