@@ -20,10 +20,10 @@
     markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js3-mode json-mode
     scss-mode web-mode rainbow-mode rainbow-delimiters
-    smartparens dumb-jump zoom-window
+    smartparens dumb-jump zoom-window inf-ruby
     fringe-helper git-gutter-fringe+ magit keychain-environment
     org org-present
-    hackernews
+    hackernews transpose-window
     ag fiplr ace-window
     all-the-icons flycheck
     neotree
@@ -57,6 +57,12 @@
 (setq vc-follow-symlinks t)
 (setq python-shell-prompt-detect-failure-warning nil)
 (setq python-shell-completion-native-disabled-interpreters (list "python" "pypy"))
+;;(add-to-list 'inf-ruby-implementations '("pry" . "pry"))
+(setq inf-ruby-default-implementation "pry")
+(setq inf-ruby-first-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)> *")
+(setq inf-ruby-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)[>*\"'] *")
+
+;; Don't ask about running processes
 (add-hook 'comint-exec-hook (lambda ()
                               (set-process-query-on-exit-flag (get-buffer-process (current-buffer)) nil)))
 
@@ -118,7 +124,12 @@
 (global-set-key (kbd "C-x d") 'dumb-jump-back)
 (global-set-key (kbd "C-x C-g") 'magit-blame)
 (global-set-key (kbd "C-x g") 'magit-blame-quit)
-(global-set-key (kbd "C-x SPC") 'toggle-window-split)
+(global-set-key (kbd "C-x SPC") (lambda ()
+                                  (interactive)
+                                  (save-neotree-state)
+                                  (neotree-hide)
+                                  (transpose-frame)
+                                  (restore-neotree-state)))
 (global-set-key (kbd "C-x C-z") 'zoom-window-zoom)
 
 ;; Environment variable setup
@@ -140,6 +151,7 @@
                                 (py-isort-buffer)
                                 )))
 (add-hook 'org-present-mode-hook (lambda ()
+                                   (save-neotree-state)
                                    (neotree-hide)
                                    (org-present-big)
                                    (git-gutter+-mode 0)
@@ -147,7 +159,7 @@
                                    (org-display-inline-images)
                                    (set-frame-parameter nil 'fullscreen 'fullboth)))
 (add-hook 'org-present-mode-quit-hook (lambda ()
-                                        (neotree-show)
+                                        (restore-neotree-state)
                                         (other-window 1)
                                         (org-present-small)
                                         (git-gutter+-mode 1)
