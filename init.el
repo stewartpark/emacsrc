@@ -57,7 +57,6 @@
 (setq vc-follow-symlinks t)
 (setq python-shell-prompt-detect-failure-warning nil)
 (setq python-shell-completion-native-disabled-interpreters (list "python" "pypy"))
-;;(add-to-list 'inf-ruby-implementations '("pry" . "pry"))
 (setq inf-ruby-default-implementation "pry")
 (setq inf-ruby-first-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)> *")
 (setq inf-ruby-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)[>*\"'] *")
