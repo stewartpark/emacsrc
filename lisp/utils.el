@@ -65,6 +65,11 @@
       (neotree-show)
       (neotree-hide)))
 
+(defun todo ()
+  "Cmd: (todo) opens a todo org."
+  (interactive)
+  (find-file "~/todo.org"))
+
 (defvar utils
   '(http:get file:read font+ font- open-init open-lisp)
   "A list of every function this file defines.")

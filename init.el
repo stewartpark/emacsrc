@@ -27,7 +27,7 @@
     ag fiplr ace-window
     all-the-icons flycheck
     neotree pivotal-tracker
-    green-phosphor-theme
+    leuven-theme
     json json-rpc
 ))
 
@@ -98,7 +98,7 @@
 (keychain-refresh-environment)
 
 ;; Theme
-(load-theme 'green-phosphor t)
+(load-theme 'leuven t)
 
 ;; Git-gutter-fringe
 (require 'git-gutter-fringe+)
@@ -177,7 +177,8 @@
                               (elpy-mode)))
 
 (add-hook 'ruby-mode-hook (lambda ()
-                            (rubocop-mode)))
+                            (rubocop-mode)
+                            (inf-ruby-minor-mode)))
 
 (add-hook 'prog-mode-hook (lambda ()
                             (git-gutter+-mode 1)
@@ -194,8 +195,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(highlight-indentation-face ((t (:background "#F0F0F0"))))
  '(linum ((t (:height 120 :foreground "#C0C0C0"))))
- '(neo-dir-link-face ((t (:foreground "light green"))))
+ '(neo-dir-link-face ((t (:foreground "black"))))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "grey"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "orange"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "yellow"))))
