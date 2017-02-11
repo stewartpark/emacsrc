@@ -27,7 +27,7 @@
     ag fiplr ace-window
     all-the-icons flycheck
     neotree pivotal-tracker
-    green-phosphor-theme
+    leuven-theme
     json json-rpc
 ))
 
@@ -98,7 +98,7 @@
 (keychain-refresh-environment)
 
 ;; Theme
-(load-theme 'green-phosphor t)
+(load-theme 'leuven t)
 
 ;; Git-gutter-fringe
 (require 'git-gutter-fringe+)
@@ -195,7 +195,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(linum ((t (:height 120 :foreground "#C0C0C0"))))
- '(neo-dir-link-face ((t (:foreground "light green"))))
+ '(highlight-indentation-face ((t (:background "#F0F0F0"))))
+ '(neo-dir-link-face ((t (:foreground "black"))))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "grey"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "orange"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "yellow"))))
