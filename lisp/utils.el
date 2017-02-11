@@ -20,6 +20,12 @@
 
       result)))
 
+(defun file:read (file)
+  "Func: (file:read file) reads file content."
+  (with-temp-buffer
+    (insert-file-contents file)
+    (buffer-string)))
+
 (defun font+ ()
   "Cmd: (font+) increases the font size."
   (interactive)
@@ -60,7 +66,7 @@
       (neotree-hide)))
 
 (defvar utils
-  '(http:get font+ font- open-init open-lisp)
+  '(http:get file:read font+ font- open-init open-lisp)
   "A list of every function this file defines.")
 (provide 'utils)
 ;;; utils.el ends here

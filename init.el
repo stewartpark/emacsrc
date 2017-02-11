@@ -26,15 +26,19 @@
     hackernews transpose-frame
     ag fiplr ace-window
     all-the-icons flycheck
-    neotree
+    neotree pivotal-tracker
     green-phosphor-theme
     json json-rpc
 ))
 
-; For my own code
+;; For my own code
 (load "~/.emacs.d/lisp/utils.el")
 (global-set-key (kbd "M-=") 'font+)
 (global-set-key (kbd "M--") 'font-)
+
+;; Host-specific configurations
+(if (file-exists-p "~/.config/pivotal-tracker.key")
+    (setq pivotal-api-token (replace-regexp-in-string "\n$" "" (file:read "~/.config/pivotal-tracker.key"))))
 
 ;; Before anything starts, get the right envs
 (when (not (getenv "TERM_PROGRAM"))
