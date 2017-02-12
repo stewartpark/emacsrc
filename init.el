@@ -27,7 +27,7 @@
     ag fiplr ace-window
     all-the-icons flycheck
     neotree pivotal-tracker
-    leuven-theme
+    green-phosphor-theme
     json json-rpc
 ))
 
@@ -71,6 +71,10 @@
 
 (setq make-backup-files nil)
 
+(let ((font-face "Roboto Mono-12"))
+  (set-face-attribute 'default nil :font font-face)
+  (set-frame-font font-face nil t))
+
 (xterm-mouse-mode t)
 (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
 (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
@@ -98,7 +102,7 @@
 (keychain-refresh-environment)
 
 ;; Theme
-(load-theme 'leuven t)
+(load-theme 'green-phosphor t)
 
 ;; Git-gutter-fringe
 (require 'git-gutter-fringe+)
@@ -197,7 +201,7 @@
  ;; If there is more than one, they won't work right.
  '(highlight-indentation-face ((t (:background "#F0F0F0"))))
  '(linum ((t (:height 120 :foreground "#C0C0C0"))))
- '(neo-dir-link-face ((t (:foreground "black"))))
+ '(neo-dir-link-face ((t (:foreground "light green"))))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "grey"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "orange"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "yellow"))))
