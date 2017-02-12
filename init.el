@@ -71,6 +71,10 @@
 
 (setq make-backup-files nil)
 
+(let ((font-face "Roboto Mono-12"))
+  (set-face-attribute 'default nil :font font-face)
+  (set-frame-font font-face nil t))
+
 (xterm-mouse-mode t)
 (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
 (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
@@ -177,7 +181,8 @@
                               (elpy-mode)))
 
 (add-hook 'ruby-mode-hook (lambda ()
-                            (rubocop-mode)))
+                            (rubocop-mode)
+                            (inf-ruby-minor-mode)))
 
 (add-hook 'prog-mode-hook (lambda ()
                             (git-gutter+-mode 1)
