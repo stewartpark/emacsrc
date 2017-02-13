@@ -200,7 +200,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(linum ((t (:height 120 :foreground "#C0C0C0"))))
- '(neo-dir-link-face ((t (:foreground "light green"))))
+ '(neo-dir-link-face ((t (:foreground "white"))))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "grey"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "orange"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "yellow"))))
