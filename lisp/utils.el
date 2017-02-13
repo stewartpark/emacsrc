@@ -5,7 +5,7 @@
 (require 'url)
 
 (defun http:get (url)
-  "Func: (http:get url) sends a HTTP GET request to the URL."
+  "Func: (http:get url) send a HTTP GET request to the URL."
   (let (result)
     (with-current-buffer (url-retrieve-synchronously url)
       (goto-char (point-min))
@@ -21,30 +21,30 @@
       result)))
 
 (defun file:read (file)
-  "Func: (file:read file) reads file content."
+  "Func: (file:read FILE) read file content."
   (with-temp-buffer
     (insert-file-contents file)
     (buffer-string)))
 
 (defun font+ ()
-  "Cmd: (font+) increases the font size."
+  "Cmd: (font+) increase the font size."
   (interactive)
   (let ((new_size (+ (face-attribute 'default :height) 10)))
     (set-face-attribute 'default nil :height new_size)))
 
 (defun font- ()
-  "Cmd: (font-) decreases the font size."
+  "Cmd: (font-) decrease the font size."
   (interactive)
   (let ((new_size (- (face-attribute 'default :height) 10)))
     (set-face-attribute 'default nil :height new_size)))
 
 (defun open-init ()
-  "Cmd: (open-init) opens the init.el file."
+  "Cmd: (open-init) open the init.el file."
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
 (defun open-lisp ()
-  "Cmd: (open-lisp) opens the lisp directory under .emacs.d."
+  "Cmd: (open-lisp) open the Lisp directory under .emacs.d."
   (interactive)
   (find-file "~/.emacs.d/lisp/"))
 
@@ -66,12 +66,29 @@
       (neotree-hide)))
 
 (defun todo ()
-  "Cmd: (todo) opens a todo org."
+  "Cmd: (todo) open a todo org."
   (interactive)
   (find-file "~/todo.org"))
 
+(defun show-itunes ()
+  "Cmd: (show-itunes) show what song iTunes is playing."
+  (interactive)
+  (let (
+        (artist (shell-command-to-string "osascript -e 'tell application \"iTunes\" to artist of current track as string'"))
+        (title (shell-command-to-string "osascript -e 'tell application \"iTunes\" to name of current track as string'")))
+    (princ (format "♫ %s - %s" artist title))))
+
+(defun show-net-latency ()
+  "Cmd: (show-net-latency) show network latency."
+  (interactive)
+  (let
+    ((latency (nth 3 (split-string (nth 1 (split-string (shell-command-to-string "ping -t 1 -c 1 8.8.8.8") "\n")) "="))))
+    (princ (if (eq latency nil)
+        "Offline"
+        latency))))
+
 (defvar utils
-  '(http:get file:read font+ font- open-init open-lisp)
+  '(http:get file:read show-itunes show-net-latency todo font+ font- open-init open-lisp)
   "A list of every function this file defines.")
 (provide 'utils)
 ;;; utils.el ends here
