@@ -4,6 +4,10 @@
 ;;; Code:
 (require 'url)
 
+(defun trim-string (s)
+  "Func: (trim-string S) trim trailing whitespaces."
+  (replace-regexp-in-string "[ \t\n\r]*$" "" s))
+
 (defun http:get (url)
   "Func: (http:get url) send a HTTP GET request to the URL."
   (let (result)
@@ -74,8 +78,8 @@
   "Cmd: (show-itunes) show what song iTunes is playing."
   (interactive)
   (let (
-        (artist (shell-command-to-string "osascript -e 'tell application \"iTunes\" to artist of current track as string'"))
-        (title (shell-command-to-string "osascript -e 'tell application \"iTunes\" to name of current track as string'")))
+        (artist (trim-string (shell-command-to-string "osascript -e 'tell application \"iTunes\" to artist of current track as string'")))
+        (title (trim-string (shell-command-to-string "osascript -e 'tell application \"iTunes\" to name of current track as string'"))))
     (princ (format "♫ %s - %s" artist title))))
 
 (defun show-net-latency ()
@@ -88,7 +92,7 @@
         latency))))
 
 (defvar utils
-  '(http:get file:read show-itunes show-net-latency todo font+ font- open-init open-lisp)
+  '(trim-string http:get file:read show-itunes show-net-latency todo font+ font- open-init open-lisp)
   "A list of every function this file defines.")
 (provide 'utils)
 ;;; utils.el ends here
