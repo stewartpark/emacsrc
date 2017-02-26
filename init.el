@@ -102,10 +102,13 @@
 (keychain-refresh-environment)
 
 ;; Theme
-(load-theme 'green-phosphor t)
+(if (display-graphic-p)
+  (load-theme 'green-phosphor t)
+  (load-theme 'tango t))
 
 ;; Git-gutter-fringe
-(require 'git-gutter-fringe+)
+(when (display-graphic-p)
+  (require 'git-gutter-fringe+))
 
 ;; Neotree
 (setq neo-smart-open t)
