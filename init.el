@@ -232,6 +232,7 @@
     ((emacs-lisp . t)
      (python . t)
      (dot . t)
+     (sql . t)
      (ruby . t))))
  '(org-confirm-babel-evaluate nil)
  '(rbenv-show-active-ruby-in-modeline nil)
