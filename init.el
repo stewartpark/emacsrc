@@ -27,7 +27,7 @@
     ag fiplr ace-window
     all-the-icons flycheck
     neotree pivotal-tracker
-    green-phosphor-theme
+    leuven-theme
     json json-rpc
 ))
 
@@ -103,7 +103,7 @@
 
 ;; Theme
 (if (display-graphic-p)
-  (load-theme 'green-phosphor t)
+  (load-theme 'leuven t)
   (load-theme 'tango t))
 
 ;; Git-gutter-fringe
@@ -203,7 +203,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(linum ((t (:height 120 :foreground "#C0C0C0"))))
- '(neo-dir-link-face ((t (:foreground "white"))))
+ '(neo-dir-link-face ((t (:foreground "#000000"))))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "grey"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "orange"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "yellow"))))
