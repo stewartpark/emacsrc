@@ -110,7 +110,7 @@
 ;; Theme
 (if (display-graphic-p)
   (load-theme 'solarized-dark t)
-  (load-theme 'tango t))
+  (load-theme 'tango-dark t))
 
 ;; Git-gutter-fringe
 (when (display-graphic-p)
