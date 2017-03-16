@@ -91,8 +91,27 @@
         "Offline"
         latency))))
 
+(defun enter-fullscreen ()
+  "Cmd: (enter-fullscreen) enter full screen mode."
+  (interactive)
+  (set-frame-parameter nil 'fullscreen 'fullboth))
+
+(defun quit-fullscreen ()
+  "Cmd: (quit-fullscreen) quit full screen mode."
+  (interactive)
+  (set-frame-parameter nil 'fullscreen nil))
+
+(defun fullscreen-p ()
+  (frame-parameter nil 'fullscreen))
+
+(defun save-fullscreen-state ()
+  (setq saved-fullscreen-state (fullscreen-p)))
+
+(defun restore-fullscreen-state ()
+  (set-frame-parameter nil 'fullscreen saved-fullscreen-state))
+
 (defvar utils
-  '(trim-string http:get file:read show-itunes show-net-latency todo font+ font- open-init open-lisp)
+  '(enter-fullscreen quit-fullscreen trim-string http:get file:read show-itunes show-net-latency todo font+ font- open-init open-lisp)
   "A list of every function this file defines.")
 (provide 'utils)
 ;;; utils.el ends here

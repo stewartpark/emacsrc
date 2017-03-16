@@ -65,6 +65,9 @@
 (setq inf-ruby-first-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)> *")
 (setq inf-ruby-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)[>*\"'] *")
 
+(setq truncate-partial-width-windows nil)
+(setq truncate-lines t)
+
 ;; Don't ask about running processes
 (add-hook 'comint-exec-hook (lambda ()
                               (set-process-query-on-exit-flag (get-buffer-process (current-buffer)) nil)))
@@ -160,24 +163,30 @@
                                 (message "Python: isorting")
                                 (py-isort-buffer)
                                 )))
+
 (add-hook 'org-present-mode-hook (lambda ()
+                                   (toggle-truncate-lines 0)
                                    (save-neotree-state)
                                    (neotree-hide)
                                    (org-present-big)
                                    (git-gutter+-mode 0)
                                    (linum-mode 0)
                                    (org-display-inline-images)
-                                   (set-frame-parameter nil 'fullscreen 'fullboth)))
+                                   (save-fullscreen-state)
+                                   (enter-fullscreen)))
+
 (add-hook 'org-present-mode-quit-hook (lambda ()
+                                        (toggle-truncate-lines 1)
                                         (restore-neotree-state)
                                         (other-window 1)
                                         (org-present-small)
                                         (git-gutter+-mode 1)
                                         (linum-mode 1)
                                         (org-remove-inline-images)
-                                        (set-frame-parameter nil 'fullscreen nil)))
+                                        (restore-fullscreen-state)))
 
-(add-hook 'python-mode-hook (lambda()
+
+(add-hook 'python-mode-hook (lambda ()
                               (run-python (python-shell-parse-command))
                               (py-autopep8-enable-on-save)
                               (pyenv-mode)
