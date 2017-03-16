@@ -69,6 +69,9 @@
 (setq truncate-lines t)
 (global-visual-line-mode 1)
 
+(setq org-todo-keywords
+      '((sequence "TODO" "DOING" "|" "DONE")))
+
 ;; Don't ask about running processes
 (add-hook 'comint-exec-hook (lambda ()
                               (set-process-query-on-exit-flag (get-buffer-process (current-buffer)) nil)))
