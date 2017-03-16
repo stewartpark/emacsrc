@@ -22,12 +22,12 @@
     scss-mode web-mode rainbow-mode rainbow-delimiters
     smartparens dumb-jump zoom-window inf-ruby
     fringe-helper git-gutter-fringe+ magit keychain-environment
-    org org-present
+    org org-present adaptive-wrap diminish
     hackernews transpose-frame
     ag fiplr ace-window
     all-the-icons flycheck
     neotree pivotal-tracker
-    leuven-theme
+    solarized-theme
     json json-rpc
 ))
 
@@ -67,6 +67,7 @@
 
 (setq truncate-partial-width-windows nil)
 (setq truncate-lines t)
+(global-visual-line-mode 1)
 
 ;; Don't ask about running processes
 (add-hook 'comint-exec-hook (lambda ()
@@ -87,7 +88,6 @@
 (when (display-graphic-p)
     (scroll-bar-mode 0))
 
-
 ;; Mac-specific config
 (when (eq system-type 'darwin)
   (defun copy-from-osx ()
@@ -106,7 +106,7 @@
 
 ;; Theme
 (if (display-graphic-p)
-  (load-theme 'leuven t)
+  (load-theme 'solarized-dark t)
   (load-theme 'tango t))
 
 ;; Git-gutter-fringe
@@ -117,13 +117,30 @@
 (setq neo-smart-open t)
 (setq neo-theme (if window-system 'icons 'arrow))
 (setq neo-window-width 30)
-(add-hook 'neotree-mode-hook (lambda () (setq cursor-type nil) (hl-line-mode 1)))
+(add-hook 'neotree-mode-hook (lambda ()
+                               (setq cursor-type nil)
+                               (toggle-truncate-lines 1)
+                               (hl-line-mode 1)
+                               (visual-line-mode 0)
+                               (adaptive-wrap-prefix-mode 0)))
 (neotree)
 
 ;; fiplr
 (setq fiplr-ignored-globs
       '((directories (".git" ".svn" ".hg" ".bzr" ".bundle" "__pycache__"))
         (files (".DS_Store" "*.pyc" ".#*" "*~" "*.so" "*.jpg" "*.png" "*.gif" "*.pdf" "*.gz" "*.zip"))))
+
+;; Line number font size fix
+(defun linum-update-window-scale-fix (win)
+  (set-window-margins
+   win
+   (ceiling (* (if (boundp 'text-scale-mode-step)
+                   (expt text-scale-mode-step
+                         text-scale-mode-amount) 1)
+               (if (car (window-margins))
+                   (car (window-margins)) 1)
+               ))))
+(advice-add #'linum-update-window :after #'linum-update-window-scale-fix)
 
 ;; Multiple cursors
 (global-set-key (kbd "C-d") 'mc/mark-next-like-this)
@@ -135,8 +152,11 @@
 (global-set-key (kbd "C-x o") 'ace-window)
 (global-set-key (kbd "C-x C-d") 'dumb-jump-go)
 (global-set-key (kbd "C-x d") 'dumb-jump-back)
-(global-set-key (kbd "C-x C-g") 'magit-blame)
-(global-set-key (kbd "C-x g") 'magit-blame-quit)
+(global-set-key (kbd "C-x C-g") (lambda ()
+                                  (interactive)
+                                  (if (bound-and-true-p magit-blame-mode)
+                                    (magit-blame-quit)
+                                    (call-interactively 'magit-blame))))
 (global-set-key (kbd "C-x SPC") (lambda ()
                                   (interactive)
                                   (save-neotree-state)
@@ -144,6 +164,18 @@
                                   (transpose-frame)
                                   (restore-neotree-state)))
 (global-set-key (kbd "C-x C-z") 'zoom-window-zoom)
+(global-set-key (kbd "C-x C-p") (lambda ()
+                                  (interactive)
+                                  (if (eq major-mode 'org-mode)
+                                    (if (bound-and-true-p org-present-mode)
+                                      (call-interactively 'org-present-quit)
+                                      (call-interactively 'org-present))
+                                    (message "Not in org-mode"))))
+(global-set-key (kbd "s-<return>") (lambda ()
+                                   (interactive)
+                                   (if (fullscreen-p)
+                                     (quit-fullscreen)
+                                     (enter-fullscreen))))
 
 ;; Environment variable setup
 (if (not (getenv "TERM_PROGRAM"))
@@ -164,24 +196,27 @@
                                 (py-isort-buffer)
                                 )))
 
+(add-hook 'visual-line-mode-hook
+  (lambda ()
+    (adaptive-wrap-prefix-mode 1)
+    (diminish 'visual-line-mode)))
+
 (add-hook 'org-present-mode-hook (lambda ()
-                                   (toggle-truncate-lines 0)
+                                   (setq word-wrap t)
                                    (save-neotree-state)
                                    (neotree-hide)
                                    (org-present-big)
                                    (git-gutter+-mode 0)
-                                   (linum-mode 0)
                                    (org-display-inline-images)
                                    (save-fullscreen-state)
                                    (enter-fullscreen)))
 
 (add-hook 'org-present-mode-quit-hook (lambda ()
-                                        (toggle-truncate-lines 1)
+                                        (setq word-wrap nil)
                                         (restore-neotree-state)
                                         (other-window 1)
                                         (org-present-small)
                                         (git-gutter+-mode 1)
-                                        (linum-mode 1)
                                         (org-remove-inline-images)
                                         (restore-fullscreen-state)))
 
@@ -211,8 +246,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(linum ((t (:height 120 :foreground "#C0C0C0"))))
- '(neo-dir-link-face ((t (:foreground "#000000"))))
+ '(neo-dir-link-face ((t (:foreground "gray"))))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "grey"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "orange"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "yellow"))))
