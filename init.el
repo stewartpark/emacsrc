@@ -27,7 +27,7 @@
     ag fiplr ace-window
     all-the-icons flycheck
     neotree pivotal-tracker
-    solarized-theme
+    monokai-theme
     json json-rpc
 ))
 
@@ -109,8 +109,8 @@
 
 ;; Theme
 (if (display-graphic-p)
-  (load-theme 'solarized-dark t)
-  (load-theme 'tango-dark t))
+  (load-theme 'monokai t)
+  (load-theme 'monokai t))
 
 ;; Git-gutter-fringe
 (when (display-graphic-p)
