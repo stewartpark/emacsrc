@@ -28,6 +28,7 @@
     all-the-icons flycheck
     neotree pivotal-tracker
     monokai-theme
+    emojify
     json json-rpc
 ))
 
@@ -203,6 +204,9 @@
   (lambda ()
     (adaptive-wrap-prefix-mode 1)
     (diminish 'visual-line-mode)))
+
+(add-hook 'org-mode-hook (lambda ()
+                           (emojify-mode)))
 
 (add-hook 'org-present-mode-hook (lambda ()
                                    (setq word-wrap t)
