@@ -79,7 +79,7 @@
 
 (setq make-backup-files nil)
 
-(let ((font-face "Roboto Mono-12"))
+(let ((font-face "Hack-12"))
   (set-face-attribute 'default nil :font font-face)
   (set-frame-font font-face nil t))
 
