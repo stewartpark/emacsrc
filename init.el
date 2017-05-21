@@ -30,6 +30,7 @@
     monokai-theme
     emojify
     json json-rpc
+    exwm
 ))
 
 ;; For my own code
@@ -40,11 +41,6 @@
 ;; Host-specific configurations
 (if (file-exists-p "~/.config/pivotal-tracker.key")
     (setq pivotal-api-token (replace-regexp-in-string "\n$" "" (file:read "~/.config/pivotal-tracker.key"))))
-
-;; Before anything starts, get the right envs
-(when (not (getenv "TERM_PROGRAM"))
-  (setenv "PATH" (shell-command-to-string "cat /etc/paths | tr '\n' ':'"))
-  (setq exec-path (split-string (getenv "PATH") ":")))
 
 ;; Install and refresh the packages
 (package-initialize)
@@ -94,6 +90,11 @@
 
 ;; Mac-specific config
 (when (eq system-type 'darwin)
+  ;; Before anything starts, get the right envs
+  (when (not (getenv "TERM_PROGRAM"))
+    (setenv "PATH" (shell-command-to-string "cat /etc/paths | tr '\n' ':'"))
+    (setq exec-path (split-string (getenv "PATH") ":")))
+  ;; Mac utils
   (defun copy-from-osx ()
     (shell-command-to-string "pbpaste"))
   (defun paste-to-osx (text &optional push)
@@ -313,3 +314,7 @@
 (add-to-list 'auto-mode-alist '("Procfile\\'" . foreman))
 (add-to-list 'auto-mode-alist '("\\.conf\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("Jenkinsfile" . groovy-mode))
+
+(require 'exwm)
+(require 'exwm-config)
+(exwm-config-default)
