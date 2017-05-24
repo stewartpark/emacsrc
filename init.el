@@ -27,7 +27,7 @@
     ag fiplr ace-window
     all-the-icons flycheck
     neotree pivotal-tracker
-    monokai-theme
+    zweilight-theme
     emojify
     json json-rpc
     exwm
@@ -111,8 +111,8 @@
 
 ;; Theme
 (if (display-graphic-p)
-  (load-theme 'monokai t)
-  (load-theme 'monokai t))
+  (load-theme 'zweilight t)
+  (load-theme 'zweilight t))
 
 ;; Git-gutter-fringe
 (when (display-graphic-p)
