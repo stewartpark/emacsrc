@@ -30,7 +30,6 @@
     zweilight-theme
     emojify
     json json-rpc
-    exwm
 ))
 
 ;; For my own code
@@ -118,7 +117,12 @@
 (when (display-graphic-p)
   (require 'git-gutter-fringe+))
 
+;; Ace window
+(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+
 ;; Neotree
+(with-eval-after-load 'neotree
+  (define-key neotree-mode-map (kbd "RET") (neotree-make-executor :file-fn 'neo-open-file-ace-window :dir-fn 'neo-open-dir)))
 (setq neo-smart-open t)
 (setq neo-theme (if window-system 'icons 'arrow))
 (setq neo-window-width 30)
@@ -314,7 +318,3 @@
 (add-to-list 'auto-mode-alist '("Procfile\\'" . foreman))
 (add-to-list 'auto-mode-alist '("\\.conf\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("Jenkinsfile" . groovy-mode))
-
-(require 'exwm)
-(require 'exwm-config)
-(exwm-config-default)
