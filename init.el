@@ -49,6 +49,7 @@
     (package-install package)))
 
 ;; Configuration
+(defalias 'yes-or-no-p 'y-or-n-p)
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
 (setq initial-scratch-message
