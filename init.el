@@ -112,7 +112,7 @@
 ;; Theme
 (if (display-graphic-p)
   (load-theme 'zweilight t)
-  (load-theme 'zweilight t))
+  (load-theme 'tango-dark t))
 
 ;; Git-gutter-fringe
 (when (display-graphic-p)
