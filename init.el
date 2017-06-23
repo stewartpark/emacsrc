@@ -137,7 +137,7 @@
 
 ;; fiplr
 (setq fiplr-ignored-globs
-      '((directories (".git" ".svn" ".hg" ".bzr" ".bundle" "__pycache__" "node_modules" "bower_modules"))
+      '((directories (".git" ".svn" ".hg" ".bzr" ".bundle" "__pycache__" "node_modules" "bower_components"))
         (files (".DS_Store" "*.pyc" ".#*" "*~" "*.so" "*.jpg" "*.png" "*.gif" "*.pdf" "*.gz" "*.zip"))))
 
 ;; Line number font size fix
