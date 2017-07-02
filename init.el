@@ -15,7 +15,7 @@
 (setq package-list '(
     better-defaults multiple-cursors
     python-mode elpy py-isort py-autopep8 pyenv-mode-auto
-    ruby-mode rspec-mode rbenv rubocop
+    ruby-mode rspec-mode rbenv rubocop rust-mode
     racket-mode elm-mode rust-mode vue-mode rjsx-mode
     markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js3-mode json-mode
@@ -276,8 +276,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(js-indent-level 2)
- '(js3-consistent-level-indent-inner-bracket t)
  '(js3-auto-indent-p t)
+ '(js3-consistent-level-indent-inner-bracket t)
  '(js3-curly-indent-offset 0)
  '(js3-enter-indents-newline t)
  '(js3-expr-indent-offset 2)
