@@ -244,6 +244,9 @@
                             (rubocop-mode)
                             (inf-ruby-minor-mode)))
 
+(add-hook 'js3-mode-hook (lambda ()
+                           (linum-mode)))
+
 (add-hook 'prog-mode-hook (lambda ()
                             (git-gutter+-mode 1)
                             (linum-mode 1)
