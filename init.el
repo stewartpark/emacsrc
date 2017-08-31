@@ -62,6 +62,9 @@
 (setq inf-ruby-first-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)> *")
 (setq inf-ruby-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)[>*\"'] *")
 
+(require 'smartparens-config)
+(sp-local-pair 'emacs-lisp-mode "'" nil :actions :rem)
+
 (setq truncate-partial-width-windows nil)
 (setq truncate-lines t)
 (global-visual-line-mode 1)
@@ -232,7 +235,6 @@
                                         (git-gutter+-mode 1)
                                         (org-remove-inline-images)
                                         (restore-fullscreen-state)))
-
 
 (add-hook 'python-mode-hook (lambda ()
                               (run-python (python-shell-parse-command))
