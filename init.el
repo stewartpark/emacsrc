@@ -18,7 +18,7 @@
     ruby-mode rspec-mode rbenv rubocop rust-mode
     racket-mode elm-mode rust-mode vue-mode rjsx-mode typescript-mode
     markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode
-    dockerfile-mode nasm-mode go-mode foreman-mode js3-mode json-mode
+    dockerfile-mode nasm-mode go-mode foreman-mode js2-mode json-mode
     scss-mode web-mode rainbow-mode rainbow-delimiters
     smartparens dumb-jump zoom-window inf-ruby
     fringe-helper git-gutter-fringe+ magit keychain-environment
@@ -246,9 +246,6 @@
                             (rubocop-mode)
                             (inf-ruby-minor-mode)))
 
-(add-hook 'js3-mode-hook (lambda ()
-                           (linum-mode)))
-
 (add-hook 'prog-mode-hook (lambda ()
                             (git-gutter+-mode 1)
                             (linum-mode 1)
@@ -284,17 +281,17 @@
  '(css-indent-offset 2)
  '(ruby-indent-level 2)
  '(js-indent-level 2)
- '(js3-auto-indent-p t)
- '(js3-consistent-level-indent-inner-bracket t)
- '(js3-curly-indent-offset 0)
- '(js3-enter-indents-newline t)
- '(js3-expr-indent-offset 2)
- '(js3-indent-on-enter-key t)
- '(js3-lazy-commas t)
- '(js3-lazy-dots t)
- '(js3-lazy-operators t)
- '(js3-paren-indent-offset 2)
- '(js3-square-indent-offset 2)
+ '(js2-auto-indent-p t)
+ '(js2-consistent-level-indent-inner-bracket t)
+ '(js2-curly-indent-offset 0)
+ '(js2-enter-indents-newline t)
+ '(js2-expr-indent-offset 2)
+ '(js2-indent-on-enter-key t)
+ '(js2-lazy-commas t)
+ '(js2-lazy-dots t)
+ '(js2-lazy-operators t)
+ '(js2-paren-indent-offset 2)
+ '(js2-square-indent-offset 2)
  '(linum-format (quote "%3d"))
  '(org-babel-load-languages
    (quote
@@ -314,7 +311,7 @@
  '(web-mode-markup-indent-offset 2))
 
 ;; Mode setup for file extensions
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js3-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.asm\\'" . nasm-mode))
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -324,7 +321,6 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js3-mode))
 (add-to-list 'auto-mode-alist '("\\.g4\\'" . antlr-mode))
 (add-to-list 'auto-mode-alist '("Procfile\\'" . foreman))
 (add-to-list 'auto-mode-alist '("\\.conf\\'" . conf-mode))
