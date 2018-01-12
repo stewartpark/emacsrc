@@ -78,7 +78,7 @@
 
 (setq make-backup-files nil)
 
-(let ((font-face "Hack-12"))
+(let ((font-face "UbuntuMono-12"))
   (set-face-attribute 'default nil :font font-face)
   (set-frame-font font-face nil t))
 
@@ -90,6 +90,8 @@
 (menu-bar-mode 0)
 (when (display-graphic-p)
     (scroll-bar-mode 0))
+
+(server-start)
 
 ;; Mac-specific config
 (when (eq system-type 'darwin)
@@ -277,9 +279,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(tab-width 2)
  '(css-indent-offset 2)
- '(ruby-indent-level 2)
  '(js-indent-level 2)
  '(js2-auto-indent-p t)
  '(js2-consistent-level-indent-inner-bracket t)
@@ -294,18 +294,19 @@
  '(js2-square-indent-offset 2)
  '(linum-format (quote "%3d"))
  '(org-babel-load-languages
-   (quote
-    ((emacs-lisp . t)
-     (python . t)
-     (dot . t)
-     (sql . t)
-     (ruby . t))))
+	 (quote
+		((emacs-lisp . t)
+		 (python . t)
+		 (dot . t)
+		 (sql . t)
+		 (ruby . t))))
  '(org-confirm-babel-evaluate nil)
  '(rbenv-show-active-ruby-in-modeline nil)
  '(ruby-align-to-stmt-keywords (quote (if begin case)))
  '(ruby-deep-indent-paren nil)
  '(ruby-indent-level 2)
  '(ruby-insert-encoding-magic-comment nil)
+ '(tab-width 2)
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
  '(web-mode-markup-indent-offset 2))
