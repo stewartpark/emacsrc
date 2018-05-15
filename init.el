@@ -55,6 +55,7 @@
 (setq initial-scratch-message
       (concat ";; Happy Hacking!\n;;\n" (get-all-documentations-as-comments)))
 (setq-default cursor-type 'bar)
+(setq-default indent-tabs-mode nil)
 (setq vc-follow-symlinks t)
 (setq python-shell-prompt-detect-failure-warning nil)
 (setq python-shell-completion-native-disabled-interpreters (list "python" "pypy"))
@@ -165,8 +166,8 @@
 (global-set-key (kbd "C-x C-f") 'ag-project)
 (global-set-key (kbd "<f8>") 'neotree-toggle)
 (global-set-key (kbd "C-x o") 'ace-window)
-(global-set-key (kbd "C-x C-d") 'dumb-jump-go)
-(global-set-key (kbd "C-x d") 'dumb-jump-back)
+(global-set-key (kbd "M-.") 'dumb-jump-go)
+(global-set-key (kbd "M-,") 'dumb-jump-back)
 (global-set-key (kbd "C-x C-g") (lambda ()
                                   (interactive)
                                   (if (bound-and-true-p magit-blame-mode)
@@ -258,6 +259,8 @@
                             (rainbow-delimiters-mode)
                             (dumb-jump-mode)))
 
+(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -294,12 +297,12 @@
  '(js2-square-indent-offset 2)
  '(linum-format (quote "%3d"))
  '(org-babel-load-languages
-	 (quote
-		((emacs-lisp . t)
-		 (python . t)
-		 (dot . t)
-		 (sql . t)
-		 (ruby . t))))
+   (quote
+    ((emacs-lisp . t)
+     (python . t)
+     (dot . t)
+     (sql . t)
+     (ruby . t))))
  '(org-confirm-babel-evaluate nil)
  '(rbenv-show-active-ruby-in-modeline nil)
  '(ruby-align-to-stmt-keywords (quote (if begin case)))
@@ -326,3 +329,4 @@
 (add-to-list 'auto-mode-alist '("Procfile\\'" . foreman))
 (add-to-list 'auto-mode-alist '("\\.conf\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("Jenkinsfile" . groovy-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx?" . typescript-mode))
