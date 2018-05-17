@@ -15,7 +15,7 @@
 (setq package-list '(
     better-defaults multiple-cursors
     python-mode elpy py-isort py-autopep8 pyenv-mode-auto
-    ruby-mode rspec-mode rbenv rubocop rust-mode
+    ruby-mode rspec-mode rbenv rubocop
     racket-mode elm-mode rust-mode vue-mode rjsx-mode typescript-mode
     markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js2-mode json-mode
@@ -25,7 +25,8 @@
     org org-present adaptive-wrap diminish
     hackernews transpose-frame
     ag fiplr ace-window
-    all-the-icons flycheck
+    all-the-icons flycheck eldoc racer
+    company company-racer
     neotree pivotal-tracker
     zweilight-theme
     emojify
@@ -64,7 +65,7 @@
 (setq inf-ruby-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)[>*\"'] *")
 
 (require 'smartparens-config)
-(sp-local-pair 'emacs-lisp-mode "'" nil :actions :rem)
+(sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
 
 (setq truncate-partial-width-windows nil)
 (setq truncate-lines t)
@@ -249,17 +250,20 @@
                             (rubocop-mode)
                             (inf-ruby-minor-mode)))
 
+(add-hook 'rust-mode-hook #'racer-mode)
+(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+
 (add-hook 'prog-mode-hook (lambda ()
+                            (company-mode)
                             (git-gutter+-mode 1)
                             (linum-mode 1)
                             (auto-revert-mode t)
                             (flycheck-mode 1)
+                            (eldoc-mode)
                             (rainbow-mode)
                             (smartparens-mode)
                             (rainbow-delimiters-mode)
                             (dumb-jump-mode)))
-
-(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
