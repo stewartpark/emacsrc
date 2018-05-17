@@ -22,7 +22,7 @@
     scss-mode web-mode rainbow-mode rainbow-delimiters
     smartparens dumb-jump zoom-window inf-ruby
     fringe-helper git-gutter-fringe+ magit keychain-environment
-    org org-present adaptive-wrap diminish
+    org org-present
     hackernews transpose-frame
     ag fiplr ace-window
     all-the-icons flycheck eldoc racer
@@ -138,8 +138,7 @@
                                (setq cursor-type nil)
                                (toggle-truncate-lines 1)
                                (hl-line-mode 1)
-                               (visual-line-mode 0)
-                               (adaptive-wrap-prefix-mode 0)))
+                               (visual-line-mode 0)))
 (neotree)
 
 ;; fiplr
@@ -212,11 +211,6 @@
                                 (message "Python: isorting")
                                 (py-isort-buffer)
                                 )))
-
-(add-hook 'visual-line-mode-hook
-  (lambda ()
-    (adaptive-wrap-prefix-mode 1)
-    (diminish 'visual-line-mode)))
 
 (add-hook 'org-mode-hook (lambda ()
                            (emojify-mode)))
