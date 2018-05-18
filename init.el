@@ -15,12 +15,12 @@
 (setq package-list '(
     better-defaults multiple-cursors
     python-mode elpy py-isort py-autopep8 pyenv-mode-auto
-    ruby-mode rspec-mode rbenv rubocop
+    ruby-mode rspec-mode rbenv inf-ruby robe
     racket-mode elm-mode rust-mode vue-mode rjsx-mode typescript-mode
     markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js2-mode json-mode
     scss-mode web-mode rainbow-mode rainbow-delimiters
-    smartparens dumb-jump zoom-window inf-ruby
+    smartparens dumb-jump zoom-window
     fringe-helper git-gutter-fringe+ magit keychain-environment
     org org-present
     hackernews transpose-frame
@@ -63,6 +63,11 @@
 (setq inf-ruby-default-implementation "pry")
 (setq inf-ruby-first-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)> *")
 (setq inf-ruby-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)[>*\"'] *")
+(setq web-mode-enable-auto-pairing nil)
+(defun load-smartparens-config ()
+  (require 'smartparens-config)
+  (sp-pair "%" "%" :wrap "C-%")
+  (sp-pair "<" ">" :wrap "C->"))
 
 (setq truncate-partial-width-windows nil)
 (setq truncate-lines t)
@@ -142,6 +147,10 @@
 (setq fiplr-ignored-globs
       '((directories (".git" ".svn" ".hg" ".bzr" ".bundle" "__pycache__" "node_modules" "bower_components"))
         (files (".DS_Store" "*.pyc" ".#*" "*~" "*.so" "*.jpg" "*.png" "*.gif" "*.pdf" "*.gz" "*.zip"))))
+
+;; Company-mode
+(eval-after-load 'company
+  '(push 'company-robe company-backends))
 
 ;; Line number font size fix
 (defun linum-update-window-scale-fix (win)
@@ -238,14 +247,14 @@
                               (elpy-mode)))
 
 (add-hook 'ruby-mode-hook (lambda ()
-                            (rubocop-mode)
+                            (robe-mode)
                             (inf-ruby-minor-mode)))
 
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 
 (add-hook 'prog-mode-hook (lambda ()
-                            (require 'smartparens-config)
+                            (load-smartparens-config)
                             (company-mode)
                             (git-gutter+-mode 1)
                             (linum-mode 1)
