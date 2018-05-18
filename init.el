@@ -51,6 +51,7 @@
 
 ;; Configuration
 (defalias 'yes-or-no-p 'y-or-n-p)
+(defun package--save-selected-packages (&rest opt) nil)
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
 (setq initial-scratch-message
