@@ -64,9 +64,6 @@
 (setq inf-ruby-first-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)> *")
 (setq inf-ruby-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)[>*\"'] *")
 
-(require 'smartparens-config)
-(sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
-
 (setq truncate-partial-width-windows nil)
 (setq truncate-lines t)
 (global-visual-line-mode 1)
@@ -248,6 +245,7 @@
 (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 
 (add-hook 'prog-mode-hook (lambda ()
+                            (require 'smartparens-config)
                             (company-mode)
                             (git-gutter+-mode 1)
                             (linum-mode 1)
