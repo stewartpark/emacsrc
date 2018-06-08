@@ -83,7 +83,7 @@
 
 (setq make-backup-files nil)
 
-(let ((font-face "UbuntuMono-12"))
+(let ((font-face "Input-12"))
   (set-face-attribute 'default nil :font font-face)
   (set-frame-font font-face nil t))
 
@@ -318,7 +318,9 @@
  '(tab-width 2)
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
- '(web-mode-markup-indent-offset 2))
+ '(web-mode-markup-indent-offset 2)
+ '(org-support-shift-select t)
+ '(org-src-tab-acts-natively t))
 
 ;; Mode setup for file extensions
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
