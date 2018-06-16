@@ -252,6 +252,7 @@
 
 (add-hook 'ruby-mode-hook (lambda ()
                             (robe-mode)
+                            (robe-start t)
                             (inf-ruby-minor-mode)))
 
 (add-hook 'rust-mode-hook #'racer-mode)
