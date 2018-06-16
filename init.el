@@ -26,7 +26,7 @@
     hackernews transpose-frame
     ag fiplr ace-window
     all-the-icons
-    flycheck flycheck-crystal flycheck-popup-tip
+    flycheck flycheck-rust flycheck-crystal flycheck-popup-tip
     company company-racer racer
     neotree pivotal-tracker
     cherry-blossom-theme
