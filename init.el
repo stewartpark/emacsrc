@@ -14,7 +14,7 @@
 ))
 (setq package-list '(
     better-defaults multiple-cursors
-    python-mode elpy py-isort py-autopep8 pyenv-mode-auto
+    python-mode anaconda-mode py-isort py-autopep8 pyenv-mode-auto
     ruby-mode rspec-mode rbenv inf-ruby robe
     racket-mode elm-mode rust-mode vue-mode rjsx-mode typescript-mode
     markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode
@@ -25,7 +25,7 @@
     org org-present
     hackernews transpose-frame
     ag fiplr ace-window
-    all-the-icons flycheck eldoc racer
+    all-the-icons flycheck flycheck-inline racer
     company company-racer
     neotree pivotal-tracker
     zweilight-theme
@@ -67,6 +67,7 @@
 (setq web-mode-enable-auto-pairing nil)
 (defun load-smartparens-config ()
   (require 'smartparens-config)
+  (sp-pair "'" nil :unless '(sp-point-after-word-p))
   (sp-pair "%" "%" :wrap "C-%")
   (sp-pair "<" ">" :wrap "C->"))
 
@@ -152,6 +153,9 @@
 ;; Company-mode
 (eval-after-load 'company
   '(push 'company-robe company-backends))
+
+(with-eval-after-load 'flycheck
+  (flycheck-inline-mode))
 
 ;; Line number font size fix
 (defun linum-update-window-scale-fix (win)
@@ -245,7 +249,7 @@
                               (run-python (python-shell-parse-command))
                               (py-autopep8-enable-on-save)
                               (pyenv-mode)
-                              (elpy-mode)))
+                              (anaconda-mode)))
 
 (add-hook 'ruby-mode-hook (lambda ()
                             (robe-mode)
@@ -262,7 +266,6 @@
                             (linum-mode 1)
                             (auto-revert-mode t)
                             (flycheck-mode 1)
-                            (eldoc-mode)
                             (rainbow-mode)
                             (smartparens-mode)
                             (rainbow-delimiters-mode)
