@@ -15,7 +15,7 @@
 (setq package-list '(
     better-defaults multiple-cursors
     python-mode anaconda-mode py-isort py-autopep8 pyenv-mode-auto pythonic
-    ruby-mode rspec-mode rbenv inf-ruby robe
+    ruby-mode rspec-mode rbenv inf-ruby robe crystal-mode
     racket-mode elm-mode rust-mode vue-mode rjsx-mode typescript-mode
     markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js2-mode json-mode
@@ -26,7 +26,7 @@
     hackernews transpose-frame
     ag fiplr ace-window
     all-the-icons
-    flycheck flycheck-popup-tip
+    flycheck flycheck-crystal flycheck-popup-tip
     company company-racer racer
     neotree pivotal-tracker
     cherry-blossom-theme
