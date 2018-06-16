@@ -7,14 +7,14 @@
 
 ;; Package setup
 (setq package-archives '(
-    ("gnu" . "https://elpa.gnu.org/packages/")
-    ("marmalade" . "https://marmalade-repo.org/packages/")
     ("melpa" . "https://melpa.org/packages/")
+    ("marmalade" . "https://marmalade-repo.org/packages/")
+    ("gnu" . "https://elpa.gnu.org/packages/")
     ("org" . "http://orgmode.org/elpa/")
 ))
 (setq package-list '(
     better-defaults multiple-cursors
-    python-mode anaconda-mode py-isort py-autopep8 pyenv-mode-auto
+    python-mode anaconda-mode py-isort py-autopep8 pyenv-mode-auto pythonic
     ruby-mode rspec-mode rbenv inf-ruby robe
     racket-mode elm-mode rust-mode vue-mode rjsx-mode typescript-mode
     markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode
@@ -25,10 +25,11 @@
     org org-present
     hackernews transpose-frame
     ag fiplr ace-window
-    all-the-icons flycheck flycheck-inline racer
-    company company-racer
+    all-the-icons
+    flycheck flycheck-popup-tip
+    company company-racer racer
     neotree pivotal-tracker
-    zweilight-theme
+    cherry-blossom-theme
     emojify
     json json-rpc
 ))
@@ -121,9 +122,7 @@
 (keychain-refresh-environment)
 
 ;; Theme
-(if (display-graphic-p)
-  (load-theme 'zweilight t)
-  (load-theme 'tango-dark t))
+(load-theme 'cherry-blossom t)
 
 ;; Git-gutter-fringe
 (when (display-graphic-p)
@@ -155,7 +154,7 @@
   '(push 'company-robe company-backends))
 
 (with-eval-after-load 'flycheck
-  (flycheck-inline-mode))
+  (flycheck-popup-tip-mode))
 
 ;; Line number font size fix
 (defun linum-update-window-scale-fix (win)
@@ -314,6 +313,8 @@
      (sql . t)
      (ruby . t))))
  '(org-confirm-babel-evaluate nil)
+ '(org-src-tab-acts-natively t)
+ '(org-support-shift-select t)
  '(rbenv-show-active-ruby-in-modeline nil)
  '(ruby-align-to-stmt-keywords (quote (if begin case)))
  '(ruby-deep-indent-paren nil)
@@ -322,9 +323,7 @@
  '(tab-width 2)
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
- '(web-mode-markup-indent-offset 2)
- '(org-support-shift-select t)
- '(org-src-tab-acts-natively t))
+ '(web-mode-markup-indent-offset 2))
 
 ;; Mode setup for file extensions
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
