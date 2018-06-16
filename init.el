@@ -83,7 +83,7 @@
 
 (setq make-backup-files nil)
 
-(let ((font-face "Input-12"))
+(let ((font-face "Inconsolata-12"))
   (set-face-attribute 'default nil :font font-face)
   (set-frame-font font-face nil t))
 
@@ -252,7 +252,8 @@
                             (inf-ruby-minor-mode)))
 
 (add-hook 'rust-mode-hook #'racer-mode)
-(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+(with-eval-after-load 'rust-mode
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 (add-hook 'prog-mode-hook (lambda ()
                             (load-smartparens-config)
