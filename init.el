@@ -91,7 +91,7 @@
 
 (xterm-mouse-mode t)
 (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
-(global-set-key (kbd "<mouse-6>") 'scroll-donw-line)
+(global-set-key (kbd "<mouse-6>") 'scroll-down-line)
 (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
 (global-set-key (kbd "<mouse-7>") 'scroll-up-line)
 
