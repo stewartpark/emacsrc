@@ -28,9 +28,8 @@
     all-the-icons
     flycheck flycheck-rust flycheck-crystal flycheck-popup-tip
     company company-racer racer
-    neotree pivotal-tracker
-    cherry-blossom-theme
-    emojify
+    solarized-theme
+    neotree pivotal-tracker emojify circe
     json json-rpc
 ))
 
@@ -42,6 +41,10 @@
 ;; Host-specific configurations
 (if (file-exists-p "~/.config/pivotal-tracker.key")
     (setq pivotal-api-token (replace-regexp-in-string "\n$" "" (file:read "~/.config/pivotal-tracker.key"))))
+
+(if (file-exists-p "~/.config/circe.cfg")
+    (setq circe-network-options
+          (eval (car (read-from-string (file:read "~/.config/circe.cfg"))))))
 
 ;; Install and refresh the packages
 (package-initialize)
@@ -85,7 +88,7 @@
 
 (setq make-backup-files nil)
 
-(let ((font-face "Inconsolata-12"))
+(let ((font-face "Hack-12"))
   (set-face-attribute 'default nil :font font-face)
   (set-frame-font font-face nil t))
 
@@ -124,7 +127,7 @@
 (keychain-refresh-environment)
 
 ;; Theme
-(load-theme 'cherry-blossom t)
+(load-theme 'solarized-dark t)
 
 ;; Git-gutter-fringe
 (when (display-graphic-p)
@@ -169,6 +172,18 @@
                    (car (window-margins)) 1)
                ))))
 (advice-add #'linum-update-window :after #'linum-update-window-scale-fix)
+
+(defun kill-whitespace-or-word ()
+  "Smart delete like a modern editor."
+  (interactive)
+  (if (looking-back "[ \t\n]" 1)
+      (let ((p (point)))
+        (re-search-backward "[^ \t\n]" nil :no-error)
+        (forward-char)
+        (kill-region p (point)))
+    (backward-kill-word 1)))
+
+(global-set-key (kbd "M-<backspace>") 'kill-whitespace-or-word)
 
 ;; Multiple cursors
 (global-set-key (kbd "C-d") 'mc/mark-next-like-this)
@@ -307,7 +322,7 @@
  '(js2-lazy-operators t)
  '(js2-paren-indent-offset 2)
  '(js2-square-indent-offset 2)
- '(linum-format (quote "%3d"))
+ '(linum-format (quote "%4d"))
  '(org-babel-load-languages
    (quote
     ((emacs-lisp . t)
