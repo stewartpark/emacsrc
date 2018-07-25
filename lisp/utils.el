@@ -52,6 +52,11 @@
   (interactive)
   (find-file "~/.emacs.d/lisp/"))
 
+(defun open-local ()
+  "Cmd: (open-local) open the host-specific Lisp code."
+  (interactive)
+  (find-file "~/.config/emacs.el"))
+
 (defun get-all-documentations-as-comments ()
   "Get all docstrings from exposed functions."
   (let ((l (make-list 0 nil)))
@@ -111,7 +116,7 @@
   (set-frame-parameter nil 'fullscreen saved-fullscreen-state))
 
 (defvar utils
-  '(enter-fullscreen quit-fullscreen trim-string http:get file:read show-itunes show-net-latency todo font+ font- open-init open-lisp)
+  '(enter-fullscreen quit-fullscreen trim-string http:get file:read show-itunes show-net-latency todo font+ font- open-init open-lisp open-local)
   "A list of every function this file defines.")
 (provide 'utils)
 ;;; utils.el ends here

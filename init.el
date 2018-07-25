@@ -29,7 +29,7 @@
     flycheck flycheck-rust flycheck-crystal flycheck-popup-tip
     company company-racer racer
     solarized-theme
-    neotree pivotal-tracker emojify circe
+    neotree emojify circe
     json json-rpc restclient
 ))
 
@@ -39,12 +39,13 @@
 (global-set-key (kbd "M--") 'font-)
 
 ;; Host-specific configurations
-(if (file-exists-p "~/.config/pivotal-tracker.key")
-    (setq pivotal-api-token (replace-regexp-in-string "\n$" "" (file:read "~/.config/pivotal-tracker.key"))))
-
 (if (file-exists-p "~/.config/circe.cfg")
     (setq circe-network-options
           (eval (car (read-from-string (file:read "~/.config/circe.cfg"))))))
+
+;; Host-specific code
+(if (file-exists-p "~/.config/emacs.el")
+    (load "~/.config/emacs.el"))
 
 ;; Install and refresh the packages
 (package-initialize)
