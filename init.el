@@ -30,7 +30,7 @@
     company company-racer racer
     solarized-theme
     neotree pivotal-tracker emojify circe
-    json json-rpc
+    json json-rpc restclient
 ))
 
 ;; For my own code
@@ -359,3 +359,4 @@
 (add-to-list 'auto-mode-alist '("\\.conf\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("Jenkinsfile" . groovy-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx?" . typescript-mode))
+(add-to-list 'auto-mode-alist '("\\.req" . restclient-mode))
