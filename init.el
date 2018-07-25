@@ -166,6 +166,9 @@
 (with-eval-after-load 'flycheck
   (flycheck-popup-tip-mode))
 
+;; Rspec
+(setq rspec-use-spring-when-possible nil)
+
 ;; Line number font size fix
 (defun linum-update-window-scale-fix (win)
   (set-window-margins
