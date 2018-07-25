@@ -207,7 +207,7 @@
 (global-set-key (kbd "C-x o") 'ace-window)
 (global-set-key (kbd "M-.") 'dumb-jump-go)
 (global-set-key (kbd "M-,") 'dumb-jump-back)
-(global-set-key (kbd "C-x C-b") (lambda ()
+(global-set-key (kbd "C-x C-l") (lambda ()
                                   (interactive)
                                   (if (bound-and-true-p magit-blame-mode)
                                     (magit-blame-quit)
