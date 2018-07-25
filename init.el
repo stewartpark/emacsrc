@@ -15,7 +15,7 @@
 (setq package-list '(
     better-defaults multiple-cursors
     python-mode anaconda-mode py-isort py-autopep8 pyenv-mode-auto pythonic
-    ruby-mode rspec-mode rbenv inf-ruby robe crystal-mode
+    ruby-mode rspec-mode rbenv inf-ruby robe bundler crystal-mode
     racket-mode elm-mode rust-mode vue-mode rjsx-mode typescript-mode
     markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js2-mode json-mode
@@ -24,7 +24,7 @@
     fringe-helper git-gutter-fringe+ magit keychain-environment
     org org-present
     hackernews transpose-frame
-    ag fiplr ace-window
+    ag fiplr ace-window multi-term
     all-the-icons
     flycheck flycheck-rust flycheck-crystal flycheck-popup-tip
     company company-racer racer
@@ -62,12 +62,17 @@
       (concat ";; Happy Hacking!\n;;\n" (get-all-documentations-as-comments)))
 (setq-default cursor-type 'bar)
 (setq-default indent-tabs-mode nil)
+
 (setq vc-follow-symlinks t)
+
 (setq python-shell-prompt-detect-failure-warning nil)
 (setq python-shell-completion-native-disabled-interpreters (list "python" "pypy"))
+
 (setq inf-ruby-default-implementation "pry")
 (setq inf-ruby-first-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)> *")
 (setq inf-ruby-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)[>*\"'] *")
+(setq inf-ruby-console-environment "development")
+
 (setq web-mode-enable-auto-pairing nil)
 (defun load-smartparens-config ()
   (require 'smartparens-config)
@@ -173,6 +178,7 @@
                ))))
 (advice-add #'linum-update-window :after #'linum-update-window-scale-fix)
 
+;; Better behavior for M-<backspace>
 (defun kill-whitespace-or-word ()
   "Smart delete like a modern editor."
   (interactive)
@@ -182,8 +188,10 @@
         (forward-char)
         (kill-region p (point)))
     (backward-kill-word 1)))
-
 (global-set-key (kbd "M-<backspace>") 'kill-whitespace-or-word)
+
+;; Multi-term
+(global-set-key (kbd "C-x C-t") 'multi-term)
 
 ;; Multiple cursors
 (global-set-key (kbd "C-d") 'mc/mark-next-like-this)
