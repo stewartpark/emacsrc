@@ -24,12 +24,12 @@
     fringe-helper git-gutter-fringe+ magit keychain-environment
     org org-present
     hackernews transpose-frame
-    ag fiplr ace-window multi-term
+    ag ace-window multi-term
     all-the-icons
     flycheck flycheck-rust flycheck-crystal flycheck-popup-tip
     company company-racer racer
     solarized-theme
-    neotree nlinum doom-modeline emojify circe
+    neotree nlinum doom-modeline circe projectile emojify
     json json-rpc restclient
 ))
 
@@ -152,11 +152,6 @@
                                (visual-line-mode 0)))
 (neotree)
 
-;; fiplr
-(setq fiplr-ignored-globs
-      '((directories (".git" ".svn" ".hg" ".bzr" ".bundle" "__pycache__" "node_modules" "bower_components"))
-        (files (".DS_Store" "*.pyc" ".#*" "*~" "*.so" "*.jpg" "*.png" "*.gif" "*.pdf" "*.gz" "*.zip"))))
-
 ;; Company-mode
 (eval-after-load 'company
   '(push 'company-robe company-backends))
@@ -181,8 +176,8 @@
 (global-set-key (kbd "C-d") 'mc/mark-next-like-this)
 
 ;; Set up shortcut keys
-(global-set-key (kbd "C-x f") 'fiplr-find-file)
-(global-set-key (kbd "C-x C-f") 'ag-project)
+(global-set-key (kbd "C-x f") 'projectile-find-file)
+(global-set-key (kbd "C-x C-f") 'projectile-ag)
 (global-set-key (kbd "<f8>") 'neotree-toggle)
 (global-set-key (kbd "C-x o") 'ace-window)
 (global-set-key (kbd "C-x C-o") 'find-file)
