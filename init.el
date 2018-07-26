@@ -39,11 +39,6 @@
 (global-set-key (kbd "M--") 'font-)
 
 ;; Host-specific configurations
-(if (file-exists-p "~/.config/circe.cfg")
-    (setq circe-network-options
-          (eval (car (read-from-string (file:read "~/.config/circe.cfg"))))))
-
-;; Host-specific code
 (if (file-exists-p "~/.config/emacs.el")
     (load "~/.config/emacs.el"))
 
