@@ -166,6 +166,7 @@
 
 ;; Rspec
 (setq rspec-use-spring-when-possible nil)
+(setq compilation-scroll-output t)
 
 ;; Line number font size fix
 (defun linum-update-window-scale-fix (win)
