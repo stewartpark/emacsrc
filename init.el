@@ -205,6 +205,7 @@
 (global-set-key (kbd "C-x C-f") 'ag-project)
 (global-set-key (kbd "<f8>") 'neotree-toggle)
 (global-set-key (kbd "C-x o") 'ace-window)
+(global-set-key (kbd "C-x C-o") 'find-file)
 (global-set-key (kbd "M-.") 'dumb-jump-go)
 (global-set-key (kbd "M-,") 'dumb-jump-back)
 (global-set-key (kbd "C-x C-g") (lambda ()
