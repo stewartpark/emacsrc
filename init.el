@@ -29,7 +29,7 @@
     flycheck flycheck-rust flycheck-crystal flycheck-popup-tip
     company company-racer racer
     solarized-theme
-    neotree emojify circe
+    neotree nlinum doom-modeline emojify circe
     json json-rpc restclient
 ))
 
@@ -79,6 +79,8 @@
 (setq truncate-partial-width-windows nil)
 (setq truncate-lines t)
 (global-visual-line-mode 1)
+
+(doom-modeline-init)
 
 (setq org-todo-keywords
       '((sequence "TODO" "DOING" "|" "DONE")))
@@ -291,7 +293,7 @@
                             (load-smartparens-config)
                             (company-mode)
                             (git-gutter+-mode 1)
-                            (linum-mode 1)
+                            (nlinum-mode 1)
                             (auto-revert-mode t)
                             (flycheck-mode 1)
                             (rainbow-mode)
@@ -333,7 +335,8 @@
  '(js2-lazy-operators t)
  '(js2-paren-indent-offset 2)
  '(js2-square-indent-offset 2)
- '(linum-format (quote "%4d"))
+ '(nlinum-format (quote "%4d"))
+ '(nlinum-highlight-current-line t)
  '(org-babel-load-languages
    (quote
     ((emacs-lisp . t)
