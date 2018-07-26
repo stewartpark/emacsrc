@@ -169,27 +169,9 @@
 (setq compilation-scroll-output t)
 
 ;; Line number font size fix
-(defun linum-update-window-scale-fix (win)
-  (set-window-margins
-   win
-   (ceiling (* (if (boundp 'text-scale-mode-step)
-                   (expt text-scale-mode-step
-                         text-scale-mode-amount) 1)
-               (if (car (window-margins))
-                   (car (window-margins)) 1)
-               ))))
 (advice-add #'linum-update-window :after #'linum-update-window-scale-fix)
 
 ;; Better behavior for M-<backspace>
-(defun kill-whitespace-or-word ()
-  "Smart delete like a modern editor."
-  (interactive)
-  (if (looking-back "[ \t\n]" 1)
-      (let ((p (point)))
-        (re-search-backward "[^ \t\n]" nil :no-error)
-        (forward-char)
-        (kill-region p (point)))
-    (backward-kill-word 1)))
 (global-set-key (kbd "M-<backspace>") 'kill-whitespace-or-word)
 
 ;; Multi-term

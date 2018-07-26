@@ -115,8 +115,34 @@
 (defun restore-fullscreen-state ()
   (set-frame-parameter nil 'fullscreen saved-fullscreen-state))
 
+(defun linum-update-window-scale-fix (win)
+  "Line number font size fix.  WIN: linum-update-window argument."
+  (set-window-margins
+   win
+   (ceiling (* (if (boundp 'text-scale-mode-step)
+                   (expt text-scale-mode-step
+                         text-scale-mode-amount) 1)
+               (if (car (window-margins))
+                   (car (window-margins)) 1)
+               ))))
+
+(defun kill-whitespace-or-word ()
+  "Smart delete like a modern editor."
+  (interactive)
+  (if (looking-back "[ \t\n]" 1)
+      (let ((p (point)))
+        (re-search-backward "[^ \t\n]" nil :no-error)
+        (forward-char)
+        (kill-region p (point)))
+    (backward-kill-word 1)))
+
+(define-minor-mode sticky-buffer-mode
+  "Make the current window always display this buffer."
+  nil " sticky" nil
+  (set-window-dedicated-p (selected-window) sticky-buffer-mode))
+
 (defvar utils
-  '(enter-fullscreen quit-fullscreen trim-string http:get file:read show-itunes show-net-latency todo font+ font- open-init open-lisp open-local)
+  '(enter-fullscreen quit-fullscreen trim-string http:get file:read show-itunes show-net-latency todo font+ font- open-init open-lisp open-local kill-whitespace-or-word linum-update-window-scale-fix sticky-buffer-mode)
   "A list of every function this file defines.")
 (provide 'utils)
 ;;; utils.el ends here
