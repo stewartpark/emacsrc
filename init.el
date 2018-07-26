@@ -24,12 +24,14 @@
     fringe-helper git-gutter-fringe+ magit keychain-environment
     org org-present
     hackernews transpose-frame
-    ag ace-window multi-term
     all-the-icons
     flycheck flycheck-rust flycheck-crystal flycheck-popup-tip
     company company-racer racer
     solarized-theme
-    neotree nlinum doom-modeline circe projectile emojify
+    ace-window multi-term neotree nlinum doom-modeline
+    projectile ag
+    helm helm-projectile helm-ag helm-circe helm-company helm-spotify
+    emojify circe
     json json-rpc restclient
 ))
 
@@ -106,8 +108,6 @@
 (when (display-graphic-p)
     (scroll-bar-mode 0))
 
-(server-start)
-
 ;; Mac-specific config
 (when (eq system-type 'darwin)
   ;; Before anything starts, get the right envs
@@ -131,6 +131,12 @@
 
 ;; Theme
 (load-theme 'solarized-dark t)
+
+;; Helm
+(setq helm-display-header-line nil)
+(setq helm-autoresize-max-height 10)
+(setq helm-autoresize-min-height 10)
+(setq helm-split-window-in-side-p t)
 
 ;; Git-gutter-fringe
 (when (display-graphic-p)
@@ -176,8 +182,12 @@
 (global-set-key (kbd "C-d") 'mc/mark-next-like-this)
 
 ;; Set up shortcut keys
-(global-set-key (kbd "C-x f") 'projectile-find-file)
-(global-set-key (kbd "C-x C-f") 'projectile-ag)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+(global-set-key (kbd "C-x C-m") 'helm-circe)
+(global-set-key (kbd "C-x f") 'helm-projectile-find-file)
+(global-set-key (kbd "C-x C-f") 'helm-projectile-ag)
+(global-set-key (kbd "C-x C-x") 'helm-imenu-in-all-buffers)
 (global-set-key (kbd "<f8>") 'neotree-toggle)
 (global-set-key (kbd "C-x o") 'ace-window)
 (global-set-key (kbd "C-x C-o") 'find-file)
@@ -260,7 +270,6 @@
 
 (add-hook 'ruby-mode-hook (lambda ()
                             (robe-mode)
-                            (robe-start t)
                             (inf-ruby-minor-mode)))
 
 (add-hook 'rust-mode-hook #'racer-mode)
@@ -352,3 +361,5 @@
 (add-to-list 'auto-mode-alist '("Jenkinsfile" . groovy-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx?" . typescript-mode))
 (add-to-list 'auto-mode-alist '("\\.req" . restclient-mode))
+
+(server-start)
