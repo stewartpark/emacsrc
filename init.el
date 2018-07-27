@@ -130,6 +130,8 @@
 (keychain-refresh-environment)
 
 ;; Theme
+(setq x-underline-at-descent-line t)
+(setq solarized-scale-org-headlines t)
 (load-theme 'solarized-dark t)
 
 ;; Helm
@@ -169,6 +171,11 @@
 (setq rspec-use-spring-when-possible nil)
 (setq compilation-scroll-output t)
 
+;; Projectile
+(setq projectile-project-search-path '("~/Workspace"))
+(projectile-discover-projects-in-search-path)
+(helm-projectile-on)
+
 ;; Line number font size fix
 (advice-add #'linum-update-window :after #'linum-update-window-scale-fix)
 
@@ -185,12 +192,12 @@
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 (global-set-key (kbd "C-x C-m") 'helm-circe)
+(global-set-key (kbd "C-x C-o") 'helm-projectile-switch-project)
 (global-set-key (kbd "C-x f") 'helm-projectile-find-file)
 (global-set-key (kbd "C-x C-f") 'helm-projectile-ag)
 (global-set-key (kbd "C-x C-x") 'helm-imenu-in-all-buffers)
 (global-set-key (kbd "<f8>") 'neotree-toggle)
 (global-set-key (kbd "C-x o") 'ace-window)
-(global-set-key (kbd "C-x C-o") 'find-file)
 (global-set-key (kbd "M-.") 'dumb-jump-go)
 (global-set-key (kbd "M-,") 'dumb-jump-back)
 (global-set-key (kbd "C-x C-g") (lambda ()
