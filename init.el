@@ -27,7 +27,7 @@
     all-the-icons
     flycheck flycheck-rust flycheck-crystal flycheck-popup-tip
     company company-racer racer
-    solarized-theme
+    doom-themes
     ace-window multi-term neotree nlinum doom-modeline
     projectile ag
     helm helm-projectile helm-ag helm-circe helm-company helm-spotify
@@ -130,9 +130,7 @@
 (keychain-refresh-environment)
 
 ;; Theme
-(setq x-underline-at-descent-line t)
-(setq solarized-scale-org-headlines t)
-(load-theme 'solarized-dark t)
+(load-theme 'doom-peacock t)
 
 ;; Helm
 (setq helm-display-header-line nil)
