@@ -153,7 +153,7 @@
 (setq neo-window-width 30)
 (add-hook 'neotree-mode-hook (lambda ()
                                (setq cursor-type nil)
-                               (toggle-truncate-lines 1)
+                               (toggle-truncate-lines 0)
                                (hl-line-mode 1)
                                (visual-line-mode 0)))
 (neotree)
