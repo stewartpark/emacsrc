@@ -37,12 +37,6 @@
 
 ;; For my own code
 (load "~/.emacs.d/lisp/utils.el")
-(global-set-key (kbd "M-=") 'font+)
-(global-set-key (kbd "M--") 'font-)
-
-;; Host-specific configurations
-(if (file-exists-p "~/.config/emacs.el")
-    (load "~/.config/emacs.el"))
 
 ;; Install and refresh the packages
 (package-initialize)
@@ -51,131 +45,100 @@
   (unless (package-installed-p package)
     (package-install package)))
 
-;; Configuration
+;; Functions for configuration
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defun package--save-selected-packages (&rest opt) nil)
-(setq inhibit-splash-screen t)
-(setq inhibit-startup-message t)
-(setq initial-scratch-message
-      (concat ";; Happy Hacking!\n;;\n" (get-all-documentations-as-comments)))
-(setq-default cursor-type 'bar)
-(setq-default indent-tabs-mode nil)
-
-(setq vc-follow-symlinks t)
-
-(setq python-shell-prompt-detect-failure-warning nil)
-(setq python-shell-completion-native-disabled-interpreters (list "python" "pypy"))
-
-(setq inf-ruby-default-implementation "pry")
-(setq inf-ruby-first-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)> *")
-(setq inf-ruby-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)[>*\"'] *")
-(setq inf-ruby-console-environment "development")
-
-(setq web-mode-enable-auto-pairing nil)
 (defun load-smartparens-config ()
   (require 'smartparens-config)
   (sp-pair "'" nil :unless '(sp-point-after-word-p))
   (sp-pair "%" "%" :wrap "C-%")
   (sp-pair "<" ">" :wrap "C->"))
 
-(setq truncate-partial-width-windows nil)
-(setq truncate-lines t)
-(global-visual-line-mode 1)
+;;;; Configuration
 
-(doom-modeline-init)
+(setq-default
+ inhibit-splash-screen t
+ inhibit-startup-message t
+ initial-scratch-message (concat ";; Happy Hacking!\n;;\n" (get-all-documentations-as-comments))
+ cursor-type 'bar
+ indent-tabs-mode nil
+ make-backup-files nil
+ vc-follow-symlinks t
 
-(setq org-todo-keywords
-      '((sequence "TODO" "DOING" "|" "DONE")))
+ ;; Python
+ python-shell-prompt-detect-failure-warning nil
+ python-shell-completion-native-disabled-interpreters (list "python" "pypy")
 
-;; Don't ask about running processes
-(add-hook 'comint-exec-hook (lambda ()
-                              (set-process-query-on-exit-flag (get-buffer-process (current-buffer)) nil)))
+ ;; Ruby
+ inf-ruby-default-implementation "pry"
+ inf-ruby-first-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)> *"
+ inf-ruby-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)[>*\"'] *"
+ inf-ruby-console-environment "development"
 
-(setq make-backup-files nil)
+ ;; Web-mode
+ web-mode-enable-auto-pairing nil
 
+ ;; Truncation
+ truncate-partial-width-windows nil
+ truncate-lines t
+
+ ;; Org-mode
+ org-todo-keywords '((sequence "TODO" "DOING" "|" "DONE"))
+
+ ;; Helm
+ helm-display-header-line nil
+ helm-autoresize-max-height 10
+ helm-autoresize-min-height 10
+ helm-split-window-in-side-p t
+
+ ;; Ace window
+ aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
+
+ ;; Neotree
+ neo-smart-open t
+ neo-theme (if window-system 'icons 'arrow)
+ neo-window-width 30
+
+ ;; Rspec
+ rspec-use-spring-when-possible nil
+ compilation-scroll-output t
+
+ ;; Projectile
+ projectile-project-search-path '("~/Workspace")
+ )
+
+;;; Theme-related
+;; Font setup
 (let ((font-face "Hack-12"))
   (set-face-attribute 'default nil :font font-face)
   (set-frame-font font-face nil t))
 
-(xterm-mouse-mode t)
-(global-set-key (kbd "<mouse-4>") 'scroll-down-line)
-(global-set-key (kbd "<mouse-6>") 'scroll-down-line)
-(global-set-key (kbd "<mouse-5>") 'scroll-up-line)
-(global-set-key (kbd "<mouse-7>") 'scroll-up-line)
+;; Load theme
+(load-theme 'doom-peacock t)
 
+;; Related modes
+(global-visual-line-mode 1)
+(doom-modeline-init)
+(xterm-mouse-mode t)
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (when (display-graphic-p)
     (scroll-bar-mode 0))
 
-;; Mac-specific config
-(when (eq system-type 'darwin)
-  ;; Before anything starts, get the right envs
-  (when (not (getenv "TERM_PROGRAM"))
-    (setenv "PATH" (shell-command-to-string "cat /etc/paths | tr '\n' ':'"))
-    (setq exec-path (split-string (getenv "PATH") ":")))
-  ;; Mac utils
-  (defun copy-from-osx ()
-    (shell-command-to-string "pbpaste"))
-  (defun paste-to-osx (text &optional push)
-    (let ((process-connection-type nil))
-      (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
-        (process-send-string proc text)
-        (process-send-eof proc))))
-  (setq mac-allow-anti-aliasing t)
-  (setq interprogram-cut-function 'paste-to-osx)
-  (setq interprogram-paste-function 'copy-from-osx))
-
-;; Load keychain env
-(keychain-refresh-environment)
-
-;; Theme
-(load-theme 'doom-peacock t)
-
-;; Helm
-(setq helm-display-header-line nil)
-(setq helm-autoresize-max-height 10)
-(setq helm-autoresize-min-height 10)
-(setq helm-split-window-in-side-p t)
-
-;; Git-gutter-fringe
-(when (display-graphic-p)
-  (require 'git-gutter-fringe+))
-
-;; Ace window
-(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-
-;; Neotree
-(with-eval-after-load 'neotree
-  (define-key neotree-mode-map (kbd "RET") (neotree-make-executor :file-fn 'neo-open-file-ace-window :dir-fn 'neo-open-dir)))
-(setq neo-smart-open t)
-(setq neo-theme (if window-system 'icons 'arrow))
-(setq neo-window-width 30)
-(add-hook 'neotree-mode-hook (lambda ()
-                               (setq cursor-type nil)
-                               (toggle-truncate-lines 0)
-                               (hl-line-mode 1)
-                               (visual-line-mode 0)))
-(neotree)
-
-;; Company-mode
-(eval-after-load 'company
-  '(push 'company-robe company-backends))
-
-(with-eval-after-load 'flycheck
-  (flycheck-popup-tip-mode))
-
-;; Rspec
-(setq rspec-use-spring-when-possible nil)
-(setq compilation-scroll-output t)
-
-;; Projectile
-(setq projectile-project-search-path '("~/Workspace"))
-(projectile-discover-projects-in-search-path)
-(helm-projectile-on)
-
+;;;; Adhoc fixes
 ;; Line number font size fix
 (advice-add #'linum-update-window :after #'linum-update-window-scale-fix)
+
+;;;; Global shortcut
+;; Font resizing
+(global-set-key (kbd "M-=") 'font+)
+(global-set-key (kbd "M--") 'font-)
+
+;; Scrolling
+(global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+(global-set-key (kbd "<mouse-6>") 'scroll-down-line)
+(global-set-key (kbd "<mouse-5>") 'scroll-up-line)
+(global-set-key (kbd "<mouse-7>") 'scroll-up-line)
 
 ;; Better behavior for M-<backspace>
 (global-set-key (kbd "M-<backspace>") 'kill-whitespace-or-word)
@@ -226,24 +189,29 @@
                                      (quit-fullscreen)
                                      (enter-fullscreen))))
 
-;; Environment variable setup
-(if (not (getenv "TERM_PROGRAM"))
-    (let ((path (shell-command-to-string
-                 "$SHELL -cl \"printf %s \\\"\\\$PATH\\\"\"")))
-      (setenv "PATH" path)
-      (setq exec-path (split-string path ":"))))
 
 ;; Autorun
 ;; NOTE: Please avoid adding anything here.
 (add-hook 'after-init-hook (lambda ()))
 
 ;; Hooks
+
+;; Don't ask about running processes
+(add-hook 'comint-exec-hook (lambda ()
+                              (set-process-query-on-exit-flag (get-buffer-process (current-buffer)) nil)))
+
 (add-hook 'before-save-hook (lambda ()
                               (delete-trailing-whitespace)
                               (when (bound-and-true-p python-mode)
                                 (message "Python: isorting")
                                 (py-isort-buffer)
                                 )))
+
+(add-hook 'neotree-mode-hook (lambda ()
+                               (setq cursor-type nil)
+                               (toggle-truncate-lines 0)
+                               (hl-line-mode 1)
+                               (visual-line-mode 0)))
 
 (add-hook 'org-mode-hook (lambda ()
                            (emojify-mode)))
@@ -293,6 +261,7 @@
                             (rainbow-delimiters-mode)
                             (dumb-jump-mode)))
 
+;;;; Emacs-generated configuration
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -367,4 +336,56 @@
 (add-to-list 'auto-mode-alist '("\\.tsx?" . typescript-mode))
 (add-to-list 'auto-mode-alist '("\\.req" . restclient-mode))
 
+;;;; Environment-specific configuration
+;; Mac-specific config
+(when (eq system-type 'darwin)
+  ;; Before anything starts, get the right envs
+  (when (not (getenv "TERM_PROGRAM"))
+    (setenv "PATH" (shell-command-to-string "cat /etc/paths | tr '\n' ':'"))
+    exec-path (split-string (getenv "PATH") ":"))
+  ;; Mac utils
+  (defun copy-from-osx ()
+    (shell-command-to-string "pbpaste"))
+  (defun paste-to-osx (text &optional push)
+    (let ((process-connection-type nil))
+      (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+        (process-send-string proc text)
+        (process-send-eof proc))))
+  (setq mac-allow-anti-aliasing t)
+  (setq interprogram-cut-function 'paste-to-osx)
+  (setq interprogram-paste-function 'copy-from-osx))
+
+;; Environment variable setup
+(if (not (getenv "TERM_PROGRAM"))
+    (let ((path (shell-command-to-string
+                 "$SHELL -cl \"printf %s \\\"\\\$PATH\\\"\"")))
+      (setenv "PATH" path)
+      (setq exec-path (split-string path ":"))))
+
+;; Host-specific configurations
+(if (file-exists-p "~/.config/emacs.el")
+    (load "~/.config/emacs.el"))
+
+;;;; Things to run at startup
+;; Load keychain env
+(keychain-refresh-environment)
+
+;; Git-gutter-fringe
+(when (display-graphic-p)
+  (require 'git-gutter-fringe+))
+
+;; Neotree
+(with-eval-after-load 'neotree
+  (define-key neotree-mode-map (kbd "RET") (neotree-make-executor :file-fn 'neo-open-file-ace-window :dir-fn 'neo-open-dir)))
+
+;; Company-mode
+(eval-after-load 'company
+  '(push 'company-robe company-backends))
+
+(with-eval-after-load 'flycheck
+  (flycheck-popup-tip-mode))
+
+(projectile-discover-projects-in-search-path)
+(helm-projectile-on)
+(neotree)
 (server-start)
