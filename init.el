@@ -30,7 +30,7 @@
     doom-themes
     ace-window multi-term neotree nlinum doom-modeline
     projectile ag
-    helm helm-projectile helm-ag helm-circe helm-company helm-spotify
+    helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck
     emojify circe
     json json-rpc restclient
 ))
@@ -157,6 +157,11 @@
 (global-set-key (kbd "C-x f") 'helm-projectile-find-file)
 (global-set-key (kbd "C-x C-f") 'helm-projectile-ag)
 (global-set-key (kbd "C-x C-x") 'helm-imenu-in-all-buffers)
+(global-set-key (kbd "C-x C-v") 'helm-flycheck)
+(global-set-key (kbd "C-x g c") 'magit-commit)
+(global-set-key (kbd "C-x g C-c") 'magit-commit-amend)
+(global-set-key (kbd "C-x g p") 'magit-push-current-to-pushremote)
+(global-set-key (kbd "C-x g r") 'magit-rebase-onto-upstream)
 (global-set-key (kbd "<f8>") 'neotree-toggle)
 (global-set-key (kbd "C-x o") 'ace-window)
 (global-set-key (kbd "M-.") 'dumb-jump-go)
