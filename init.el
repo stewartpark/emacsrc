@@ -56,12 +56,13 @@
 
 ;;; Theme-related
 ;; Font setup
-(let ((font-face "Hack-12"))
+(let ((font-face "Hack-13"))
   (set-face-attribute 'default nil :font font-face)
   (set-frame-font font-face nil t))
 
 ;; Load theme
-(load-theme 'doom-dracula t)
+(load-random-theme
+ '(doom-dracula doom-molokai))
 
 ;; Related modes
 (global-visual-line-mode 1)
@@ -213,7 +214,9 @@
                                 )))
 
 (add-hook 'neotree-mode-hook (lambda ()
-                               (setq cursor-type nil)
+                               (setq
+                                cursor-type nil
+                                mode-line-format nil)
                                (toggle-truncate-lines 0)
                                (hl-line-mode 1)
                                (visual-line-mode 0)))
