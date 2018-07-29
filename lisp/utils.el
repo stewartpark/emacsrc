@@ -146,8 +146,21 @@
   (load-theme
    (nth (random (length themes)) themes) t))
 
+(defun neotree-project-root-dir ()
+  "Make neotree display the right root for the project."
+  (interactive)
+  (let ((project-dir (ignore-errors (projectile-project-root)))
+        (file-name (buffer-file-name)))
+    (if (neo-global--window-exists-p)
+      (progn
+        (if project-dir
+            (neotree-dir project-dir))
+        (if file-name
+            (neotree-find file-name)))
+    )))
+
 (defvar utils
-  '(enter-fullscreen quit-fullscreen trim-string http:get file:read show-itunes show-net-latency todo font+ font- open-init open-lisp open-local kill-whitespace-or-word linum-update-window-scale-fix sticky-buffer-mode load-random-theme)
+  '(enter-fullscreen quit-fullscreen trim-string http:get file:read show-itunes show-net-latency todo font+ font- open-init open-lisp open-local kill-whitespace-or-word linum-update-window-scale-fix sticky-buffer-mode load-random-theme neotree-project-root-dir)
   "A list of every function this file defines.")
 (provide 'utils)
 ;;; utils.el ends here

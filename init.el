@@ -45,15 +45,6 @@
   (unless (package-installed-p package)
     (package-install package)))
 
-;; Functions for configuration
-(defalias 'yes-or-no-p 'y-or-n-p)
-(defun package--save-selected-packages (&rest opt) nil)
-(defun load-smartparens-config ()
-  (require 'smartparens-config)
-  (sp-pair "'" nil :unless '(sp-point-after-word-p))
-  (sp-pair "%" "%" :wrap "C-%")
-  (sp-pair "<" ">" :wrap "C->"))
-
 ;;; Theme-related
 ;; Font setup
 (let ((font-face "Hack-13"))
@@ -117,6 +108,7 @@
  neo-smart-open t
  neo-theme (if window-system 'icons 'arrow)
  neo-window-width 24
+ neo-force-change-root t
 
  ;; Rspec
  rspec-use-spring-when-possible nil
@@ -127,6 +119,11 @@
 )
 
 ;;;; Adhoc fixes
+;; Ignore yes or no
+(defalias 'yes-or-no-p 'y-or-n-p)
+;; Do not save packages in init.el
+(defun package--save-selected-packages (&rest opt) "OPT." nil)
+
 ;; Line number font size fix
 (advice-add #'linum-update-window :after #'linum-update-window-scale-fix)
 
@@ -159,20 +156,20 @@
 (global-set-key (kbd "C-x C-f") 'helm-projectile-ag)
 (global-set-key (kbd "C-x C-x") 'helm-imenu-in-all-buffers)
 (global-set-key (kbd "C-x C-v") 'helm-flycheck)
-(global-set-key (kbd "C-x g c") 'magit-commit)
-(global-set-key (kbd "C-x g C-c") 'magit-commit-amend)
-(global-set-key (kbd "C-x g p") 'magit-push-current-to-pushremote)
-(global-set-key (kbd "C-x g r") 'magit-rebase-onto-upstream)
 (global-set-key (kbd "<f8>") 'neotree-toggle)
 (global-set-key (kbd "C-x o") 'ace-window)
 (global-set-key (kbd "M-.") 'dumb-jump-go)
 (global-set-key (kbd "M-,") 'dumb-jump-back)
-(global-set-key (kbd "C-x C-g") (lambda ()
+(global-set-key (kbd "C-x C-g c") 'magit-commit)
+(global-set-key (kbd "C-x C-g C-c") 'magit-commit-amend)
+(global-set-key (kbd "C-x C-g p") 'magit-push-current-to-pushremote)
+(global-set-key (kbd "C-x C-g r") 'magit-rebase-onto-upstream)
+(global-set-key (kbd "C-x C-g b") (lambda ()
                                   (interactive)
                                   (if (bound-and-true-p magit-blame-mode)
                                     (magit-blame-quit)
                                     (call-interactively 'magit-blame))))
-(global-set-key (kbd "C-x l") (lambda ()
+(global-set-key (kbd "C-x C-g l") (lambda ()
                                 (interactive)
                                 (call-interactively 'magit-log-all-branches)))
 (global-set-key (kbd "C-x SPC") (lambda ()
@@ -258,7 +255,10 @@
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 (add-hook 'prog-mode-hook (lambda ()
-                            (load-smartparens-config)
+                            (require 'smartparens-config)
+                            (sp-pair "'" nil :unless '(sp-point-after-word-p))
+                            (sp-pair "%" "%" :wrap "C-%")
+                            (sp-pair "<" ">" :wrap "C->")
                             (company-mode)
                             (git-gutter+-mode 1)
                             (nlinum-mode 1)
