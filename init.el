@@ -54,8 +54,26 @@
   (sp-pair "%" "%" :wrap "C-%")
   (sp-pair "<" ">" :wrap "C->"))
 
-;;;; Configuration
+;;; Theme-related
+;; Font setup
+(let ((font-face "Hack-12"))
+  (set-face-attribute 'default nil :font font-face)
+  (set-frame-font font-face nil t))
 
+;; Load theme
+(load-theme 'doom-dracula t)
+
+;; Related modes
+(global-visual-line-mode 1)
+(doom-modeline-init)
+(doom-themes-org-config)
+(xterm-mouse-mode t)
+(tool-bar-mode 0)
+(menu-bar-mode 0)
+(when (display-graphic-p)
+    (scroll-bar-mode 0))
+
+;;;; Configuration
 (setq-default
  inhibit-splash-screen t
  inhibit-startup-message t
@@ -105,25 +123,7 @@
 
  ;; Projectile
  projectile-project-search-path '("~/Workspace")
- )
-
-;;; Theme-related
-;; Font setup
-(let ((font-face "Hack-12"))
-  (set-face-attribute 'default nil :font font-face)
-  (set-frame-font font-face nil t))
-
-;; Load theme
-(load-theme 'doom-peacock t)
-
-;; Related modes
-(global-visual-line-mode 1)
-(doom-modeline-init)
-(xterm-mouse-mode t)
-(tool-bar-mode 0)
-(menu-bar-mode 0)
-(when (display-graphic-p)
-    (scroll-bar-mode 0))
+)
 
 ;;;; Adhoc fixes
 ;; Line number font size fix
