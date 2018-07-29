@@ -116,7 +116,7 @@
  ;; Neotree
  neo-smart-open t
  neo-theme (if window-system 'icons 'arrow)
- neo-window-width 30
+ neo-window-width 24
 
  ;; Rspec
  rspec-use-spring-when-possible nil
