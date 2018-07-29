@@ -37,6 +37,7 @@
 
 ;; For my own code
 (load "~/.emacs.d/lisp/utils.el")
+(load "~/.emacs.d/lisp/resque-mode.el")
 
 ;; Install and refresh the packages
 (package-initialize)
