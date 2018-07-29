@@ -61,7 +61,10 @@
   "Get all docstrings from exposed functions."
   (let ((l (make-list 0 nil)))
     (dolist (f utils)
-      (add-to-list 'l (concat ";; " (documentation f) "\n")))
+      (when (or
+             (string-prefix-p "Cmd:" (documentation f))
+             (string-prefix-p "Func:" (documentation f)))
+          (add-to-list 'l (concat ";; " (documentation f) "\n"))))
     (apply 'concat l)))
 
 (defun save-neotree-state ()
