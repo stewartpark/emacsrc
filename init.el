@@ -219,6 +219,8 @@
                                (hl-line-mode 1)
                                (visual-line-mode 0)))
 
+(add-hook 'projectile-after-switch-project-hook 'neotree-project-root-dir)
+
 (add-hook 'org-mode-hook (lambda ()
                            (emojify-mode)))
 

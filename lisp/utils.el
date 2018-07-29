@@ -153,13 +153,15 @@
   "Make neotree display the right root for the project."
   (interactive)
   (let ((project-dir (ignore-errors (projectile-project-root)))
-        (file-name (buffer-file-name)))
+        (file-name (buffer-file-name))
+        (win (selected-window)))
     (if (neo-global--window-exists-p)
       (progn
         (if project-dir
             (neotree-dir project-dir))
         (if file-name
-            (neotree-find file-name)))
+            (neotree-find file-name))
+        (select-window win))
     )))
 
 (defvar utils
