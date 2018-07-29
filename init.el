@@ -28,16 +28,12 @@
     flycheck flycheck-rust flycheck-crystal flycheck-popup-tip
     company company-racer racer
     doom-themes
-    ace-window multi-term neotree nlinum doom-modeline
+    ace-window multi-term neotree nlinum doom-modeline symon
     projectile ag
     helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck
     emojify circe
     json json-rpc restclient
 ))
-
-;; For my own code
-(load "~/.emacs.d/lisp/utils.el")
-(load "~/.emacs.d/lisp/resque-mode.el")
 
 ;; Install and refresh the packages
 (package-initialize)
@@ -45,6 +41,11 @@
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
+
+;; For my own code
+(load "~/.emacs.d/lisp/utils.el")
+(load "~/.emacs.d/lisp/resque-mode.el")
+(load "~/.emacs.d/lisp/symon-monitors.el")
 
 ;;; Theme-related
 ;; Font setup
@@ -54,12 +55,13 @@
 
 ;; Load theme
 (load-random-theme
- '(doom-dracula))
+ '(doom-molokai))
 
 ;; Related modes
 (global-visual-line-mode 1)
 (doom-modeline-init)
 (doom-themes-org-config)
+(symon-mode)
 (xterm-mouse-mode t)
 (tool-bar-mode 0)
 (menu-bar-mode 0)
