@@ -62,7 +62,7 @@
 
 ;; Load theme
 (load-random-theme
- '(doom-dracula doom-molokai))
+ '(doom-dracula))
 
 ;; Related modes
 (global-visual-line-mode 1)
