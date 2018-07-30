@@ -55,7 +55,7 @@
 
 ;; Load theme
 (load-random-theme
- '(doom-molokai))
+ '(doom-peacock))
 
 ;; Related modes
 (global-visual-line-mode 1)
