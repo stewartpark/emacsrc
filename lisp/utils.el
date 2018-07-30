@@ -175,7 +175,7 @@
                     ;; Also handle undocumented (<active> <inactive>) form.
                     ((numberp (cadr alpha)) (cadr alpha)))
               100)
-         '(85 . 50) '(100 . 100)))))
+         '(85 . 85) '(100 . 100)))))
 
 (defvar utils
   '(enter-fullscreen quit-fullscreen trim-string http:get file:read show-itunes show-net-latency todo font+ font- open-init open-lisp open-local kill-whitespace-or-word linum-update-window-scale-fix sticky-buffer-mode load-random-theme neotree-project-root-dir toggle-transparency)
