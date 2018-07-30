@@ -30,7 +30,7 @@
     doom-themes
     ace-window multi-term neotree nlinum doom-modeline symon
     projectile ag
-    helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck
+    helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck swiper-helm
     emojify circe
     json json-rpc restclient
 ))
@@ -143,6 +143,10 @@
 
 ;; Better behavior for M-<backspace>
 (global-set-key (kbd "M-<backspace>") 'kill-whitespace-or-word)
+
+
+;; Better search
+(global-set-key (kbd "C-s") 'swiper-from-isearch)
 
 ;; Multi-term
 (global-set-key (kbd "C-x C-t") 'multi-term)
