@@ -146,7 +146,7 @@
 
 
 ;; Better search
-(global-set-key (kbd "C-s") 'swiper-all)
+(global-set-key (kbd "C-s") 'swiper)
 
 ;; Multi-term
 (global-set-key (kbd "C-x C-t") 'multi-term)
