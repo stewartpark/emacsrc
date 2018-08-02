@@ -156,7 +156,7 @@
 
 ;; Set up shortcut keys
 (global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
 (global-set-key (kbd "C-x C-m") 'helm-circe)
 (global-set-key (kbd "C-x C-o") 'helm-projectile-switch-project)
 (global-set-key (kbd "C-x f") 'helm-projectile-find-file)
