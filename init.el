@@ -19,6 +19,7 @@
     racket-mode elm-mode rust-mode vue-mode rjsx-mode typescript-mode
     markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js2-mode json-mode
+    ansible ansible-vault
     scss-mode web-mode rainbow-mode rainbow-delimiters
     smartparens dumb-jump zoom-window
     fringe-helper git-gutter-fringe+ magit keychain-environment
@@ -263,6 +264,10 @@
 (add-hook 'rust-mode-hook #'racer-mode)
 (with-eval-after-load 'rust-mode
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
+(add-hook 'yaml-mode-hook (lambda ()
+                            (when (ansible-vault--is-vault-file)
+                              (ansible-vault-mode 1))))
 
 (add-hook 'prog-mode-hook (lambda ()
                             (require 'smartparens-config)
