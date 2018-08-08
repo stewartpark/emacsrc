@@ -19,8 +19,7 @@
     racket-mode elm-mode rust-mode vue-mode rjsx-mode typescript-mode
     markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js2-mode json-mode
-    ansible ansible-vault
-    scss-mode web-mode rainbow-mode rainbow-delimiters
+    ansible scss-mode web-mode rainbow-mode rainbow-delimiters
     smartparens dumb-jump zoom-window
     fringe-helper git-gutter-fringe+ magit keychain-environment
     org org-present
@@ -120,6 +119,9 @@
 
  ;; Projectile
  projectile-project-search-path '("~/Workspace")
+
+ ;; Ansible
+ ansible::vault-password-file "~/.vault-pass"
 )
 
 ;;;; Adhoc fixes
@@ -266,8 +268,10 @@
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 (add-hook 'yaml-mode-hook (lambda ()
-                            (when (ansible-vault--is-vault-file)
-                              (ansible-vault-mode 1))))
+                            (when (file-exists-p (concat (projectile-project-root) "ansible.cfg"))
+                                (ansible 1))))
+
+(add-hook 'ansible-hook 'ansible::auto-decrypt-encrypt)
 
 (add-hook 'prog-mode-hook (lambda ()
                             (require 'smartparens-config)
