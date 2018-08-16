@@ -31,8 +31,7 @@
     ace-window multi-term neotree nlinum doom-modeline symon
     projectile ag
     helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck swiper-helm
-    emojify circe
-    json json-rpc restclient
+    emojify circe json json-rpc restclient
 ))
 
 ;; Install and refresh the packages
@@ -66,7 +65,8 @@
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (when (display-graphic-p)
-    (scroll-bar-mode 0))
+  (set-frame-parameter nil 'undecorated t)
+  (scroll-bar-mode 0))
 
 ;;;; Configuration
 (setq-default
