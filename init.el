@@ -31,7 +31,7 @@
     ace-window multi-term neotree nlinum doom-modeline symon
     projectile ag
     helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck swiper-helm
-    emojify circe json json-rpc restclient
+    emojify circe json json-rpc restclient zeal
 ))
 
 ;; Install and refresh the packages
@@ -158,6 +158,7 @@
 (global-set-key (kbd "C-d") 'mc/mark-next-like-this)
 
 ;; Set up shortcut keys
+(global-set-key (kbd "M-?") 'zeal-at-point)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 (global-set-key (kbd "C-x C-m") 'helm-circe)
