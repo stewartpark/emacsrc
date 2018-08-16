@@ -54,7 +54,7 @@
 
 ;; Load theme
 (load-random-theme
- '(doom-peacock))
+ '(doom-vibrant))
 
 ;; Related modes
 (global-visual-line-mode 1)
