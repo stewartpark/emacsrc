@@ -31,7 +31,7 @@
     ace-window multi-term neotree nlinum doom-modeline symon
     projectile ag
     helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck swiper-helm
-    emojify circe json json-rpc restclient zeal
+    emojify circe json json-rpc restclient zeal-at-point
 ))
 
 ;; Install and refresh the packages
