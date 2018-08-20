@@ -324,6 +324,7 @@
  '(js2-lazy-operators t)
  '(js2-paren-indent-offset 2)
  '(js2-square-indent-offset 2)
+ '(typescript-indent-level 2)
  '(nlinum-format (quote "%4d"))
  '(nlinum-highlight-current-line t)
  '(org-babel-load-languages
