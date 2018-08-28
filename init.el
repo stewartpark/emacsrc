@@ -31,7 +31,7 @@
     ace-window multi-term neotree nlinum doom-modeline symon
     projectile ag
     helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck swiper-helm
-    emojify circe json json-rpc restclient zeal-at-point
+    emojify circe circe-notifications json json-rpc restclient zeal-at-point
 ))
 
 ;; Install and refresh the packages
@@ -273,6 +273,8 @@
                                 (ansible 1))))
 
 (add-hook 'ansible-hook 'ansible::auto-decrypt-encrypt)
+
+(add-hook 'circe-server-connected-hook 'enable-circe-notifications)
 
 (add-hook 'prog-mode-hook (lambda ()
                             (require 'smartparens-config)
