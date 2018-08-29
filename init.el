@@ -31,7 +31,7 @@
     ace-window multi-term neotree nlinum doom-modeline symon
     projectile ag
     helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck swiper-helm
-    emojify circe circe-notifications json json-rpc restclient zeal-at-point
+    emojify circe json json-rpc restclient zeal-at-point
 ))
 
 ;; Install and refresh the packages
@@ -48,9 +48,10 @@
 
 ;;; Theme-related
 ;; Font setup
-(let ((font-face "Hack-13"))
+(let ((font-face "Hack-8"))
   (set-face-attribute 'default nil :font font-face)
-  (set-frame-font font-face nil t))
+  (set-frame-font font-face nil t)
+  (set-fontset-font "fontset-default" '(#xac00 . #xd7a3) "NanumGothicCoding"))
 
 ;; Load theme
 (load-random-theme
@@ -273,8 +274,6 @@
                                 (ansible 1))))
 
 (add-hook 'ansible-hook 'ansible::auto-decrypt-encrypt)
-
-(add-hook 'circe-server-connected-hook 'enable-circe-notifications)
 
 (add-hook 'prog-mode-hook (lambda ()
                             (require 'smartparens-config)
