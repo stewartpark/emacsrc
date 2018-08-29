@@ -243,6 +243,8 @@
                                    (org-present-big)
                                    (git-gutter+-mode 0)
                                    (org-display-inline-images)
+                                   (org-present-hide-cursor)
+                                   (org-present-read-only)
                                    (save-fullscreen-state)
                                    (enter-fullscreen)))
 
@@ -253,6 +255,8 @@
                                         (org-present-small)
                                         (git-gutter+-mode 1)
                                         (org-remove-inline-images)
+                                        (org-present-show-cursor)
+                                        (org-present-read-write)
                                         (restore-fullscreen-state)))
 
 (add-hook 'python-mode-hook (lambda ()
