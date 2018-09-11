@@ -31,7 +31,7 @@
     ace-window multi-term neotree nlinum doom-modeline symon
     projectile ag
     helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck swiper-helm
-    emojify circe json json-rpc restclient zeal-at-point
+    emojify circe circe-notifications json json-rpc restclient zeal-at-point
 ))
 
 ;; Install and refresh the packages
@@ -98,6 +98,7 @@
 
  ;; Org-mode
  org-todo-keywords '((sequence "TODO" "DOING" "|" "DONE"))
+ org-image-actual-width nil
 
  ;; Helm
  helm-display-header-line nil
@@ -232,6 +233,8 @@
                                (visual-line-mode 0)))
 
 (add-hook 'projectile-after-switch-project-hook 'neotree-project-root-dir)
+
+(add-hook 'circe-server-connected-hook 'enable-circe-notifications)
 
 (add-hook 'org-mode-hook (lambda ()
                            (emojify-mode)))
