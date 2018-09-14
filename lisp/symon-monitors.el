@@ -4,6 +4,8 @@
 
 (require 'symon)
 
+(setq network-interfaces (network-interface-list))
+
 (define-symon-monitor current-time-monitor
   :display (format-time-string "%F %I:%M%p |"))
 
@@ -12,7 +14,7 @@
                ((l (make-list 0 nil)))
              (progn
                (dolist
-                   (n (network-interface-list))
+                   (n network-interfaces)
                  (when (or (string-prefix-p "wl" (car n))
                            (string-prefix-p "en" (car n))
                            (string-prefix-p "eth" (car n))
