@@ -48,14 +48,14 @@
 
 ;;; Theme-related
 ;; Font setup
-(let ((font-face "Anonymous Pro-9"))
+(let ((font-face "Inconsolata-13"))
   (set-face-attribute 'default nil :font font-face)
   (set-frame-font font-face nil t)
   (set-fontset-font "fontset-default" '(#xac00 . #xd7a3) "NanumGothicCoding"))
 
 ;; Load theme
 (load-random-theme
- '(doom-vibrant))
+ '(doom-molokai))
 
 ;; Related modes
 (global-visual-line-mode 1)
