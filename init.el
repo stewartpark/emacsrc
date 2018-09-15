@@ -48,7 +48,7 @@
 
 ;;; Theme-related
 ;; Font setup
-(let ((font-face "Hack-8"))
+(let ((font-face "Anonymous Pro-9"))
   (set-face-attribute 'default nil :font font-face)
   (set-frame-font font-face nil t)
   (set-fontset-font "fontset-default" '(#xac00 . #xd7a3) "NanumGothicCoding"))
