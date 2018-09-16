@@ -48,10 +48,9 @@
 
 ;;; Theme-related
 ;; Font setup
-(let ((font-face "Inconsolata-13"))
+(let ((font-face "Inconsolata-12"))
   (set-face-attribute 'default nil :font font-face)
-  (set-frame-font font-face nil t)
-  (set-fontset-font "fontset-default" '(#xac00 . #xd7a3) "NanumGothicCoding"))
+  (set-frame-font font-face nil t))
 
 ;; Load theme
 (load-random-theme
@@ -111,7 +110,7 @@
 
  ;; Neotree
  neo-smart-open t
- neo-theme (if window-system 'icons 'arrow)
+ neo-theme (if (display-graphic-p) 'icons 'arrow)
  neo-window-width 24
  neo-force-change-root t
 
