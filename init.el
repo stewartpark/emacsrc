@@ -54,12 +54,14 @@
 
 ;; Load theme
 (load-random-theme
- '(doom-molokai))
+ '(doom-city-lights))
 
 ;; Related modes
 (global-visual-line-mode 1)
 (doom-modeline-init)
 (doom-themes-org-config)
+(doom-themes-neotree-config)
+(doom-themes-visual-bell-config)
 (symon-mode)
 (xterm-mouse-mode t)
 (tool-bar-mode 0)
@@ -302,7 +304,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(neo-dir-link-face ((t (:foreground "gray"))))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "grey"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "orange"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "yellow"))))
