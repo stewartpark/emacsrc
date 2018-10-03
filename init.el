@@ -17,7 +17,7 @@
     python-mode anaconda-mode py-isort py-autopep8 pyenv-mode-auto pythonic
     ruby-mode rspec-mode rbenv inf-ruby robe bundler crystal-mode
     racket-mode elm-mode rust-mode vue-mode rjsx-mode typescript-mode
-    markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode
+    markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode scala-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js2-mode json-mode
     ansible scss-mode web-mode rainbow-mode rainbow-delimiters
     smartparens dumb-jump zoom-window
@@ -28,7 +28,7 @@
     flycheck flycheck-rust flycheck-crystal flycheck-popup-tip
     company company-racer racer
     doom-themes
-    ace-window multi-term neotree nlinum doom-modeline symon
+    ace-window multi-term neotree nlinum doom-modeline
     projectile ag
     helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck swiper-helm
     emojify circe circe-notifications json json-rpc restclient zeal-at-point
@@ -112,6 +112,7 @@
 
  ;; Neotree
  neo-smart-open t
+ neo-window-fixed-size nil
  neo-theme (if (display-graphic-p) 'icons 'arrow)
  neo-window-width 24
  neo-force-change-root t
@@ -372,6 +373,7 @@
 (add-to-list 'auto-mode-alist '("Jenkinsfile" . groovy-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx?" . typescript-mode))
 (add-to-list 'auto-mode-alist '("\\.req" . restclient-mode))
+(add-to-list 'auto-mode-alist '("\\.scala" . scala-mode))
 
 ;;;; Environment-specific configuration
 ;; Mac-specific config
