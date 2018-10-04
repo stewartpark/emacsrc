@@ -61,7 +61,6 @@
 (doom-themes-org-config)
 (doom-themes-neotree-config)
 (doom-themes-visual-bell-config)
-(symon-mode)
 (xterm-mouse-mode t)
 (tool-bar-mode 0)
 (menu-bar-mode 0)
