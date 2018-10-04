@@ -44,7 +44,6 @@
 ;; For my own code
 (load "~/.emacs.d/lisp/utils.el")
 (load "~/.emacs.d/lisp/resque-mode.el")
-(load "~/.emacs.d/lisp/symon-monitors.el")
 
 ;;; Theme-related
 ;; Font setup
@@ -111,11 +110,10 @@
  aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
 
  ;; Neotree
- neo-smart-open t
+ neo-smart-open nil
  neo-window-fixed-size nil
  neo-theme (if (display-graphic-p) 'icons 'arrow)
- neo-window-width 24
- neo-force-change-root t
+ neo-force-change-root nil
 
  ;; Rspec
  rspec-use-spring-when-possible nil
