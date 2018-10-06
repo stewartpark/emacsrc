@@ -31,7 +31,7 @@
     ace-window multi-term nlinum doom-modeline
     projectile treemacs treemacs-projectile ag
     helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck swiper-helm
-    emojify circe circe-notifications json json-rpc restclient zeal-at-point
+    emojify circe circe-notifications json json-rpc restclient zeal-at-point symon
 ))
 
 ;; Install and refresh the packages
@@ -44,16 +44,19 @@
 ;; For my own code
 (load "~/.emacs.d/lisp/utils.el")
 (load "~/.emacs.d/lisp/resque-mode.el")
+(load "~/.emacs.d/lisp/symon-monitors.el")
 
 ;;; Theme-related
 ;; Font setup
-(let ((font-face "Inconsolata-12"))
+(let ((font-face "Inconsolata:pixelsize=18"))
   (set-face-attribute 'default nil :font font-face)
-  (set-frame-font font-face nil t))
+  (set-face-attribute 'variable-pitch nil :font font-face)
+  (set-frame-font font-face nil t)
+  (set-fontset-font "fontset-default" '(#xac00 . #xd7a3) "NanumGothicCoding"))
 
 ;; Load theme
 (load-random-theme
- '(doom-city-lights))
+ '(doom-nord-light))
 
 ;; Related modes
 (global-visual-line-mode 1)
@@ -131,6 +134,8 @@
 
 ;; Treemacs actions
 (with-eval-after-load 'treemacs
+  (treemacs-follow-mode)
+  (treemacs-filewatch-mode)
   (treemacs-define-RET-action 'file-node-closed #'treemacs-visit-node-ace))
 
 ;;;; Adhoc fixes
@@ -238,8 +243,12 @@
 
 (add-hook 'org-present-mode-hook (lambda ()
                                    (setq word-wrap t)
+                                   (setq mode-line-format-backup mode-line-format)
+                                   (setq mode-line-format nil)
+                                   (symon-mode nil)
                                    (save-treemacs-state)
                                    (treemacs-hide)
+                                   (zoom-window-zoom)
                                    (org-present-big)
                                    (git-gutter+-mode 0)
                                    (org-display-inline-images)
@@ -250,6 +259,10 @@
 
 (add-hook 'org-present-mode-quit-hook (lambda ()
                                         (setq word-wrap nil)
+                                        (setq mode-line-format mode-line-format-backup)
+                                        (setq mode-line-format-backup nil)
+                                        (symon-mode t)
+                                        (zoom-window-zoom)
                                         (restore-treemacs-state)
                                         (other-window 1)
                                         (org-present-small)
@@ -300,15 +313,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(rainbow-delimiters-depth-1-face ((t (:foreground "grey"))))
- '(rainbow-delimiters-depth-2-face ((t (:foreground "orange"))))
- '(rainbow-delimiters-depth-3-face ((t (:foreground "yellow"))))
+ '(rainbow-delimiters-depth-1-face ((t (:foreground "#909090"))))
+ '(rainbow-delimiters-depth-2-face ((t (:foreground "dark orange"))))
+ '(rainbow-delimiters-depth-3-face ((t (:foreground "#D0D000"))))
  '(rainbow-delimiters-depth-4-face ((t (:foreground "green"))))
  '(rainbow-delimiters-depth-5-face ((t (:foreground "blue"))))
  '(rainbow-delimiters-depth-6-face ((t (:foreground "violet"))))
  '(rainbow-delimiters-depth-7-face ((t (:foreground "purple"))))
- '(rainbow-delimiters-depth-8-face ((t (:foreground "red"))))
- '(rainbow-delimiters-depth-9-face ((t (:foreground "white")))))
+ '(rainbow-delimiters-depth-8-face ((t (:foreground "dark red"))))
+ '(rainbow-delimiters-depth-9-face ((t (:foreground "medium sea green")))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -415,7 +428,14 @@
 (with-eval-after-load 'flycheck
   (flycheck-popup-tip-mode))
 
-(projectile-discover-projects-in-search-path)
-(helm-projectile-on)
+(projectile-cleanup-known-projects)
+(dolist (project-path (car (last (car (projectile-discover-projects-in-search-path)))))
+  (projectile-add-known-project project-path))
+
+(symon-mode)
 (treemacs)
+(helm-projectile-on)
 (server-start)
+
+(provide 'init)
+;;; init.el ends here
