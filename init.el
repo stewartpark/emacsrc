@@ -437,7 +437,6 @@
   (projectile-add-known-project project-path))
 
 (symon-mode)
-(treemacs)
 (helm-projectile-on)
 (server-start)
 
