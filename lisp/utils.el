@@ -67,15 +67,30 @@
           (add-to-list 'l (concat ";; " (documentation f) "\n"))))
     (apply 'concat l)))
 
-(defun save-neotree-state ()
-  "Save neotree's state."
-  (setq saved-neotree-state (neo-global--window-exists-p)))
+(defun treemacs-show ()
+  "Ensure treemacs is showed."
+  (pcase (treemacs-current-visibility)
+    ('exists (treemacs-select-window))
+    ('none (treemacs--init))))
 
-(defun restore-neotree-state ()
-  "Restore neotree's state."
-  (if saved-neotree-state
-      (neotree-show)
-      (neotree-hide)))
+(defun treemacs-hide ()
+  "Ensure treemacs is hidden."
+  (if (eq (treemacs-current-visibility) 'visible)
+      (delete-window (treemacs-get-local-window))))
+
+(defun save-treemacs-state ()
+  "Save treemacs's state."
+  (setq saved-treemacs-state
+        (pcase (treemacs-current-visibility)
+          ('visible t)
+          ('exists nil)
+          ('none nil))))
+
+(defun restore-treemacs-state ()
+  "Restore treemacs's state."
+  (if saved-treemacs-state
+      (treemacs-show)
+      (treemacs-hide)))
 
 (defun todo ()
   "Cmd: (todo) open a todo org."
@@ -149,21 +164,6 @@
   (load-theme
    (nth (random (length themes)) themes) t))
 
-(defun neotree-project-root-dir ()
-  "Make neotree display the right root for the project."
-  (interactive)
-  (let ((project-dir (ignore-errors (projectile-project-root)))
-        (file-name (buffer-file-name))
-        (win (selected-window)))
-    (if (neo-global--window-exists-p)
-      (progn
-        (if project-dir
-            (neotree-dir project-dir))
-        (if file-name
-            (neotree-find file-name))
-        (select-window win))
-    )))
-
 (defun toggle-transparency ()
   "Cmd: (toggle-transparency) Make the window transparent."
   (interactive)
@@ -178,7 +178,7 @@
          '(85 . 85) '(100 . 100)))))
 
 (defvar utils
-  '(enter-fullscreen quit-fullscreen trim-string http:get file:read show-itunes show-net-latency todo font+ font- open-init open-lisp open-local kill-whitespace-or-word linum-update-window-scale-fix sticky-buffer-mode load-random-theme neotree-project-root-dir toggle-transparency)
+  '(enter-fullscreen quit-fullscreen trim-string http:get file:read show-itunes show-net-latency todo font+ font- open-init open-lisp open-local kill-whitespace-or-word linum-update-window-scale-fix sticky-buffer-mode load-random-theme toggle-transparency)
   "A list of every function this file defines.")
 (provide 'utils)
 ;;; utils.el ends here

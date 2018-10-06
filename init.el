@@ -17,7 +17,7 @@
     python-mode anaconda-mode py-isort py-autopep8 pyenv-mode-auto pythonic
     ruby-mode rspec-mode rbenv inf-ruby robe bundler crystal-mode
     racket-mode elm-mode rust-mode vue-mode rjsx-mode typescript-mode
-    markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode scala-mode
+    markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode scala-mode sbt-mode
     dockerfile-mode nasm-mode go-mode foreman-mode js2-mode json-mode
     ansible scss-mode web-mode rainbow-mode rainbow-delimiters
     smartparens dumb-jump zoom-window
@@ -28,8 +28,8 @@
     flycheck flycheck-rust flycheck-crystal flycheck-popup-tip
     company company-racer racer
     doom-themes
-    ace-window multi-term neotree nlinum doom-modeline
-    projectile ag
+    ace-window multi-term nlinum doom-modeline
+    projectile treemacs treemacs-projectile ag
     helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck swiper-helm
     emojify circe circe-notifications json json-rpc restclient zeal-at-point
 ))
@@ -59,7 +59,7 @@
 (global-visual-line-mode 1)
 (doom-modeline-init)
 (doom-themes-org-config)
-(doom-themes-neotree-config)
+(doom-themes-treemacs-config)
 (doom-themes-visual-bell-config)
 (xterm-mouse-mode t)
 (tool-bar-mode 0)
@@ -108,11 +108,15 @@
  ;; Ace window
  aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
 
- ;; Neotree
- neo-smart-open nil
- neo-window-fixed-size nil
- neo-theme (if (display-graphic-p) 'icons 'arrow)
- neo-force-change-root nil
+ ;; Treemacs
+ treemacs-collapse-dirs 5
+ treemacs-space-between-root-nodes nil
+ treemacs-git-mode 'extended
+ treemacs-project-follow-cleanup t
+
+ ;; Flycheck
+ flycheck-scala-scalastyle-executable "scalastyle"
+ flycheck-scalastylerc "scalastyle-config.xml"
 
  ;; Rspec
  rspec-use-spring-when-possible nil
@@ -124,6 +128,10 @@
  ;; Ansible
  ansible::vault-password-file "~/.vault-pass"
 )
+
+;; Treemacs actions
+(with-eval-after-load 'treemacs
+  (treemacs-define-RET-action 'file-node-closed #'treemacs-visit-node-ace))
 
 ;;;; Adhoc fixes
 ;; Ignore yes or no
@@ -168,7 +176,7 @@
 (global-set-key (kbd "C-x C-f") 'helm-projectile-ag)
 (global-set-key (kbd "C-x C-x") 'helm-imenu-in-all-buffers)
 (global-set-key (kbd "C-x C-v") 'helm-flycheck)
-(global-set-key (kbd "<f8>") 'neotree-toggle)
+(global-set-key (kbd "<f8>") 'treemacs)
 (global-set-key (kbd "C-x o") 'ace-window)
 (global-set-key (kbd "M-.") 'dumb-jump-go)
 (global-set-key (kbd "M-,") 'dumb-jump-back)
@@ -187,10 +195,10 @@
                                 (call-interactively 'magit-log-all-branches)))
 (global-set-key (kbd "C-x SPC") (lambda ()
                                   (interactive)
-                                  (save-neotree-state)
-                                  (neotree-hide)
+                                  (save-treemacs-state)
+                                  (treemacs-hide)
                                   (transpose-frame)
-                                  (restore-neotree-state)))
+                                  (restore-treemacs-state)))
 (global-set-key (kbd "C-x C-z") 'zoom-window-zoom)
 (global-set-key (kbd "C-x C-p") (lambda ()
                                   (interactive)
@@ -223,16 +231,6 @@
                                 (py-isort-buffer)
                                 )))
 
-(add-hook 'neotree-mode-hook (lambda ()
-                               (setq
-                                cursor-type nil
-                                mode-line-format nil)
-                               (toggle-truncate-lines 0)
-                               (hl-line-mode 1)
-                               (visual-line-mode 0)))
-
-(add-hook 'projectile-after-switch-project-hook 'neotree-project-root-dir)
-
 (add-hook 'circe-server-connected-hook 'enable-circe-notifications)
 
 (add-hook 'org-mode-hook (lambda ()
@@ -240,8 +238,8 @@
 
 (add-hook 'org-present-mode-hook (lambda ()
                                    (setq word-wrap t)
-                                   (save-neotree-state)
-                                   (neotree-hide)
+                                   (save-treemacs-state)
+                                   (treemacs-hide)
                                    (org-present-big)
                                    (git-gutter+-mode 0)
                                    (org-display-inline-images)
@@ -252,7 +250,7 @@
 
 (add-hook 'org-present-mode-quit-hook (lambda ()
                                         (setq word-wrap nil)
-                                        (restore-neotree-state)
+                                        (restore-treemacs-state)
                                         (other-window 1)
                                         (org-present-small)
                                         (git-gutter+-mode 1)
@@ -410,10 +408,6 @@
 (when (display-graphic-p)
   (require 'git-gutter-fringe+))
 
-;; Neotree
-(with-eval-after-load 'neotree
-  (define-key neotree-mode-map (kbd "RET") (neotree-make-executor :file-fn 'neo-open-file-ace-window :dir-fn 'neo-open-dir)))
-
 ;; Company-mode
 (eval-after-load 'company
   '(push 'company-robe company-backends))
@@ -423,5 +417,5 @@
 
 (projectile-discover-projects-in-search-path)
 (helm-projectile-on)
-(neotree)
+(treemacs)
 (server-start)
