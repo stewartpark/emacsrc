@@ -5,6 +5,8 @@
 ;;;
 ;;; Code:
 
+;;; TODO: use use-package, smart-jump
+
 ;; Package setup
 (setq package-archives '(
     ("melpa" . "https://melpa.org/packages/")
@@ -16,7 +18,7 @@
     better-defaults multiple-cursors
     python-mode anaconda-mode py-isort py-autopep8 pyenv-mode-auto pythonic
     ruby-mode rspec-mode rbenv inf-ruby robe bundler crystal-mode
-    racket-mode elm-mode rust-mode vue-mode rjsx-mode typescript-mode
+    racket-mode elm-mode rust-mode cargo vue-mode rjsx-mode typescript-mode
     markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode
     scala-mode sbt-mode ensime
     dockerfile-mode nasm-mode go-mode foreman-mode js2-mode json-mode
@@ -27,10 +29,11 @@
     hackernews transpose-frame
     all-the-icons
     flycheck flycheck-rust flycheck-crystal flycheck-popup-tip
-    company company-racer racer
-    doom-themes
+    company company-racer racer company-restclient
+    doom-themes restart-emacs cov
+    helm-tramp docker-tramp tramp-hdfs
     ace-window multi-term nlinum doom-modeline
-    projectile treemacs treemacs-projectile ag
+    projectile treemacs treemacs-projectile ag editorconfig
     helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck swiper-helm
     emojify circe circe-notifications json json-rpc restclient zeal-at-point symon
 ))
@@ -80,7 +83,11 @@
  cursor-type 'bar
  indent-tabs-mode nil
  make-backup-files nil
+ create-lockfiles nil
  vc-follow-symlinks t
+
+ ;; Tramp
+ tramp-default-method "ssh"
 
  ;; Python
  python-shell-prompt-detect-failure-warning nil
@@ -174,6 +181,9 @@
 
 ;; Multiple cursors
 (global-set-key (kbd "C-d") 'mc/mark-next-like-this)
+
+;; Open remote file/sudo via TRAMP
+(define-key global-map (kbd "C-x C-r") 'helm-tramp)
 
 ;; Set up shortcut keys
 (global-set-key (kbd "M-?") 'zeal-at-point)
@@ -284,6 +294,7 @@
 
 (add-hook 'ruby-mode-hook (lambda ()
                             (robe-mode)
+                            (coverage-mode)
                             (inf-ruby-minor-mode)))
 
 (add-hook 'rust-mode-hook #'racer-mode)
@@ -301,7 +312,9 @@
                             (sp-pair "'" nil :unless '(sp-point-after-word-p))
                             (sp-pair "%" "%" :wrap "C-%")
                             (sp-pair "<" ">" :wrap "C->")
+                            (editorconfig-mode 1)
                             (company-mode)
+                            (cov-mode)
                             (git-gutter+-mode 1)
                             (nlinum-mode 1)
                             (auto-revert-mode t)
