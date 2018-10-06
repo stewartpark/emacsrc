@@ -17,7 +17,8 @@
     python-mode anaconda-mode py-isort py-autopep8 pyenv-mode-auto pythonic
     ruby-mode rspec-mode rbenv inf-ruby robe bundler crystal-mode
     racket-mode elm-mode rust-mode vue-mode rjsx-mode typescript-mode
-    markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode scala-mode sbt-mode
+    markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode
+    scala-mode sbt-mode ensime
     dockerfile-mode nasm-mode go-mode foreman-mode js2-mode json-mode
     ansible scss-mode web-mode rainbow-mode rainbow-delimiters
     smartparens dumb-jump zoom-window
@@ -120,6 +121,9 @@
  ;; Flycheck
  flycheck-scala-scalastyle-executable "scalastyle"
  flycheck-scalastylerc "scalastyle-config.xml"
+
+ ;; Ensime
+ ensime-startup-notification nil
 
  ;; Rspec
  rspec-use-spring-when-possible nil
