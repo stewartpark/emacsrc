@@ -23,7 +23,7 @@
     scala-mode sbt-mode ensime
     dockerfile-mode nasm-mode go-mode foreman-mode js2-mode json-mode
     ansible scss-mode web-mode rainbow-mode rainbow-delimiters
-    smartparens dumb-jump zoom-window
+    smartparens dumb-jump zoom-window dotenv-mode
     fringe-helper git-gutter-fringe+ magit keychain-environment
     org org-present
     hackernews transpose-frame
@@ -382,6 +382,7 @@
  '(web-mode-markup-indent-offset 2))
 
 ;; Mode setup for file extensions
+(add-to-list 'auto-mode-alist '("\\.env\\..*\\'" . dotenv-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.asm\\'" . nasm-mode))
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
