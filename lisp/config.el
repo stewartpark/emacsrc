@@ -6,11 +6,11 @@
 ;;; Code:
 
 ;; Font setup
-(let ((font-face "Inconsolata:pixelsize=18"))
+(let ((font-face "Inconsolata-10"))
   (set-face-attribute 'default nil :font font-face)
   (set-face-attribute 'variable-pitch nil :font font-face)
   (set-frame-font font-face nil t)
-  (set-fontset-font "fontset-default" '(#xac00 . #xd7a3) "NanumGothicCoding:pixelsize=16"))
+  (set-fontset-font "fontset-default" '(#xac00 . #xd7a3) "NanumGothicCoding-10"))
 
 ;; Line number font size fix
 (advice-add #'linum-update-window :after #'linum-update-window-scale-fix)
