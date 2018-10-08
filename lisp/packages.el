@@ -33,20 +33,21 @@
     ace-window multi-term nlinum doom-modeline
     projectile treemacs treemacs-projectile ag editorconfig
     helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck swiper-helm
-    emojify circe circe-notifications json json-rpc restclient zeal-at-point symon
+    emojify circe circe-notifications json json-rpc restclient zeal-at-point symon exwm
 ))
 
 
 (defun ensure-packages-installed ()
   "Ensure packages listed are installed."
   (interactive)
+  (package-initialize)
   (unless package-archive-contents (package-refresh-contents))
   (dolist (package package-list)
     (unless (package-installed-p package)
       (package-install package))))
 
-;; Load installed packages
-(package-initialize)
+;; Ensure packages installed.
+(ensure-packages-installed)
 
 (provide 'packages)
 ;;; packages.el ends here

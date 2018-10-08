@@ -4,6 +4,8 @@
 ;;; Code:
 (require 'url)
 
+(defvar saved-treemacs-state nil)
+
 (defun trim-string (s)
   "Func: (trim-string S) trim trailing whitespaces."
   (replace-regexp-in-string "[ \t\n\r]*$" "" s))
@@ -69,28 +71,32 @@
 
 (defun treemacs-show ()
   "Ensure treemacs is showed."
-  (pcase (treemacs-current-visibility)
-    ('exists (treemacs-select-window))
-    ('none (treemacs--init))))
+  (ignore-errors
+    (pcase (treemacs-current-visibility)
+      ('exists (treemacs-select-window))
+      ('none (treemacs--init)))))
 
 (defun treemacs-hide ()
   "Ensure treemacs is hidden."
-  (if (eq (treemacs-current-visibility) 'visible)
-      (delete-window (treemacs-get-local-window))))
+  (ignore-errors
+    (if (eq (treemacs-current-visibility) 'visible)
+        (delete-window (treemacs-get-local-window)))))
 
 (defun save-treemacs-state ()
   "Save treemacs's state."
-  (setq saved-treemacs-state
-        (pcase (treemacs-current-visibility)
-          ('visible t)
-          ('exists nil)
-          ('none nil))))
+  (ignore-errors
+    (setq saved-treemacs-state
+          (pcase (treemacs-current-visibility)
+            ('visible t)
+            ('exists nil)
+            ('none nil)))))
 
 (defun restore-treemacs-state ()
   "Restore treemacs's state."
-  (if saved-treemacs-state
+  (ignore-errors
+    (if saved-treemacs-state
       (treemacs-show)
-      (treemacs-hide)))
+      (treemacs-hide))))
 
 (defun todo ()
   "Cmd: (todo) open a todo org."
