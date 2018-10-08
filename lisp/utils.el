@@ -177,8 +177,13 @@
               100)
          '(85 . 85) '(100 . 100)))))
 
+(defun compile-lisp ()
+  "Cmd: (compile-lisp) Compile all the custom Lisp files."
+  (interactive)
+  (byte-recompile-directory "~/.emacs.d/lisp/" 0))
+
 (defvar utils
-  '(enter-fullscreen quit-fullscreen trim-string http:get file:read show-itunes show-net-latency todo font+ font- open-init open-lisp open-local kill-whitespace-or-word linum-update-window-scale-fix sticky-buffer-mode load-random-theme toggle-transparency)
+  '(enter-fullscreen quit-fullscreen trim-string http:get file:read show-itunes show-net-latency todo font+ font- open-init open-lisp open-local kill-whitespace-or-word linum-update-window-scale-fix sticky-buffer-mode load-random-theme toggle-transparency compile-lisp)
   "A list of every function this file defines.")
 (provide 'utils)
 ;;; utils.el ends here
