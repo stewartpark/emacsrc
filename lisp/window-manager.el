@@ -11,6 +11,10 @@
 (exwm-config-ido)
 (exwm-config-misc)
 
+;; Share all windows across workspaces
+(setq exwm-layout-show-all-buffers t
+      exwm-workspace-show-all-buffers t)
+
 (require 'exwm-systemtray)
 (exwm-systemtray-enable)
 
