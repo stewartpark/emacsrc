@@ -41,8 +41,62 @@
 (desktop-environment-mode)
 (desktop-environment-exwm-set-global-keybindings)
 
-(provide 'window-manager)
-;; window-manager.el ends here
+;; Application shortcuts
+(exwm-input-set-key (kbd "s-s w") (lambda ()
+                                  (interactive)
+                                  (call-process-shell-command "google-chrome &" nil 0)))
+
+(exwm-input-set-key (kbd "s-s f") (lambda ()
+                                  (interactive)
+                                  (call-process-shell-command "nautilus -w &" nil 0)))
+
+(exwm-input-set-key (kbd "s-s S") (lambda ()
+                                  (interactive)
+                                  (call-process-shell-command "gnome-screenshot -a &" nil 0)))
+
+(exwm-input-set-key (kbd "s-s s") (lambda ()
+                                  (interactive)
+                                  (call-process-shell-command "slack &" nil 0)))
+
+;; Mac-like shortcuts
+(exwm-input-set-key (kbd "s-c") (lambda ()
+                                  (interactive)
+                                  (exwm-input-send-next-key (kbd "C-c"))))
+
+(exwm-input-set-key (kbd "s-v") (lambda ()
+                                  (interactive)
+                                  (exwm-input-send-next-key (kbd "C-v"))))
+
+(exwm-input-set-key (kbd "s-w") (lambda ()
+                                  (interactive)
+                                  (exwm-input-send-next-key (kbd "C-w"))))
+
+;; Simulate Emacs shortcuts on applications.
+(setq exwm-input-simulation-keys
+      '(
+        ([?\C-b] . [left])
+        ([?\M-b] . [C-left])
+        ([?\C-f] . [right])
+        ([?\M-f] . [C-right])
+        ([?\C-p] . [up])
+        ([?\C-n] . [down])
+        ([?\C-a] . [home])
+        ([?\C-e] . [end])
+        ([?\M-v] . [prior])
+        ([?\C-v] . [next])
+        ([?\C-d] . [delete])
+        ([?\C-k] . [S-end delete])
+
+        ;; cut/paste.
+        ([?\C-w] . [?\C-x])
+        ([?\M-w] . [?\C-c])
+        ([?\C-y] . [?\C-v])
+
+        ;; search
+        ([?\C-s] . [?\C-f])))
+
+;; Start EXWM
+(exwm-enable)
 
 (provide 'window-manager)
 ;;; window-manager.el ends here
