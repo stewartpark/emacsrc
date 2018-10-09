@@ -33,7 +33,8 @@
     ace-window multi-term nlinum doom-modeline
     projectile treemacs treemacs-projectile ag editorconfig
     helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck swiper-helm
-    emojify circe circe-notifications json json-rpc restclient zeal-at-point symon exwm
+    emojify circe circe-notifications json json-rpc restclient zeal-at-point symon
+    exwm desktop-environment
 ))
 
 

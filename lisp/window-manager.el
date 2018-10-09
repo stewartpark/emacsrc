@@ -18,7 +18,9 @@
 (require 'exwm-systemtray)
 (exwm-systemtray-enable)
 
-(setq window-divider-default-right-width 1)
+;;Make non-floating windows resizable
+(setq window-divider-default-right-width 2
+      window-divider-default-right-width 2)
 (window-divider-mode)
 
 ;; Auto detect multiple screens
@@ -35,6 +37,12 @@
                nil
                (concat "xrandr --output " (nth 0 exwm-xrandr-displays) " --left-of " (nth 1 exwm-xrandr-displays) " --auto"))))
   (exwm-randr-enable))
+
+(desktop-environment-mode)
+(desktop-environment-exwm-set-global-keybindings)
+
+(provide 'window-manager)
+;; window-manager.el ends here
 
 (provide 'window-manager)
 ;;; window-manager.el ends here
