@@ -50,26 +50,18 @@
                                   (interactive)
                                   (call-process-shell-command "nautilus -w &" nil 0)))
 
-(exwm-input-set-key (kbd "s-s S") (lambda ()
+(exwm-input-set-key (kbd "s-s p") (lambda ()
                                   (interactive)
                                   (call-process-shell-command "gnome-screenshot -a &" nil 0)))
 
-(exwm-input-set-key (kbd "s-s s") (lambda ()
+(exwm-input-set-key (kbd "s-s c") (lambda ()
                                   (interactive)
                                   (call-process-shell-command "slack &" nil 0)))
 
-;; Mac-like shortcuts
-(exwm-input-set-key (kbd "s-c") (lambda ()
+(exwm-input-set-key (kbd "s-s s") (lambda ()
                                   (interactive)
-                                  (exwm-input-send-next-key (kbd "C-c"))))
+                                  (call-process-shell-command "spotify &" nil 0)))
 
-(exwm-input-set-key (kbd "s-v") (lambda ()
-                                  (interactive)
-                                  (exwm-input-send-next-key (kbd "C-v"))))
-
-(exwm-input-set-key (kbd "s-w") (lambda ()
-                                  (interactive)
-                                  (exwm-input-send-next-key (kbd "C-w"))))
 
 ;; Simulate Emacs shortcuts on applications.
 (setq exwm-input-simulation-keys
