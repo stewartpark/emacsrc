@@ -24,7 +24,7 @@
     smartparens dumb-jump zoom-window dotenv-mode
     fringe-helper git-gutter-fringe+ magit keychain-environment
     org org-present
-    hackernews transpose-frame
+    hackernews transpose-frame pinentry
     all-the-icons
     flycheck flycheck-rust flycheck-crystal flycheck-popup-tip
     company company-racer racer company-restclient
