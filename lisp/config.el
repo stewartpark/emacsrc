@@ -17,7 +17,7 @@
 
 ;; Load theme
 (load-random-theme
- '(doom-opera-light))
+ '(doom-tomorrow-night doom-tomorrow-day))
 
 ;; Global mode settings
 (global-visual-line-mode 1)
