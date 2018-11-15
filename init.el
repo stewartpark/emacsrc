@@ -23,7 +23,6 @@
 (load "~/.emacs.d/lisp/hooks.el")
 (load "~/.emacs.d/lisp/keys.el")
 (load "~/.emacs.d/lisp/file-types.el")
-(load "~/.emacs.d/lisp/symon-monitors.el")
 
 ;; Host-specific configurations
 (if (file-exists-p "~/.config/emacs.el")
@@ -35,7 +34,6 @@
   (projectile-add-known-project project-path))
 
 ;; Things I need to turn on in the beginning
-(symon-mode)
 (helm-projectile-on)
 (server-start)
 
