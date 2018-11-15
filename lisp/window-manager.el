@@ -41,27 +41,10 @@
 (desktop-environment-mode)
 (desktop-environment-exwm-set-global-keybindings)
 
-;; Application shortcuts
-(exwm-input-set-key (kbd "s-s w") (lambda ()
-                                  (interactive)
-                                  (call-process-shell-command "google-chrome &" nil 0)))
-
-(exwm-input-set-key (kbd "s-s f") (lambda ()
-                                  (interactive)
-                                  (call-process-shell-command "nautilus -w &" nil 0)))
-
-(exwm-input-set-key (kbd "s-s p") (lambda ()
-                                  (interactive)
-                                  (call-process-shell-command "gnome-screenshot -a &" nil 0)))
-
-(exwm-input-set-key (kbd "s-s c") (lambda ()
-                                  (interactive)
-                                  (call-process-shell-command "slack &" nil 0)))
-
+;; Application shortcut
 (exwm-input-set-key (kbd "s-s s") (lambda ()
                                   (interactive)
-                                  (call-process-shell-command "spotify &" nil 0)))
-
+                                  (call-process-shell-command "dmenu_run &" nil 0)))
 
 ;; Simulate Emacs shortcuts on applications.
 (setq exwm-input-simulation-keys

@@ -37,6 +37,7 @@
     exwm desktop-environment
 ))
 
+(setq package--init-file-ensured t)
 
 (defun ensure-packages-installed ()
   "Ensure packages listed are installed."
