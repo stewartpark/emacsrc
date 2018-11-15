@@ -68,10 +68,16 @@
         ([?\C-y] . [?\C-v])
 
         ;; search
-        ([?\C-s] . [?\C-f])))
+        ([?\C-s] . [?\C-f])
+
+        ;; chrome
+        ([?\s-w] . [?\C-w])))
 
 ;; Start EXWM
 (exwm-enable)
+
+;; Disable workspace switching
+(global-unset-key (kbd "s-w"))
 
 (provide 'window-manager)
 ;;; window-manager.el ends here
