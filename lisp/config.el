@@ -17,7 +17,7 @@
 
 ;; Load theme
 (load-random-theme
- '(doom-tomorrow-night doom-tomorrow-day))
+ '(doom-Iosvkem))
 
 ;; Global mode settings
 (global-visual-line-mode 1)
