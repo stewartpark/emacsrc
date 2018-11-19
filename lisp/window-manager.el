@@ -42,7 +42,7 @@
 (desktop-environment-exwm-set-global-keybindings)
 
 ;; Application shortcut
-(exwm-input-set-key (kbd "s-s s") (lambda ()
+(exwm-input-set-key (kbd "s-d") (lambda ()
                                   (interactive)
                                   (call-process-shell-command "dmenu_run &" nil 0)))
 
