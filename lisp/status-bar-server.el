@@ -9,7 +9,8 @@
   (when (string= string "dzen2\n")
     (process-send-string proc (concat
                                "^fn(Inconsolata)"
-                               "^fg(#f44336)" (current-time-string) " ^fg()"))))
+                               "^fg(#f44336)" (current-time-string) " ^fg()"
+                               "\n"))))
 
 (defun status-bar-server-start ()
   (interactive)
