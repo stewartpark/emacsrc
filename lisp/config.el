@@ -6,7 +6,7 @@
 ;;; Code:
 
 ;; Font setup
-(let ((font-face "Inconsolata-10"))
+(let ((font-face "Inconsolata-12"))
   (set-face-attribute 'default nil :font font-face)
   (set-face-attribute 'variable-pitch nil :font font-face)
   (set-frame-font font-face nil t)
