@@ -17,7 +17,7 @@
 
 ;; Load theme
 (load-random-theme
- '(doom-Iosvkem))
+ '(doom-molokai))
 
 ;; Global mode settings
 (global-visual-line-mode 1)
