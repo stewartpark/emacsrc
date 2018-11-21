@@ -30,7 +30,7 @@
     company company-racer racer company-restclient
     doom-themes restart-emacs cov
     helm-tramp docker-tramp tramp-hdfs
-    ace-window multi-term nlinum doom-modeline
+    ace-window multi-term nlinum doom-modeline eterm-256color
     projectile treemacs treemacs-projectile ag editorconfig
     helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck swiper-helm
     emojify circe circe-notifications json json-rpc restclient zeal-at-point

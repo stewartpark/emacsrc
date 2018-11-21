@@ -74,6 +74,8 @@
 
 (add-hook 'ansible-hook 'ansible::auto-decrypt-encrypt)
 
+(add-hook 'term-mode-hook #'eterm-256color-mode)
+
 (add-hook 'prog-mode-hook (lambda ()
                             (require 'smartparens-config)
                             (sp-pair "'" nil :unless '(sp-point-after-word-p))

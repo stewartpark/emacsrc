@@ -44,7 +44,7 @@
 ;; Application shortcut
 (exwm-input-set-key (kbd "s-d") (lambda ()
                                   (interactive)
-                                  (call-process-shell-command "dmenu_run &" nil 0)))
+                                  (call-process-shell-command "dmenu_run -b &" nil 0)))
 
 ;; Simulate Emacs shortcuts on applications.
 (setq exwm-input-simulation-keys
