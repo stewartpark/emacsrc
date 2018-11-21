@@ -76,6 +76,9 @@
 ;; Start EXWM
 (exwm-enable)
 
+;; Run status bar server
+(status-bar-server-start)
+
 ;; Disable workspace switching
 (global-unset-key (kbd "s-w"))
 

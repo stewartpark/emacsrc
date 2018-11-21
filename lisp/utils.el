@@ -109,16 +109,16 @@
   (let (
         (artist (trim-string (shell-command-to-string "osascript -e 'tell application \"iTunes\" to artist of current track as string'")))
         (title (trim-string (shell-command-to-string "osascript -e 'tell application \"iTunes\" to name of current track as string'"))))
-    (princ (format "♫ %s - %s" artist title))))
+    (format "♫ %s - %s" artist title)))
 
 (defun show-net-latency ()
   "Cmd: (show-net-latency) show network latency."
   (interactive)
   (let
-    ((latency (nth 3 (split-string (nth 1 (split-string (shell-command-to-string "ping -t 1 -c 1 8.8.8.8") "\n")) "="))))
-    (princ (if (eq latency nil)
+    ((latency (nth 3 (split-string (nth 1 (split-string (shell-command-to-string "ping -c 1 8.8.8.8") "\n")) "="))))
+    (if (eq latency nil)
         "Offline"
-        latency))))
+        latency)))
 
 (defun enter-fullscreen ()
   "Cmd: (enter-fullscreen) enter full screen mode."

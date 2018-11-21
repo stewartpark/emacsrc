@@ -17,6 +17,7 @@
 ;; Custom utillities and modes
 (load "~/.emacs.d/lisp/utils.el")
 (load "~/.emacs.d/lisp/resque-mode.el")
+(load "~/.emacs.d/lisp/status-bar-server.el")
 
 ;; Custom configuartion files
 (load "~/.emacs.d/lisp/config.el")
