@@ -68,6 +68,8 @@
 (with-eval-after-load 'rust-mode
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
+(add-hook 'js2-mode-hook 'flow-minor-enable-automatically)
+
 (add-hook 'yaml-mode-hook (lambda ()
                             (when (file-exists-p (concat (projectile-project-root) "ansible.cfg"))
                                 (ansible 1))))

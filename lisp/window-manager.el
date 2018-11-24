@@ -44,7 +44,11 @@
 ;; Application shortcut
 (exwm-input-set-key (kbd "s-d") (lambda ()
                                   (interactive)
-                                  (call-process-shell-command "dmenu_run -b &" nil 0)))
+                                  (call-process-shell-command "dmenu_run &" nil 0)))
+
+(exwm-input-set-key (kbd "s-RET") (lambda()
+                                    (interactive)
+                                    (multi-term)))
 
 ;; Simulate Emacs shortcuts on applications.
 (setq exwm-input-simulation-keys
@@ -59,8 +63,6 @@
         ([?\C-e] . [end])
         ([?\M-v] . [prior])
         ([?\C-v] . [next])
-        ([?\C-d] . [delete])
-        ([?\C-k] . [S-end delete])
 
         ;; cut/paste.
         ([?\C-w] . [?\C-x])
@@ -70,8 +72,15 @@
         ;; search
         ([?\C-s] . [?\C-f])
 
-        ;; chrome
-        ([?\s-w] . [?\C-w])))
+        ;; vim hjkl keys
+        ([?\C-h] . [left])
+        ([?\C-j] . [down])
+        ([?\C-k] . [up])
+        ([?\C-l] . [right])
+
+        ;; mac-like shortcuts
+        ([?\s-w] . [?\C-w])
+        ([?\s-q] . [M-f4])))
 
 ;; Start EXWM
 (exwm-enable)

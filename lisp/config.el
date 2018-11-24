@@ -149,11 +149,16 @@
   (require 'git-gutter-fringe+))
 
 ;; Company-mode
-(eval-after-load 'company
-  '(push 'company-robe company-backends))
+(with-eval-after-load 'company
+  (add-to-list 'company-backends 'company-flow)
+  (add-to-list 'company-backends 'company-robe))
 
 (with-eval-after-load 'flycheck
-  (flycheck-popup-tip-mode))
+  (flycheck-popup-tip-mode)
+  (require 'flycheck-flow)
+  (flycheck-add-mode 'javascript-flow 'flow-minor-mode)
+  (flycheck-add-mode 'javascript-eslint 'floiw-minor-mode)
+  (flycheck-add-next-checker 'javascript-flow 'javascript-eslint))
 
 ;;;; Emacs-generated configuration
 (custom-set-faces
@@ -210,7 +215,8 @@
  '(tab-width 2)
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
- '(web-mode-markup-indent-offset 2))
+ '(web-mode-markup-indent-offset 2)
+)
 
 (provide 'config)
 ;;; config.el ends here
