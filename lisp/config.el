@@ -106,6 +106,8 @@
 
  ;; Ansible
  ansible::vault-password-file "~/.vault-pass"
+
+ epa-pinentry-mode 'loopback
 )
 
 ;; Treemacs actions
