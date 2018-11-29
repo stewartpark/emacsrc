@@ -36,6 +36,7 @@
 
 ;; Things I need to turn on in the beginning
 (helm-projectile-on)
+(pinentry-start)
 (server-start)
 
 ;; Make gc pauses faster by decreasing the threshold.
