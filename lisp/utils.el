@@ -103,22 +103,38 @@
   (interactive)
   (find-file "~/todo.org"))
 
-(defun show-itunes ()
-  "Cmd: (show-itunes) show what song iTunes is playing."
+(defun get-current-song ()
+  "Cmd: (get-current-song) show what song iTunes is playing."
   (interactive)
   (let (
-        (artist (trim-string (shell-command-to-string "osascript -e 'tell application \"iTunes\" to artist of current track as string'")))
-        (title (trim-string (shell-command-to-string "osascript -e 'tell application \"iTunes\" to name of current track as string'"))))
-    (format "♫ %s - %s" artist title)))
+        (artist (trim-string (shell-command-to-string "dbus-send --print-reply --session --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata' | sed -n '/artist/{n;n;p}' | cut -d '\"' -f 2")))
+        (title (trim-string (shell-command-to-string "dbus-send --print-reply --session --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata' | sed -n '/title/{n;p}' | cut -d '\"' -f 2"))))
+    (if (string= artist "Error org.freedesktop.DBus.Error.ServiceUnknown: The name org.mpris.MediaPlayer2.spotify was not provided by any .service files") nil
+    (format "%s - %s" artist title))))
 
-(defun show-net-latency ()
+(defun get-net-latency ()
   "Cmd: (show-net-latency) show network latency."
   (interactive)
   (let
     ((latency (nth 3 (split-string (nth 1 (split-string (shell-command-to-string "ping -c 1 8.8.8.8") "\n")) "="))))
     (if (eq latency nil)
-        "Offline"
-        latency)))
+      "Offline"
+      latency)))
+
+(defun get-wifi-name ()
+  "Return the currently connected access point's advertised name."
+  (trim-string (shell-command-to-string "nmcli c show --active | awk '/wifi/ { print $1 }'")))
+
+(defun get-vpn-name ()
+  "Return the currently connected VPN's name."
+  (trim-string (shell-command-to-string "nmcli c show --active | awk '/vpn/ { print $1 }'")))
+
+(defun get-net-ipv4-addr (interface)
+  "Return the IPv4 address of the given INTERFACE."
+  (trim-string (shell-command-to-string
+                (concat
+                 "nmcli c show " interface " | awk '/IP4.ADDRESS/ { print $2 }'"))))
+
 
 (defun enter-fullscreen ()
   "Cmd: (enter-fullscreen) enter full screen mode."
@@ -189,7 +205,7 @@
   (byte-recompile-directory "~/.emacs.d/lisp/" 0))
 
 (defvar utils
-  '(enter-fullscreen quit-fullscreen trim-string http:get file:read show-itunes show-net-latency todo font+ font- open-init open-lisp open-local kill-whitespace-or-word linum-update-window-scale-fix sticky-buffer-mode load-random-theme toggle-transparency compile-lisp)
+  '(enter-fullscreen quit-fullscreen trim-string http:get file:read get-current-song get-net-latency get-wifi-name get-net-ipv4-addr todo font+ font- open-init open-lisp open-local kill-whitespace-or-word linum-update-window-scale-fix sticky-buffer-mode load-random-theme toggle-transparency compile-lisp)
   "A list of every function this file defines.")
 (provide 'utils)
 ;;; utils.el ends here

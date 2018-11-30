@@ -5,12 +5,82 @@
 ;;;
 ;;; Code:
 
+(defun status-bar-widget--datetime ()
+  (concat
+   "^fg(#f403a0)^fn(Symbola)⏰^fn() "
+   (current-time-string)
+   "^fg()"))
+
+(defun status-bar-widget--wifi ()
+  (let ((name (get-wifi-name)))
+    (concat
+     "^fg(#0fa0b0)"
+     "^fn(Symbola)📶^fn() "
+     (if (eq (length name) 0)
+       "^fn(Symbola)^fg(red)🚫^fg()^fn()"
+       (concat name "(" (get-net-ipv4-addr name) ")"))
+     "^fg()")))
+
+(defun status-bar-widget--vpn ()
+  (let ((name (get-vpn-name)))
+    (concat
+     "^fg(#00aa00)^fn(Symbola)🏢^fn() "
+     (if (eq (length name) 0)
+      "^fn(Symbola)^fg(red)🚫^fg()^fn()"
+      (concat name "(" (get-net-ipv4-addr name) ")")
+      )
+     "^fg()")))
+
+(defun status-bar-widget--volume ()
+  (concat
+   "^fg(#0050a0)^fn(Symbola)🔊^fn() "
+   (desktop-environment-volume-get)
+   "^fg()"))
+
+(defun status-bar-widget--brightness ()
+  (concat
+   "^fg(yellow)^fn(Symbola)🔆^fn() "
+   (desktop-environment-brightness-get)
+   "^fg()"))
+
+(defun status-bar-widget--battery ()
+  (let ((gov (trim-string (file:read "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor")))
+        (status (trim-string (file:read "/sys/class/power_supply/BAT0/status")))
+        (capacity (trim-string (file:read "/sys/class/power_supply/BAT0/capacity"))))
+    (concat
+     "^fg(#00f0ff)"
+     "^fn(Symbola)"
+     (if (string= status "Discharging") "" "⚡")
+     (if (string= gov "performance") "💪" "🔋")
+     "^fn() "
+     capacity "%"
+     "^fg()")))
+
+(defun status-bar-widget--music ()
+  (let ((current-song (get-current-song)))
+    (concat
+     "^fg(#00fa0a)^fn(Symbola)♫^fn() "
+     (if (eq current-song nil) "^fn(Symbola)^fg(red)🚫^fg()^fn()" current-song)
+     "^fg()")))
+
 (defun status-bar-server--filter (proc string)
   (when (string= string "dzen2\n")
-    (process-send-string proc (concat
-                               "^fn(Inconsolata)"
-                               "^fg(#f44336)" (current-time-string) " ^fg()"
-                               "\n"))))
+    (process-send-string
+     proc
+     (concat
+      "(λx.^r(18x1) "
+      (status-bar-widget--datetime) " | "
+      (status-bar-widget--wifi) " | "
+      (status-bar-widget--vpn) " | "
+      (status-bar-widget--volume) " | "
+      (status-bar-widget--brightness) " | "
+      (if (file-exists-p "/sys/class/power_supply/BAT0/status")
+          (concat (status-bar-widget--battery) " | ") "")
+      (status-bar-widget--music)
+      " ^r(18x1))"
+      "\n"))))
+
+(get-net-latency)
 
 (defun status-bar-server-start ()
   (interactive)
