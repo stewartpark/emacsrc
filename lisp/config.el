@@ -64,6 +64,9 @@
  inf-ruby-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)[>*\"'] *"
  inf-ruby-console-environment "development"
 
+ ;; Rust
+ rust-format-on-save t
+
  ;; Web-mode
  web-mode-enable-auto-pairing nil
 
