@@ -11,6 +11,16 @@
    (current-time-string)
    "^fg()"))
 
+(defun status-bar-widget--ethernet ()
+  (let ((name (get-ethernet-name)))
+    (concat
+     "^fg(#0fa)"
+     "^fn(Symbola)🖳^fn() "
+     (if (eq (length name) 0)
+       "^fn(Symbola)^fg(red)🚫^fg()^fn()"
+       (concat name "(" (get-net-ipv4-addr name) ")"))
+     "^fg()")))
+
 (defun status-bar-widget--wifi ()
   (let ((name (get-wifi-name)))
     (concat
@@ -70,6 +80,7 @@
      (concat
       "(λx.^r(18x1) "
       (status-bar-widget--datetime) " | "
+      (status-bar-widget--ethernet) " | "
       (status-bar-widget--wifi) " | "
       (status-bar-widget--vpn) " | "
       (status-bar-widget--volume) " | "

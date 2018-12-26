@@ -3,6 +3,7 @@
 ;;; This program defines some useful functions and modes for Stewart Park.
 ;;; Code:
 (require 'url)
+(require 'dash)
 
 (defvar saved-treemacs-state nil)
 
@@ -102,9 +103,9 @@
   "Cmd: (todo) open a todo org."
   (interactive)
   (find-file "~/todo.org"))
-
+c
 (defun get-current-song ()
-  "Cmd: (get-current-song) show what song iTunes is playing."
+  "Cmd: (get-current-song) show what song the music player is playing."
   (interactive)
   (let (
         (artist (trim-string (shell-command-to-string "dbus-send --print-reply --session --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata' | sed -n '/artist/{n;n;p}' | cut -d '\"' -f 2")))
@@ -121,20 +122,35 @@
       "Offline"
       latency)))
 
+(defun get-active-net-interface-name (type)
+  "Return the name of an active network interface whose type is the given TYPE."
+  (first
+   (first
+    (-filter
+     (lambda (x) (string= (nth 2 x) type))
+     (delete
+      '("")
+      (mapcar
+       (lambda (x) (split-string x ":"))
+       (split-string
+        (trim-string
+         (shell-command-to-string "nmcli -t c show --active | tr '\n' ';'")) ";")))))))
+
 (defun get-wifi-name ()
   "Return the currently connected access point's advertised name."
-  (trim-string (shell-command-to-string "nmcli c show --active | awk '/wifi/ { print $1 }'")))
+  (get-active-net-interface-name "802-11-wireless"))
 
 (defun get-vpn-name ()
   "Return the currently connected VPN's name."
-  (trim-string (shell-command-to-string "nmcli c show --active | awk '/vpn/ { print $1 }'")))
+  (get-active-net-interface-name "vpn"))
+
+(defun get-ethernet-name ()
+  "Return the currently connected ethernet's name."
+  (get-active-net-interface-name "802-3-ethernet"))
 
 (defun get-net-ipv4-addr (interface)
   "Return the IPv4 address of the given INTERFACE."
-  (trim-string (shell-command-to-string
-                (concat
-                 "nmcli c show " interface " | awk '/IP4.ADDRESS/ { print $2 }'"))))
-
+  (second (split-string (trim-string (shell-command-to-string (concat "nmcli -t c show '" interface "' | grep IP4.ADDRESS"))) ":")))
 
 (defun enter-fullscreen ()
   "Cmd: (enter-fullscreen) enter full screen mode."
@@ -205,7 +221,7 @@
   (byte-recompile-directory "~/.emacs.d/lisp/" 0))
 
 (defvar utils
-  '(enter-fullscreen quit-fullscreen trim-string http:get file:read get-current-song get-net-latency get-wifi-name get-net-ipv4-addr todo font+ font- open-init open-lisp open-local kill-whitespace-or-word linum-update-window-scale-fix sticky-buffer-mode load-random-theme toggle-transparency compile-lisp)
+  '(enter-fullscreen quit-fullscreen trim-string http:get file:read get-current-song get-net-latency get-ethernet-name get-wifi-name get-net-ipv4-addr todo font+ font- open-init open-lisp open-local kill-whitespace-or-word linum-update-window-scale-fix sticky-buffer-mode load-random-theme toggle-transparency compile-lisp)
   "A list of every function this file defines.")
 (provide 'utils)
 ;;; utils.el ends here

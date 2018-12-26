@@ -35,14 +35,14 @@
               (start-process-shell-command
                "xrandr"
                nil
-               (concat "xrandr --output " (nth 0 exwm-xrandr-displays) " --left-of " (nth 1 exwm-xrandr-displays) " --auto"))))
+               (concat "xrandr --output " (nth 0 exwm-xrandr-displays) " --below " (nth 1 exwm-xrandr-displays) " --auto"))))
   (exwm-randr-enable))
 
 (desktop-environment-mode)
 (desktop-environment-exwm-set-global-keybindings)
 
 ;; Application shortcut
-(exwm-input-set-key (kbd "s-d") (lambda ()
+(exwm-input-set-key (kbd "s-x") (lambda ()
                                   (interactive)
                                   (call-process-shell-command "dmenu_run &" nil 0)))
 
