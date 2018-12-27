@@ -44,4 +44,5 @@
       gc-cons-percentage 0.1)
 
 (provide 'init)
+
 ;;; init.el ends here

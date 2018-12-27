@@ -103,15 +103,6 @@
   "Cmd: (todo) open a todo org."
   (interactive)
   (find-file "~/todo.org"))
-c
-(defun get-current-song ()
-  "Cmd: (get-current-song) show what song the music player is playing."
-  (interactive)
-  (let (
-        (artist (trim-string (shell-command-to-string "dbus-send --print-reply --session --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata' | sed -n '/artist/{n;n;p}' | cut -d '\"' -f 2")))
-        (title (trim-string (shell-command-to-string "dbus-send --print-reply --session --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata' | sed -n '/title/{n;p}' | cut -d '\"' -f 2"))))
-    (if (string= artist "Error org.freedesktop.DBus.Error.ServiceUnknown: The name org.mpris.MediaPlayer2.spotify was not provided by any .service files") nil
-    (format "%s - %s" artist title))))
 
 (defun get-net-latency ()
   "Cmd: (show-net-latency) show network latency."
@@ -124,8 +115,8 @@ c
 
 (defun get-active-net-interface-name (type)
   "Return the name of an active network interface whose type is the given TYPE."
-  (first
-   (first
+  (car
+   (car
     (-filter
      (lambda (x) (string= (nth 2 x) type))
      (delete
@@ -150,7 +141,7 @@ c
 
 (defun get-net-ipv4-addr (interface)
   "Return the IPv4 address of the given INTERFACE."
-  (second (split-string (trim-string (shell-command-to-string (concat "nmcli -t c show '" interface "' | grep IP4.ADDRESS"))) ":")))
+  (car (cdr (split-string (trim-string (shell-command-to-string (concat "nmcli -t c show '" interface "' | grep IP4.ADDRESS"))) ":"))))
 
 (defun enter-fullscreen ()
   "Cmd: (enter-fullscreen) enter full screen mode."

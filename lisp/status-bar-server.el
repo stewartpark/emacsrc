@@ -66,13 +66,6 @@
      capacity "%"
      "^fg()")))
 
-(defun status-bar-widget--music ()
-  (let ((current-song (get-current-song)))
-    (concat
-     "^fg(#00fa0a)^fn(Symbola)♫^fn() "
-     (if (eq current-song nil) "^fn(Symbola)^fg(red)🚫^fg()^fn()" current-song)
-     "^fg()")))
-
 (defun status-bar-server--filter (proc string)
   (when (string= string "dzen2\n")
     (process-send-string
@@ -86,8 +79,7 @@
       (status-bar-widget--volume) " | "
       (status-bar-widget--brightness) " | "
       (if (file-exists-p "/sys/class/power_supply/BAT0/status")
-          (concat (status-bar-widget--battery) " | ") "")
-      (status-bar-widget--music)
+          (status-bar-widget--battery) "")
       " ^r(18x1))"
       "\n"))))
 
