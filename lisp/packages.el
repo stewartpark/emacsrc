@@ -20,6 +20,7 @@
     markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode
     scala-mode sbt-mode ensime flow-minor-mode flycheck-flow company-flow
     dockerfile-mode nasm-mode go-mode foreman-mode js2-mode json-mode
+    lsp-java company-lsp
     ansible scss-mode web-mode rainbow-mode rainbow-delimiters
     smartparens dumb-jump zoom-window dotenv-mode
     fringe-helper git-gutter-fringe+ magit keychain-environment

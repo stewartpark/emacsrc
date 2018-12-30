@@ -212,7 +212,7 @@
   (byte-recompile-directory "~/.emacs.d/lisp/" 0))
 
 (defvar utils
-  '(enter-fullscreen quit-fullscreen trim-string http:get file:read get-current-song get-net-latency get-ethernet-name get-wifi-name get-net-ipv4-addr todo font+ font- open-init open-lisp open-local kill-whitespace-or-word linum-update-window-scale-fix sticky-buffer-mode load-random-theme toggle-transparency compile-lisp)
+  '(enter-fullscreen quit-fullscreen trim-string http:get file:read get-net-latency get-ethernet-name get-wifi-name get-net-ipv4-addr todo font+ font- open-init open-lisp open-local kill-whitespace-or-word linum-update-window-scale-fix sticky-buffer-mode load-random-theme toggle-transparency compile-lisp)
   "A list of every function this file defines.")
 (provide 'utils)
 ;;; utils.el ends here

@@ -157,7 +157,8 @@
 ;; Company-mode
 (with-eval-after-load 'company
   (add-to-list 'company-backends 'company-flow)
-  (add-to-list 'company-backends 'company-robe))
+  (add-to-list 'company-backends 'company-robe)
+  (add-to-list 'company-backends 'company-lsp))
 
 (with-eval-after-load 'flycheck
   (flycheck-popup-tip-mode)
