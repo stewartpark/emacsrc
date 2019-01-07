@@ -35,7 +35,6 @@
     projectile treemacs treemacs-projectile ag editorconfig
     helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck swiper-helm
     emojify circe circe-notifications json json-rpc restclient zeal-at-point
-    exwm desktop-environment
 ))
 
 (setq package--init-file-ensured t)
