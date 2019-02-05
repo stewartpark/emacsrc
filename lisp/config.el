@@ -30,8 +30,10 @@
  )
 
 ;; Global mode settings
+(make-thread (lambda ()
+  (global-magit-file-mode 1)))
+
 (global-visual-line-mode 1)
-(global-magit-file-mode 1)
 (doom-modeline-init)
 (ace-window-display-mode t)
 (doom-themes-org-config)
@@ -153,10 +155,12 @@
 
 ;; Environment variable setup
 (if (not (getenv "TERM_PROGRAM"))
-    (let ((path (shell-command-to-string
-                 "$SHELL -cl \"printf %s \\\"\\\$PATH\\\"\"")))
-      (setenv "PATH" path)
-      (setq exec-path (split-string path ":"))))
+    (make-thread
+     (lambda ()
+       (let ((path (shell-command-to-string
+                    "$SHELL -cl \"printf %s \\\"\\\$PATH\\\"\"")))
+         (setenv "PATH" path)
+         (setq exec-path (split-string path ":"))))))
 
 ;;;; Things to run at startup
 ;; Load keychain env
@@ -164,7 +168,7 @@
 
 ;; Git-gutter-fringe
 (when (display-graphic-p)
-  (require 'git-gutter-fringe+))
+  (autoload 'git-gutter+-mode "git-gutter-fringe+" nil t))
 
 ;; Company-mode
 (with-eval-after-load 'company
