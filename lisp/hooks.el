@@ -68,9 +68,10 @@
 (with-eval-after-load 'rust-mode
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
-(add-hook 'java-mode-hook #'lsp)
-
 (add-hook 'js2-mode-hook 'flow-minor-enable-automatically)
+
+(with-eval-after-load 'rjsx-mode
+  (define-key rjsx-mode-map (kbd "C-d") nil))
 
 (add-hook 'typescript-mode-hook (lambda ()
                                   (tide-setup)
@@ -79,6 +80,7 @@
                                   (eldoc-mode +1)
                                   (tide-hl-identifier-mode +1)
                                   (company-mode +1)))
+
 (add-hook 'web-mode-hook (lambda ()
                            (when (string-equal "tsx" (file-name-extension buffer-file-name))
                              (setup-tide-mode))))
@@ -98,6 +100,7 @@
                             (sp-pair "<" ">" :wrap "C->")
                             (editorconfig-mode 1)
                             (company-mode)
+                            (lsp-mode)
                             (cov-mode)
                             (git-gutter+-mode 1)
                             (nlinum-mode 1)

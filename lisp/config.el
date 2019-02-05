@@ -22,6 +22,7 @@
 
 ;; Global mode settings
 (global-visual-line-mode 1)
+(global-magit-file-mode 1)
 (doom-modeline-init)
 (ace-window-display-mode t)
 (doom-themes-org-config)

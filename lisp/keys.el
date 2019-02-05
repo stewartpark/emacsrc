@@ -38,6 +38,7 @@
 (global-set-key (kbd "C-x C-m") 'helm-circe)
 (global-set-key (kbd "C-x C-o") 'helm-projectile-switch-project)
 (global-set-key (kbd "C-x f") 'helm-projectile-find-file)
+(global-set-key (kbd "C-x F") 'helm-projectile-find-file-in-known-projects)
 (global-set-key (kbd "C-x C-f") 'helm-projectile-ag)
 (global-set-key (kbd "C-x C-x") 'helm-imenu-in-all-buffers)
 (global-set-key (kbd "C-x C-v") 'helm-flycheck)
