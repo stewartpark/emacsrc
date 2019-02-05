@@ -22,6 +22,8 @@
    doom-one-light
    doom-solarized-light
    doom-molokai
+   doom-dracula
+   doom-peacock
    doom-challenger-deep
    doom-Iosvkem
    )
