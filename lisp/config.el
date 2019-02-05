@@ -18,7 +18,14 @@
 
 ;; Load theme
 (load-random-theme
- '(doom-one-light))
+ '(
+   doom-one-light
+   doom-solarized-light
+   doom-molokai
+   doom-challenger-deep
+   doom-Iosvkem
+   )
+ )
 
 ;; Global mode settings
 (global-visual-line-mode 1)
