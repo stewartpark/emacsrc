@@ -7,40 +7,41 @@
 
 ;;; TODO: use use-package, smart-jump
 
-;; Make startup faster by reducing the frequency of garbage collection.
-(setq gc-cons-threshold (* 1024 1024 1024) ; 1 GiB
-      gc-cons-percentage 1.0)
+(let ((file-name-handler-alist nil))
+  ;; Make startup faster by reducing the frequency of garbage collection.
+  (setq gc-cons-threshold (* 1024 1024 1024) ; 1 GiB
+        gc-cons-percentage 1.0)
 
-;; Load packages
-(load "~/.emacs.d/lisp/packages.el")
+  ;; Load packages
+  (load "~/.emacs.d/lisp/packages.el")
 
-;; Custom utillities and modes
-(load "~/.emacs.d/lisp/utils.el")
-(load "~/.emacs.d/lisp/resque-mode.el")
+  ;; Custom utillities and modes
+  (load "~/.emacs.d/lisp/utils.el")
+  (load "~/.emacs.d/lisp/resque-mode.el")
 
-;; Custom configuartion files
-(load "~/.emacs.d/lisp/config.el")
-(load "~/.emacs.d/lisp/hooks.el")
-(load "~/.emacs.d/lisp/keys.el")
-(load "~/.emacs.d/lisp/file-types.el")
+  ;; Custom configuartion files
+  (load "~/.emacs.d/lisp/config.el")
+  (load "~/.emacs.d/lisp/hooks.el")
+  (load "~/.emacs.d/lisp/keys.el")
+  (load "~/.emacs.d/lisp/file-types.el")
 
-;; Host-specific configurations
-(if (file-exists-p "~/.config/emacs.el")
-    (load "~/.config/emacs.el"))
+  ;; Host-specific configurations
+  (if (file-exists-p "~/.config/emacs.el")
+      (load "~/.config/emacs.el"))
 
-;; Clean up and ad projects to projectile
-(projectile-cleanup-known-projects)
-(dolist (project-path (car (last (car (projectile-discover-projects-in-search-path)))))
-  (projectile-add-known-project project-path))
+  ;; Clean up and ad projects to projectile
+  (projectile-cleanup-known-projects)
+  (dolist (project-path (car (last (car (projectile-discover-projects-in-search-path)))))
+    (projectile-add-known-project project-path))
 
-;; Things I need to turn on in the beginning
-(helm-projectile-on)
-(pinentry-start)
-(server-start)
+  ;; Things I need to turn on in the beginning
+  (helm-projectile-on)
+  (pinentry-start)
+  (server-start)
 
-;; Make gc pauses faster by decreasing the threshold.
-(setq gc-cons-threshold (* 10 1024 1024) ; 10MiB
-      gc-cons-percentage 0.1)
+  ;; Make gc pauses faster by decreasing the threshold.
+  (setq gc-cons-threshold (* 10 1024 1024) ; 10MiB
+        gc-cons-percentage 0.1))
 
 (provide 'init)
 
