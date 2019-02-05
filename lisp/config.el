@@ -18,7 +18,7 @@
 
 ;; Load theme
 (load-random-theme
- '(doom-molokai))
+ '(doom-one-light))
 
 ;; Global mode settings
 (global-visual-line-mode 1)
@@ -113,6 +113,7 @@
  ansible::vault-password-file "~/.vault-pass"
 
  epa-pinentry-mode 'loopback
+ require-final-newline t
 )
 
 ;; Treemacs actions

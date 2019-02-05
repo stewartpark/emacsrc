@@ -72,6 +72,17 @@
 
 (add-hook 'js2-mode-hook 'flow-minor-enable-automatically)
 
+(add-hook 'typescript-mode-hook (lambda ()
+                                  (tide-setup)
+                                  (flycheck-mode +1)
+                                  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+                                  (eldoc-mode +1)
+                                  (tide-hl-identifier-mode +1)
+                                  (company-mode +1)))
+(add-hook 'web-mode-hook (lambda ()
+                           (when (string-equal "tsx" (file-name-extension buffer-file-name))
+                             (setup-tide-mode))))
+
 (add-hook 'yaml-mode-hook (lambda ()
                             (when (file-exists-p (concat (projectile-project-root) "ansible.cfg"))
                                 (ansible 1))))
