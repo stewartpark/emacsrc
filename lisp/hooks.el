@@ -83,10 +83,6 @@
                                   (tide-hl-identifier-mode +1)
                                   (company-mode +1)))
 
-(add-hook 'web-mode-hook (lambda ()
-                           (when (string-equal "tsx" (file-name-extension buffer-file-name))
-                             (setup-tide-mode))))
-
 (add-hook 'yaml-mode-hook (lambda ()
                             (when (file-exists-p (concat (projectile-project-root) "ansible.cfg"))
                                 (ansible 1))))

@@ -19,8 +19,7 @@
 (add-to-list 'auto-mode-alist '("Procfile\\'" . foreman))
 (add-to-list 'auto-mode-alist '("\\.conf\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("Jenkinsfile" . groovy-mode))
-(add-to-list 'auto-mode-alist '("\\.ts" . typescript-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx?\\'" . (lambda () (web-mode) (typescript-mode))))
 (add-to-list 'auto-mode-alist '("\\.req" . restclient-mode))
 (add-to-list 'auto-mode-alist '("\\.scala" . scala-mode))
 
