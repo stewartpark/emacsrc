@@ -29,7 +29,7 @@
     all-the-icons
     flycheck flycheck-rust flycheck-crystal flycheck-popup-tip
     company company-racer racer company-restclient
-    doom-theme srcery-theme restart-emacs cov
+    srcery-theme restart-emacs cov
     helm-tramp docker-tramp tramp-hdfs
     ace-window multi-term nlinum doom-modeline eterm-256color
     projectile treemacs treemacs-projectile ag editorconfig

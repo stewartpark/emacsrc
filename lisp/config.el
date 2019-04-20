@@ -53,6 +53,7 @@
  make-backup-files nil
  create-lockfiles nil
  vc-follow-symlinks t
+ auto-window-vscroll nil
  custom-file (concat user-emacs-directory "/lisp/config.el")
 
  ;; Tramp
