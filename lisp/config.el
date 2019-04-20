@@ -6,28 +6,18 @@
 ;;; Code:
 
 ;; Font setup
-(let ((font-face "Inconsolata-12"))
+(let ((font-face "NanumGothicCoding-13"))
   (set-face-attribute 'default nil :font font-face)
   (set-face-attribute 'variable-pitch nil :font font-face)
   (set-frame-font font-face nil t)
-  (setq default-frame-alist '((font . "Inconsolata-12")))
-  (set-fontset-font "fontset-default" '(#xac00 . #xd7a3) "NanumGothicCoding-10"))
+  (setq default-frame-alist '((font . "NanumGothicCoding-13")))
+  (set-fontset-font "fontset-default" '(#xac00 . #xd7a3) "NanumGothicCoding-13"))
 
 ;; Line number font size fix
 (advice-add #'linum-update-window :after #'linum-update-window-scale-fix)
 
 ;; Load theme
-(load-random-theme
- '(
-   doom-one-light
-   doom-solarized-light
-   doom-molokai
-   doom-dracula
-   doom-peacock
-   doom-challenger-deep
-   doom-Iosvkem
-   )
- )
+(load-theme 'srcery t)
 
 ;; Global mode settings
 (make-thread (lambda ()

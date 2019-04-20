@@ -17,7 +17,7 @@
     python-mode anaconda-mode py-isort py-autopep8 pyenv-mode-auto pythonic
     ruby-mode rspec-mode rbenv inf-ruby robe bundler crystal-mode
     racket-mode elm-mode rust-mode cargo vue-mode rjsx-mode typescript-mode tide
-    markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode
+    markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode coffee-mode
     scala-mode sbt-mode ensime flow-minor-mode flycheck-flow company-flow
     dockerfile-mode nasm-mode go-mode foreman-mode js2-mode json-mode
     lsp-java company-lsp
@@ -29,7 +29,7 @@
     all-the-icons
     flycheck flycheck-rust flycheck-crystal flycheck-popup-tip
     company company-racer racer company-restclient
-    doom-themes restart-emacs cov
+    doom-theme srcery-theme restart-emacs cov
     helm-tramp docker-tramp tramp-hdfs
     ace-window multi-term nlinum doom-modeline eterm-256color
     projectile treemacs treemacs-projectile ag editorconfig
