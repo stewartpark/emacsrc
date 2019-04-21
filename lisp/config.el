@@ -32,6 +32,7 @@
 (xterm-mouse-mode t)
 (tool-bar-mode 0)
 (menu-bar-mode 0)
+(display-time-mode t)
 
 (when (display-graphic-p)
   (set-frame-parameter nil 'undecorated t)
