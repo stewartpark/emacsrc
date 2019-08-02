@@ -47,6 +47,7 @@
 (global-set-key (kbd "M-,") 'dumb-jump-back)
 (global-set-key (kbd "C-x C-g c") 'magit-commit)
 (global-set-key (kbd "C-x C-g d") 'magit-diff-buffer-file)
+(global-set-key (kbd "C-x C-g C-d") 'magit-diff-unstaged)
 (global-set-key (kbd "C-x C-g C-c") 'magit-commit-amend)
 (global-set-key (kbd "C-x C-g p") 'magit-push-current-to-pushremote)
 (global-set-key (kbd "C-x C-g r") 'magit-rebase-onto-upstream)

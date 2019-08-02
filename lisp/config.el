@@ -52,7 +52,12 @@
  create-lockfiles nil
  vc-follow-symlinks t
  auto-window-vscroll nil
+ epa-pinentry-mode 'loopback
+ require-final-newline t
  custom-file (concat user-emacs-directory "/lisp/config.el")
+
+ split-height-threshold nil
+ split-width-threshold 0
 
  ;; Scroll optimization
  mouse-wheel-scroll-amount '(1 ((shift) . 6) ((control) . nil))
@@ -129,9 +134,6 @@
 
  ;; Ansible
  ansible::vault-password-file "~/.vault-pass"
-
- epa-pinentry-mode 'loopback
- require-final-newline t
 )
 
 ;; Treemacs actions
@@ -149,9 +151,9 @@
 (solaire-mode-swap-bg)
 
 ;; Rspec-mode side window config
-(push
- '("*rspec-compilation" display-buffer-in-side-window (side . bottom) (slot . 2))
- display-buffer-alist)
+(add-to-list
+ 'display-buffer-alist
+ '("*rspec-compilation" display-buffer-in-side-window (side . bottom) (slot . 2)))
 
 ;;;; Environment-specific configuration
 ;; Mac-specific config
