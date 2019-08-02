@@ -38,7 +38,8 @@
 (global-set-key (kbd "C-x f") 'helm-projectile-find-file)
 (global-set-key (kbd "C-x F") 'helm-projectile-find-file-in-known-projects)
 (global-set-key (kbd "C-x C-f") 'helm-projectile-ag)
-(global-set-key (kbd "C-x C-x") 'helm-imenu-in-all-buffers)
+(global-set-key (kbd "C-x C-x") 'helm-imenu)
+(global-set-key (kbd "C-x x") 'helm-imenu-in-all-buffers)
 (global-set-key (kbd "C-x C-v") 'helm-flycheck)
 (global-set-key (kbd "<f8>") 'treemacs)
 (global-set-key (kbd "C-x o") 'ace-window)
@@ -53,7 +54,7 @@
                                   (interactive)
                                   (if (bound-and-true-p magit-blame-mode)
                                     (magit-blame-quit)
-                                    (call-interactively 'magit-blame))))
+                                    (call-interactively 'magit-blame-addition))))
 (global-set-key (kbd "C-x C-g l") (lambda ()
                                 (interactive)
                                 (call-interactively 'magit-log-all-branches)))
@@ -76,6 +77,18 @@
                                    (if (fullscreen-p)
                                      (quit-fullscreen)
                                      (enter-fullscreen))))
+
+;; Redfine keys for modes
+(with-eval-after-load 'rjsx-mode
+  (define-key rjsx-mode-map "<" nil)
+  (define-key rjsx-mode-map ">" nil)
+  (define-key rjsx-mode-map (kbd "C-d") nil))
+
+(with-eval-after-load 'rspec-mode
+  (define-key rspec-mode-map (kbd "C-c C-c") 'rspec-verify-single)
+  (define-key rspec-mode-map (kbd "C-c c") 'rspec-verify-all)
+  (define-key rspec-mode-map (kbd "C-c C-f") 'rspec-run-last-failed)
+  (define-key rspec-mode-map (kbd "C-c f") 'rspec-rerun))
 
 (provide 'keys)
 ;;; keys.el ends here

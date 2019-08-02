@@ -69,11 +69,6 @@
 
 (add-hook 'js2-mode-hook 'flow-minor-enable-automatically)
 
-(with-eval-after-load 'rjsx-mode
-  (define-key rjsx-mode-map "<" nil)
-  (define-key rjsx-mode-map ">" nil)
-  (define-key rjsx-mode-map (kbd "C-d") nil))
-
 (add-hook 'typescript-mode-hook (lambda ()
                                   (tide-setup)
                                   (flycheck-mode +1)

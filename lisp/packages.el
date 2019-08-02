@@ -18,17 +18,17 @@
     ruby-mode rspec-mode rbenv inf-ruby robe bundler crystal-mode
     racket-mode elm-mode rust-mode cargo vue-mode rjsx-mode typescript-mode tide
     markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode coffee-mode
-    scala-mode sbt-mode ensime flow-minor-mode flycheck-flow company-flow
+    scala-mode sbt-mode ensime flow-minor-mode flycheck-flow
     dockerfile-mode nasm-mode go-mode foreman-mode js2-mode json-mode
-    lsp-java company-lsp
     ansible scss-mode web-mode rainbow-mode rainbow-delimiters
     smartparens dumb-jump zoom-window dotenv-mode
     fringe-helper git-gutter-fringe+ magit keychain-environment
-    org org-present
+    org org-present ob-restclient
     hackernews transpose-frame pinentry
     all-the-icons solaire-mode
     flycheck flycheck-rust flycheck-crystal flycheck-popup-tip
-    company company-racer racer company-restclient
+    company company-racer racer company-restclient company-flow lsp-java company-lsp company-inf-ruby company-ansible
+    company-jedi company-c-headers company-jedi company-go company-ghc company-shell company-web
     helm-tramp docker-tramp kubernetes-tramp tramp-hdfs restart-emacs
     ace-window multi-term doom-modeline eterm-256color
     projectile treemacs treemacs-projectile treemacs-icons-dired treemacs-magit ag editorconfig

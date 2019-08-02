@@ -148,6 +148,11 @@
 (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer)
 (solaire-mode-swap-bg)
 
+;; Rspec-mode side window config
+(push
+ '("*rspec-compilation" display-buffer-in-side-window (side . bottom) (slot . 2))
+ display-buffer-alist)
+
 ;;;; Environment-specific configuration
 ;; Mac-specific config
 (when (eq system-type 'darwin)
@@ -234,7 +239,8 @@
      (python . t)
      (dot . t)
      (sql . t)
-     (ruby . t))))
+     (ruby . t)
+     (restclient . t))))
  '(org-confirm-babel-evaluate nil)
  '(org-src-tab-acts-natively t)
  '(org-support-shift-select t)
