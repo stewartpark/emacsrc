@@ -13,11 +13,8 @@
   (setq default-frame-alist '((font . "NanumGothicCoding-13")))
   (set-fontset-font "fontset-default" '(#xac00 . #xd7a3) "NanumGothicCoding-13"))
 
-;; Line number font size fix
-(advice-add #'linum-update-window :after #'linum-update-window-scale-fix)
-
 ;; Load theme
-(load-theme 'srcery t)
+(load-theme 'doom-dracula t)
 
 ;; Global mode settings
 (make-thread (lambda ()
@@ -35,7 +32,7 @@
 (display-time-mode t)
 
 (when (display-graphic-p)
-  (set-frame-parameter nil 'undecorated t)
+  (set-frame-parameter nil 'undecorated nil)
   (scroll-bar-mode 0))
 
 ;;;; Adhoc fixes
@@ -56,6 +53,20 @@
  vc-follow-symlinks t
  auto-window-vscroll nil
  custom-file (concat user-emacs-directory "/lisp/config.el")
+
+ ;; Scroll optimization
+ mouse-wheel-scroll-amount '(1 ((shift) . 6) ((control) . nil))
+ mouse-wheel-follow-mouse t
+ mouse-wheel-progressive-speed nil
+ fast-but-imprecise-scrolling nil
+ scroll-margin 2
+ scroll-conservatively 10000
+ scroll-conservatively scroll-margin
+ scroll-step 1
+ scroll-preserve-screen-position t
+ scroll-error-top-bottom t
+ next-error-recenter '(4)
+ jit-lock-defer-time 0
 
  ;; Tramp
  tramp-default-method "ssh"
@@ -96,8 +107,11 @@
  ;; Treemacs
  treemacs-collapse-dirs 5
  treemacs-space-between-root-nodes nil
- treemacs-git-mode 'extended
+ treemacs-git-mode 'deferred
  treemacs-project-follow-cleanup t
+ treemacs-wrap-around t
+ treemacs-indentation 1
+ treemacs-display-in-side-window t
 
  ;; Flycheck
  flycheck-scala-scalastyle-executable "scalastyle"
@@ -125,6 +139,14 @@
   (treemacs-follow-mode)
   (treemacs-filewatch-mode)
   (treemacs-define-RET-action 'file-node-closed #'treemacs-visit-node-ace))
+
+;; Solaire-mode (foreground buffer color difference)
+(require 'solaire-mode)
+(solaire-global-mode +1)
+(add-hook 'ediff-prepare-buffer-hook #'solaire-mode)
+(add-hook 'after-revert-hook #'turn-on-solaire-mode)
+(add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer)
+(solaire-mode-swap-bg)
 
 ;;;; Environment-specific configuration
 ;; Mac-specific config
@@ -175,12 +197,12 @@
   (flycheck-add-mode 'javascript-eslint 'floiw-minor-mode)
   (flycheck-add-next-checker 'javascript-flow 'javascript-eslint))
 
-;;;; Emacs-generated configuration
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
+ ;; Treemacs git colors
+ '(treemacs-git-added-face ((t (:foreground "green"))))
+ '(treemacs-git-modified-face ((t (:foreground "dark orange"))))
+
+ ;; Rainbow delimiter colors
  '(rainbow-delimiters-depth-1-face ((t (:foreground "#909090"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "dark orange"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "#D0D000"))))
@@ -192,10 +214,6 @@
  '(rainbow-delimiters-depth-9-face ((t (:foreground "medium sea green")))))
 
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(css-indent-offset 2)
  '(js-indent-level 2)
  '(js2-auto-indent-p t)
@@ -210,8 +228,6 @@
  '(js2-paren-indent-offset 2)
  '(js2-square-indent-offset 2)
  '(typescript-indent-level 2)
- '(nlinum-format (quote "%4d"))
- '(nlinum-highlight-current-line t)
  '(org-babel-load-languages
    (quote
     ((emacs-lisp . t)

@@ -26,14 +26,13 @@
     fringe-helper git-gutter-fringe+ magit keychain-environment
     org org-present
     hackernews transpose-frame pinentry
-    all-the-icons
+    all-the-icons solaire-mode
     flycheck flycheck-rust flycheck-crystal flycheck-popup-tip
     company company-racer racer company-restclient
-    srcery-theme restart-emacs cov
-    helm-tramp docker-tramp tramp-hdfs
-    ace-window multi-term nlinum doom-modeline eterm-256color
-    projectile treemacs treemacs-projectile ag editorconfig
-    helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck swiper-helm
+    helm-tramp docker-tramp kubernetes-tramp tramp-hdfs restart-emacs
+    ace-window multi-term doom-modeline eterm-256color
+    projectile treemacs treemacs-projectile treemacs-icons-dired treemacs-magit ag editorconfig
+    helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck swiper helm-smex
     emojify circe circe-notifications json json-rpc restclient zeal-at-point
 ))
 

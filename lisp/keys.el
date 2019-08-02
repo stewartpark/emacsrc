@@ -10,12 +10,6 @@
 (global-set-key (kbd "M-=") 'font+)
 (global-set-key (kbd "M--") 'font-)
 
-;; Scrolling
-(global-set-key (kbd "<mouse-4>") 'scroll-down-line)
-(global-set-key (kbd "<mouse-6>") 'scroll-down-line)
-(global-set-key (kbd "<mouse-5>") 'scroll-up-line)
-(global-set-key (kbd "<mouse-7>") 'scroll-up-line)
-
 ;; Better behavior for M-<backspace>
 (global-set-key (kbd "M-<backspace>") 'kill-whitespace-or-word)
 
@@ -24,6 +18,10 @@
 
 ;; Multi-term
 (global-set-key (kbd "C-x C-t") 'multi-term)
+(global-set-key (kbd "C-t") (lambda()
+                              (interactive)
+                              (multi-term-dedicated-toggle)
+                              (multi-term-dedicated-select)))
 
 ;; Multiple cursors
 (global-set-key (kbd "C-d") 'mc/mark-next-like-this)
@@ -33,7 +31,7 @@
 
 ;; Set up shortcut keys
 (global-set-key (kbd "M-?") 'zeal-at-point)
-(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-x") 'helm-smex)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 (global-set-key (kbd "C-x C-m") 'helm-circe)
 (global-set-key (kbd "C-x C-o") 'helm-projectile-switch-project)

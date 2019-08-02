@@ -61,7 +61,6 @@
 
 (add-hook 'ruby-mode-hook (lambda ()
                             (robe-mode)
-                            (coverage-mode)
                             (inf-ruby-minor-mode)))
 
 (add-hook 'rust-mode-hook #'racer-mode)
@@ -99,9 +98,8 @@
                             (editorconfig-mode 1)
                             (company-mode)
                             (lsp-mode)
-                            (cov-mode)
                             (git-gutter+-mode 1)
-                            (nlinum-mode 1)
+                            (display-line-numbers-mode t)
                             (auto-revert-mode t)
                             (flycheck-mode 1)
                             (rainbow-mode)

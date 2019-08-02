@@ -29,10 +29,14 @@
   (if (file-exists-p "~/.config/emacs.el")
       (load "~/.config/emacs.el"))
 
-  ;; Clean up and ad projects to projectile
-  (projectile-cleanup-known-projects)
-  (dolist (project-path (car (last (car (projectile-discover-projects-in-search-path)))))
-    (projectile-add-known-project project-path))
+  ;; Clean up and add projects to projectile in a thread
+  (let ((project-paths (-non-nil (-flatten (projectile-discover-projects-in-search-path)))))
+    (projectile-cleanup-known-projects)
+    (make-thread
+     (lambda ()
+       (dolist (project-path project-paths)
+         (thread-yield)
+         (projectile-add-known-project project-path)))))
 
   ;; Things I need to turn on in the beginning
   (helm-projectile-on)
