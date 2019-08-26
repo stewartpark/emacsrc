@@ -17,8 +17,10 @@
 (load-theme 'doom-dracula t)
 
 ;; Global mode settings
-(make-thread (lambda ()
-  (global-magit-file-mode 1)))
+(make-thread
+ (lambda ()
+   (global-magit-file-mode 1)
+   (global-rbenv-mode 1)))
 
 (global-visual-line-mode 1)
 (doom-modeline-init)
@@ -136,6 +138,11 @@
  ansible::vault-password-file "~/.vault-pass"
 )
 
+(with-eval-after-load 'flycheck
+  (flycheck-add-mode 'html-tidy 'web-mode)
+  (flycheck-add-mode 'css-csslint 'web-mode)
+  (flycheck-add-mode 'javascript-eslint 'web-mode))
+
 ;; Treemacs actions
 (with-eval-after-load 'treemacs
   (treemacs-follow-mode)
@@ -201,7 +208,7 @@
   (flycheck-popup-tip-mode)
   (require 'flycheck-flow)
   (flycheck-add-mode 'javascript-flow 'flow-minor-mode)
-  (flycheck-add-mode 'javascript-eslint 'floiw-minor-mode)
+  (flycheck-add-mode 'javascript-eslint 'flow-minor-mode)
   (flycheck-add-next-checker 'javascript-flow 'javascript-eslint))
 
 (custom-set-faces
