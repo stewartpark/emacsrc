@@ -7,9 +7,9 @@
 
 ;; Package setup
 (defvar package-archives '(
+    ("gnu" . "https://elpa.gnu.org/packages/")
     ("melpa" . "https://melpa.org/packages/")
     ("marmalade" . "https://marmalade-repo.org/packages/")
-    ("gnu" . "https://elpa.gnu.org/packages/")
     ("org" . "http://orgmode.org/elpa/")))
 
 (defvar package-list '(
@@ -30,7 +30,7 @@
     company company-racer racer company-restclient company-flow lsp-java company-lsp company-inf-ruby company-ansible
     company-jedi company-c-headers company-jedi company-go company-ghc company-shell company-web
     helm-tramp docker-tramp kubernetes-tramp tramp-hdfs restart-emacs
-    ace-window multi-term doom-modeline eterm-256color
+    ace-window multi-term doom-modeline doom-themes eterm-256color
     projectile treemacs treemacs-projectile treemacs-icons-dired treemacs-magit ag editorconfig
     helm helm-projectile helm-ag helm-circe helm-company helm-spotify helm-flycheck swiper helm-smex
     emojify circe circe-notifications json json-rpc restclient zeal-at-point
@@ -41,6 +41,7 @@
 (defun ensure-packages-installed ()
   "Ensure packages listed are installed."
   (interactive)
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
   (package-initialize)
   (unless package-archive-contents (package-refresh-contents))
   (dolist (package package-list)
