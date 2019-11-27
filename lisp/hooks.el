@@ -54,7 +54,7 @@
                                         (restore-fullscreen-state)))
 
 (add-hook 'python-mode-hook (lambda ()
-                              (run-python (python-shell-parse-command))
+                              (eldoc-mode 0)
                               (py-autopep8-enable-on-save)
                               (pyenv-mode)
                               (anaconda-mode)))

@@ -14,7 +14,7 @@
   (set-fontset-font "fontset-default" '(#xac00 . #xd7a3) "NanumGothicCoding-13"))
 
 ;; Load theme
-(load-theme 'doom-dracula t)
+(load-theme 'doom-solarized-dark t)
 
 ;; Global mode settings
 (make-thread
@@ -66,7 +66,7 @@
  mouse-wheel-follow-mouse t
  mouse-wheel-progressive-speed nil
  fast-but-imprecise-scrolling nil
- scroll-margin 2
+ scroll-margin 0
  scroll-conservatively 10000
  scroll-conservatively scroll-margin
  scroll-step 1
