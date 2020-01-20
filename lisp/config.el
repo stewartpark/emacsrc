@@ -14,7 +14,7 @@
   (set-fontset-font "fontset-default" '(#xac00 . #xd7a3) "NanumGothicCoding-13"))
 
 ;; Load theme
-(load-theme 'doom-solarized-dark t)
+(load-theme 'doom-solarized-light t)
 
 ;; Global mode settings
 (make-thread
