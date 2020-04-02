@@ -27,7 +27,8 @@
     hackernews transpose-frame pinentry
     all-the-icons solaire-mode
     flycheck flycheck-rust flycheck-crystal flycheck-popup-tip
-    company company-racer racer company-restclient company-flow lsp-java company-lsp company-inf-ruby company-ansible
+    company company-racer racer company-restclient company-flow lsp-java company-lsp lsp-ui
+    company-inf-ruby company-ansible
     company-jedi company-c-headers company-jedi company-go company-ghc company-shell company-web
     helm-tramp docker-tramp kubernetes-tramp tramp-hdfs restart-emacs
     ace-window multi-term doom-modeline doom-themes eterm-256color
