@@ -14,7 +14,7 @@
 (global-set-key (kbd "M-<backspace>") 'kill-whitespace-or-word)
 
 ;; Better search
-(global-set-key (kbd "C-s") 'swiper)
+(global-set-key (kbd "C-s") 'swiper-isearch)
 
 ;; Multi-term
 (global-set-key (kbd "C-x C-t") 'multi-term)
