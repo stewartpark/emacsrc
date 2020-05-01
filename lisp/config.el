@@ -6,15 +6,15 @@
 ;;; Code:
 
 ;; Font setup
-(let ((font-face "NanumGothicCoding-13"))
+(let ((font-face "Iosevka Term SS09-12"))
   (set-face-attribute 'default nil :font font-face)
   (set-face-attribute 'variable-pitch nil :font font-face)
   (set-frame-font font-face nil t)
-  (setq default-frame-alist '((font . "NanumGothicCoding-13")))
-  (set-fontset-font "fontset-default" '(#xac00 . #xd7a3) "NanumGothicCoding-13"))
+  (setq default-frame-alist '((font . "Iosevka Term SS09-12")))
+  (set-fontset-font "fontset-default" '(#xac00 . #xd7a3) "NanumGothicCoding-12"))
 
 ;; Load theme
-(load-theme 'doom-manegarm t)
+(load-theme 'doom-one-light t)
 
 ;; Global mode settings
 (make-thread
@@ -65,11 +65,11 @@
  mouse-wheel-scroll-amount '(1 ((shift) . 6) ((control) . nil))
  mouse-wheel-follow-mouse t
  mouse-wheel-progressive-speed nil
- fast-but-imprecise-scrolling nil
+ fast-but-imprecise-scrolling t
  scroll-margin 0
  scroll-conservatively 10000
  scroll-conservatively scroll-margin
- scroll-step 1
+ scroll-step 5
  scroll-preserve-screen-position t
  scroll-error-top-bottom t
  next-error-recenter '(4)
