@@ -6,15 +6,15 @@
 ;;; Code:
 
 ;; Font setup
-(let ((font-face "Iosevka Term SS09-12"))
+(let ((font-face "Inconsolata"))
   (set-face-attribute 'default nil :font font-face)
   (set-face-attribute 'variable-pitch nil :font font-face)
   (set-frame-font font-face nil t)
-  (setq default-frame-alist '((font . "Iosevka Term SS09-12")))
+  (setq default-frame-alist '((font . "Inconsolata")))
   (set-fontset-font "fontset-default" '(#xac00 . #xd7a3) "NanumGothicCoding-12"))
 
 ;; Load theme
-(load-theme 'doom-one-light t)
+(load-theme 'doom-henna t)
 
 ;; Global mode settings
 (make-thread
@@ -166,23 +166,24 @@
 ;; Mac-specific config
 (when (eq system-type 'darwin)
   ;; Before anything starts, get the right envs
-  (when (not (getenv "TERM_PROGRAM"))
-    (setenv "PATH" (shell-command-to-string "cat /etc/paths | tr '\n' ':'"))
-    exec-path (split-string (getenv "PATH") ":"))
-  ;; Mac utils
-  (defun copy-from-osx ()
-    (shell-command-to-string "pbpaste"))
-  (defun paste-to-osx (text &optional push)
-    (let ((process-connection-type nil))
-      (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
-        (process-send-string proc text)
-        (process-send-eof proc))))
-  (setq mac-allow-anti-aliasing t)
-  (setq interprogram-cut-function 'paste-to-osx)
-  (setq interprogram-paste-function 'copy-from-osx))
+  (make-thread (lambda ()
+    (when (not (getenv "TERM_PROGRAM"))
+      (setenv "PATH" (shell-command-to-string "/bin/cat /etc/paths | /usr/bin/tr '\n' ':'"))
+      (setq exec-path (split-string (getenv "PATH") ":")))
+    ;; Mac utils
+    (defun copy-from-osx ()
+      (shell-command-to-string "pbpaste"))
+    (defun paste-to-osx (text &optional push)
+      (let ((process-connection-type nil))
+        (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+          (process-send-string proc text)
+          (process-send-eof proc))))
+    (setq mac-allow-anti-aliasing t)
+    (setq interprogram-cut-function 'paste-to-osx)
+    (setq interprogram-paste-function 'copy-from-osx))))
 
 ;; Environment variable setup
-(if (not (getenv "TERM_PROGRAM"))
+(if (and (not (eq system-type 'darwin)) (not (getenv "TERM_PROGRAM")))
     (make-thread
      (lambda ()
        (let ((path (shell-command-to-string

@@ -6,7 +6,7 @@
 ;;; Code:
 
 ;; Package setup
-(defvar package-archives '(
+(setq package-archives '(
     ("gnu" . "https://elpa.gnu.org/packages/")
     ("melpa" . "https://melpa.org/packages/")
     ("marmalade" . "https://marmalade-repo.org/packages/")
@@ -18,7 +18,7 @@
     ruby-mode rspec-mode rbenv inf-ruby robe bundler crystal-mode
     racket-mode elm-mode rust-mode cargo vue-mode rjsx-mode typescript-mode tide
     markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode coffee-mode
-    scala-mode sbt-mode ensime flow-minor-mode flycheck-flow
+    scala-mode sbt-mode flow-minor-mode flycheck-flow
     dockerfile-mode nasm-mode go-mode foreman-mode js2-mode json-mode
     ansible scss-mode web-mode rainbow-mode rainbow-delimiters
     smartparens dumb-jump zoom-window dotenv-mode
