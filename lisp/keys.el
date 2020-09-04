@@ -50,6 +50,8 @@
 (global-set-key (kbd "C-x C-g C-d") 'magit-diff-unstaged)
 (global-set-key (kbd "C-x C-g C-c") 'magit-commit-amend)
 (global-set-key (kbd "C-x C-g p") 'magit-push-current-to-pushremote)
+(global-set-key (kbd "C-x C-g f") 'magit-pull-from-pushremote)
+(global-set-key (kbd "C-x C-g C-b") 'magit-branch-checkout)
 (global-set-key (kbd "C-x C-g r") 'magit-rebase-onto-upstream)
 (global-set-key (kbd "C-x C-g b") (lambda ()
                                   (interactive)
@@ -80,16 +82,14 @@
                                      (enter-fullscreen))))
 
 ;; Redfine keys for modes
-(with-eval-after-load 'rjsx-mode
-  (define-key rjsx-mode-map "<" nil)
-  (define-key rjsx-mode-map ">" nil)
-  (define-key rjsx-mode-map (kbd "C-d") nil))
-
 (with-eval-after-load 'rspec-mode
   (define-key rspec-mode-map (kbd "C-c C-c") 'rspec-verify-single)
   (define-key rspec-mode-map (kbd "C-c c") 'rspec-verify-all)
   (define-key rspec-mode-map (kbd "C-c C-f") 'rspec-run-last-failed)
   (define-key rspec-mode-map (kbd "C-c f") 'rspec-rerun))
+
+(with-eval-after-load 'js2-mode
+  (define-key js2-mode-map (kbd "C-c c") 'jest-file))
 
 (provide 'keys)
 ;;; keys.el ends here

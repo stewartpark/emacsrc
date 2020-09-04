@@ -44,8 +44,8 @@
   (server-start)
 
   ;; Make gc pauses faster by decreasing the threshold.
-  (setq gc-cons-threshold (* 1 1024 1024) ; 1MiB
-        gc-cons-percentage 0.1))
+  (setq gc-cons-threshold (* 1 1024 1024 2) ; 512MiB
+        gc-cons-percentage 0.3))
 
 (provide 'init)
 
