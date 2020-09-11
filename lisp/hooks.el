@@ -63,7 +63,6 @@
                             (robe-mode)
                             (inf-ruby-minor-mode)))
 
-(add-hook 'rust-mode-hook #'racer-mode)
 (with-eval-after-load 'rust-mode
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
@@ -92,6 +91,8 @@
                             (sp-pair "<" ">" :wrap "C->")
                             (editorconfig-mode 1)
                             (company-mode)
+                            (lsp-mode 1)
+                            (lsp)
                             (git-gutter+-mode 1)
                             (display-line-numbers-mode 0)
                             (auto-revert-mode t)
