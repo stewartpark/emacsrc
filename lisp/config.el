@@ -28,7 +28,8 @@
 (display-time-mode t)
 
 (when (display-graphic-p)
-  (set-frame-parameter nil 'undecorated t)
+  (when (eq system-type 'linux)
+    (set-frame-parameter nil 'undecorated t))
   (scroll-bar-mode 0))
 
 ;;;; Adhoc fixes
