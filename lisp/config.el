@@ -28,7 +28,7 @@
 (display-time-mode t)
 
 (when (display-graphic-p)
-  (when (eq system-type 'linux)
+  (when (eq system-type 'gnu/linux)
     (set-frame-parameter nil 'undecorated t))
   (scroll-bar-mode 0))
 
