@@ -5,22 +5,8 @@
 ;;;
 ;;; Code:
 
-;; Font setup
-(let ((font-face "Inconsolata-12"))
-  (set-face-attribute 'default nil :font font-face)
-  (set-face-attribute 'variable-pitch nil :font font-face)
-  (set-frame-font font-face nil t)
-  (setq default-frame-alist '((font . "Inconsolata-12")))
-  (set-fontset-font "fontset-default" '(#xac00 . #xd7a3) "NanumGothicCoding-12"))
-
 ;; Load theme
 (load-theme 'doom-henna t)
-
-;; Global mode settings
-(make-thread
- (lambda ()
-   (global-magit-file-mode 1)
-   (global-rbenv-mode 1)))
 
 (xterm-mouse-mode t)
 (tool-bar-mode 0)
@@ -28,9 +14,23 @@
 (display-time-mode t)
 
 (when (display-graphic-p)
+  ;; Font setup
+  (let ((font-face "Inconsolata-12"))
+    (set-face-attribute 'default nil :font font-face)
+    (set-face-attribute 'variable-pitch nil :font font-face)
+    (set-frame-font font-face nil t)
+    (setq default-frame-alist '((font . "Inconsolata-12")))
+    (set-fontset-font "fontset-default" '(#xac00 . #xd7a3) "NanumGothicCoding-12"))
+
   (when (eq system-type 'gnu/linux)
     (set-frame-parameter nil 'undecorated t))
   (scroll-bar-mode 0))
+
+;; Global mode settings
+(make-thread
+ (lambda ()
+   (global-magit-file-mode 1)
+   (global-rbenv-mode 1)))
 
 ;;;; Adhoc fixes
 ;; Ignore yes or no
@@ -79,6 +79,7 @@
 
  ;; LSP
  lsp-restart 'auto-restart
+ lsp-python-ms-auto-install-server t
 
  ;; Python
  python-shell-prompt-detect-failure-warning nil

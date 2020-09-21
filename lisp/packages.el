@@ -14,11 +14,11 @@
 
 (defvar package-list '(
     better-defaults multiple-cursors
-    python-mode anaconda-mode py-isort py-autopep8 pyenv-mode-auto pythonic
+    python-mode lsp-python-ms py-isort py-autopep8 pyenv-mode-auto pythonic
     ruby-mode rspec-mode rbenv inf-ruby robe bundler crystal-mode
     racket-mode elm-mode rust-mode cargo vue-mode rjsx-mode typescript-mode tide
     markdown-mode yaml-mode haskell-mode antlr-mode groovy-mode coffee-mode
-    scala-mode sbt-mode flow-minor-mode flycheck-flow
+    scala-mode sbt-mode lsp-metals flow-minor-mode flycheck-flow
     dockerfile-mode nasm-mode go-mode foreman-mode js2-mode json-mode jest
     ansible scss-mode web-mode rainbow-mode rainbow-delimiters
     smartparens dumb-jump zoom-window dotenv-mode

@@ -56,8 +56,7 @@
 (add-hook 'python-mode-hook (lambda ()
                               (eldoc-mode 0)
                               (py-autopep8-enable-on-save)
-                              (pyenv-mode)
-                              (anaconda-mode)))
+                              (pyenv-mode)))
 
 (add-hook 'ruby-mode-hook (lambda ()
                             (robe-mode)
