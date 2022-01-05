@@ -41,7 +41,7 @@
     (set-frame-parameter nil 'undecorated t))
   (scroll-bar-mode 0))
 
-(load (concat user-emacs-directory "/lisp/utils.el"))
+(load "~/.emacs.d/lisp/utils.el")
 
 (make-thread
  (server-start))
