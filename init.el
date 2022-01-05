@@ -41,35 +41,51 @@
     (set-frame-parameter nil 'undecorated t))
   (scroll-bar-mode 0))
 
+(load (concat user-emacs-directory "/lisp/utils.el"))
+
 ;; Global Keys
 (global-set-key (kbd "M-<return>") 'toggle-frame-fullscreen)
 
 ;; Major Modes
 (use-package typescript-mode
+  :ensure t
   :mode ("\\.tsx?\\'" . typescript-mode))
 
-(use-package ruby-mode)
+(use-package ruby-mode
+  :ensure t)
 
-(use-package python)
+(use-package python
+  :ensure t)
 
-(use-package go-mode)
+(use-package go-mode
+  :ensure t)
 
-(use-package rust-mode)
+(use-package rust-mode
+  :ensure t)
 
 (use-package svelte-mode
+  :ensure t
   :mode ("\\.svelte\\'" . svelte-mode))
 
 (use-package terraform-mode
+  :ensure t
   :mode ("\\.tf\\'" . terraform-mode))
 
 (use-package markdown-mode
+  :ensure t
   :mode ("\\.md\\'" . markdown-mode))
 
-(use-package json-mode)
+(use-package json-mode
+  :ensure t)
 
-(use-package yaml-mode)
+(use-package yaml-mode
+  :ensure t)
+
+(use-package restclient
+  :ensure t)
 
 (use-package lsp-mode
+  :ensure t
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook ((python-mode . lsp)
@@ -84,13 +100,16 @@
   :commands lsp)
 
 ;; Minor Modes & Utilities
+(use-package flx
+  :ensure t)
+
 (use-package counsel
   :ensure t
   :config
   (global-set-key (kbd "M-x") 'counsel-M-x)
   (global-set-key (kbd "C-S-s") 'counsel-rg)
   (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-  (global-set-key (kbd "C-x f") 'counsel-git)
+  (global-set-key (kbd "C-x f") 'counsel-projectile-find-file)
   (global-set-key (kbd "C-x b") 'counsel-switch-buffer))
 
 (use-package counsel-projectile
@@ -104,6 +123,7 @@
   (global-set-key (kbd "C-x C-t") 'counsel-tramp))
 
 (use-package swiper
+  :ensure t
   :bind (("C-s" . swiper-isearch)
          ("M-s ." . swiper-isearch-thing-at-point))
   :config
@@ -114,6 +134,7 @@
   :ensure t)
 
 (use-package company
+  :ensure t
   :init
   (setq company-async-timeout 15
         company-tooltip-align-annotations t)
@@ -129,9 +150,13 @@
                               (magit-blame-quit)
                             (call-interactively 'magit-blame-addition))))))
 
-(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+(use-package lsp-ivy
+  :ensure t
+  :commands lsp-ivy-workspace-symbol)
 
-(use-package lsp-ui :commands lsp-ui-mode)
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
 
 (use-package smartparens
   :ensure t
@@ -165,9 +190,11 @@
   :init
   (pinentry-start))
 
-(use-package docker-tramp)
+(use-package docker-tramp
+  :ensure t)
 
-(use-package kubernetes-tramp)
+(use-package kubernetes-tramp
+  :ensure t)
 
 ;; Theme
 (use-package doom-themes
