@@ -43,6 +43,9 @@
 
 (load (concat user-emacs-directory "/lisp/utils.el"))
 
+(make-thread
+ (server-start))
+
 ;; Global Keys
 (global-set-key (kbd "M-<return>") 'toggle-frame-fullscreen)
 
