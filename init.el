@@ -41,7 +41,7 @@
     (set-frame-parameter nil 'undecorated t))
   (scroll-bar-mode 0))
 
-(load (concat user-emacs-directory "/lisp/utils.el"))
+(load "~/.emacs.d/lisp/utils.el")
 
 (make-thread
  (server-start))
@@ -61,7 +61,10 @@
   :ensure t)
 
 (use-package go-mode
-  :ensure t)
+  :ensure t
+  :init
+  (setq gofmt-command "goimports")
+  (add-hook 'before-save-hook 'gofmt-before-save))
 
 (use-package rust-mode
   :ensure t)
@@ -159,6 +162,7 @@
 
 (use-package lsp-ui
   :ensure t
+  :hook (lsp-mode . lsp-ui-mode)
   :commands lsp-ui-mode)
 
 (use-package smartparens
