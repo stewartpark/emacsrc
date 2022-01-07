@@ -61,7 +61,10 @@
   :ensure t)
 
 (use-package go-mode
-  :ensure t)
+  :ensure t
+  :init
+  (setq gofmt-command "goimports")
+  (add-hook 'before-save-hook 'gofmt-before-save))
 
 (use-package rust-mode
   :ensure t)
@@ -103,6 +106,10 @@
   :commands lsp)
 
 ;; Minor Modes & Utilities
+(use-package editorconfig
+  :ensure t
+  :hook (prog-mode . editorconfig-mode))
+
 (use-package flx
   :ensure t)
 
@@ -159,6 +166,7 @@
 
 (use-package lsp-ui
   :ensure t
+  :hook (lsp-mode . lsp-ui-mode)
   :commands lsp-ui-mode)
 
 (use-package smartparens
