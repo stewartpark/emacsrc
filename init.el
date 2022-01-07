@@ -106,6 +106,10 @@
   :commands lsp)
 
 ;; Minor Modes & Utilities
+(use-package editorconfig
+  :ensure t
+  :hook (prog-mode . editorconfig-mode))
+
 (use-package flx
   :ensure t)
 
