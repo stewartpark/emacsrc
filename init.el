@@ -1,6 +1,8 @@
 (require 'package)
 (add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -16,7 +18,13 @@
   projectile-project-search-path '("~/Workspace/")
 
   make-backup-files nil
-  
+  vc-follow-symlinks nil
+
+  mac-command-modifier 'meta
+  mac-option-modifier 'super
+  mac-control-modifier 'control
+  ns-function-modifier 'hyper
+
   inhibit-splash-screen t
   inhibit-startup-message t
   initial-scratch-message ";; Happy Hacking!")
@@ -24,18 +32,19 @@
 (custom-set-variables
  '(tab-width 4 't))
 
-(global-linum-mode t)
 (xterm-mouse-mode t)
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (display-time-mode t)
 (when (display-graphic-p)
+  (pixel-scroll-precision-mode t)
+
   ;; Font setup
-  (let ((font-face "Ubuntu Mono-15"))
+  (let ((font-face "Ubuntu Mono-16"))
     (set-face-attribute 'default nil :font font-face)
     (set-face-attribute 'variable-pitch nil :font font-face)
     (set-frame-font font-face nil t)
-    (setq default-frame-alist '((font . "Ubuntu Mono-15"))))
+    (setq default-frame-alist '((font . "Ubuntu Mono-16"))))
 
   (when (eq system-type 'gnu/linux)
     (set-frame-parameter nil 'undecorated t))
@@ -44,10 +53,15 @@
 (load "~/.emacs.d/lisp/utils.el")
 
 (make-thread
- (server-start))
+ (server-start)
+ (projectile-discover-projects-in-search-path))
+
+;; Hooks
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Global Keys
 (global-set-key (kbd "M-<return>") 'toggle-frame-fullscreen)
+(global-set-key (kbd "M-<backspace>") 'kill-whitespace-or-word-backward)
 
 ;; Major Modes
 (use-package typescript-mode
@@ -77,15 +91,21 @@
   :ensure t
   :mode ("\\.tf\\'" . terraform-mode))
 
+(use-package dockerfile-mode
+  :ensure t
+  :mode ("Dockerfile" . dockerfile-mode))
+
 (use-package markdown-mode
   :ensure t
   :mode ("\\.md\\'" . markdown-mode))
 
 (use-package json-mode
-  :ensure t)
+  :ensure t
+  :mode ("\\.json\\'" . json-mode))
 
 (use-package yaml-mode
-  :ensure t)
+  :ensure t
+  :mode ("\\.ya?ml\\'" . yaml-mode))
 
 (use-package restclient
   :ensure t)
@@ -94,6 +114,7 @@
   :ensure t
   :init
   (setq lsp-keymap-prefix "C-c l")
+  :bind (("M-/" . company-complete))
   :hook ((python-mode . lsp)
 		 (ruby-mode . lsp)
 		 (go-mode . lsp)
@@ -102,6 +123,7 @@
 		 (js-mode . lsp)
 		 (svelte-mode . lsp)
 		 (terraform-mode . lsp)
+		 (dockerfile-mode . lsp)
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
 
@@ -201,12 +223,6 @@
   :init
   (pinentry-start))
 
-(use-package docker-tramp
-  :ensure t)
-
-(use-package kubernetes-tramp
-  :ensure t)
-
 ;; Theme
 (use-package doom-themes
   :ensure t
@@ -214,7 +230,7 @@
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t
 		doom-themes-treemacs-theme "doom-atom")
-  (load-theme 'doom-one t)
+  (load-theme 'doom-moonlight t)
   (doom-themes-visual-bell-config)
   (doom-themes-neotree-config)
   (doom-themes-treemacs-config)
