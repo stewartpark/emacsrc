@@ -24,4 +24,9 @@
         (kill-region p (point)))
     (backward-kill-word 1)))
 
+(defun todo ()
+  "Cmd: (todo) open a todo file."
+  (interactive)
+  (find-file "~/todo.org"))
+
 (provide 'utils)

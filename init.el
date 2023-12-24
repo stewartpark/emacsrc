@@ -25,6 +25,8 @@
   mac-control-modifier 'control
   ns-function-modifier 'hyper
 
+  eat-term-name "xterm-256color"
+
   inhibit-splash-screen t
   inhibit-startup-message t
   initial-scratch-message ";; Happy Hacking!")
@@ -51,10 +53,6 @@
   (scroll-bar-mode 0))
 
 (load "~/.emacs.d/lisp/utils.el")
-
-(make-thread
- (server-start)
- (projectile-discover-projects-in-search-path))
 
 ;; Hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -182,6 +180,10 @@
                               (magit-blame-quit)
                             (call-interactively 'magit-blame-addition))))))
 
+(use-package eat
+  :ensure t
+  :bind (("C-x t" . eat)))
+
 (use-package lsp-ivy
   :ensure t
   :commands lsp-ivy-workspace-symbol)
@@ -224,13 +226,18 @@
   (pinentry-start))
 
 ;; Theme
+(use-package leuven-theme
+  :ensure t
+  :config
+  (load-theme 'leuven t))
+
 (use-package doom-themes
   :ensure t
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t
 		doom-themes-treemacs-theme "doom-atom")
-  (load-theme 'doom-moonlight t)
+  (load-theme 'doom-one-light t)
   (doom-themes-visual-bell-config)
   (doom-themes-neotree-config)
   (doom-themes-treemacs-config)
@@ -242,3 +249,7 @@
   :config
   (setq doom-modeline-lsp t
 		doom-modeline-icon nil))
+
+(make-thread
+ (server-start)
+ (projectile-discover-projects-in-search-path))
